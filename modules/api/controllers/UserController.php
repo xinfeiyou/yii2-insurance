@@ -5,6 +5,7 @@ namespace app\modules\api\controllers;
 use app\modules\api\controllers\BaseController;
 use app\modules\base\models\WorkUser;
 use app\common\Str;
+use app\common\NetWork;
 
 /**
  * Default controller for the `api` module
@@ -12,7 +13,6 @@ use app\common\Str;
 class UserController extends BaseController {
 
     public $strTitle = '用户操作';
-    public $strUserId = '2018012400000001';
 
     /**
      * Renders the index view for the module
@@ -22,7 +22,7 @@ class UserController extends BaseController {
         $model = new WorkUser();
         $arPost = \Yii::$app->request->post();
         unset($arPost['strCode']);
-        $arMsg = $model->edit($this->strUserId, $arPost);
+        $arMsg = $model->add($arPost);
         $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
         $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
         Str::echoJson($arReturn);
@@ -37,14 +37,16 @@ class UserController extends BaseController {
         $model = new WorkUser();
         if ($model->checkOpenId($openId)) {
             //已经登录
+            $arMsg['ret'] = '0000';
+            $arMsg['content'] = [];
         } else {
             $arPost['openId'] = $openId;
             unset($arPost['code']);
-            $arMsg = $model->add($arPost);
-            $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
-            $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
-            Str::echoJson($arReturn);
+            $arMsg = $model->edit($arPost['strUserId'], $arPost);
         }
+        $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
+        $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
+        Str::echoJson($arReturn);
     }
 
     /**

@@ -97,7 +97,6 @@ class WorkApply extends \app\modules\base\models\BaseModel {
      */
     public function add($arData) {
         $model = new WorkApply();
-        $arData['strWorkNum'] = $this->getWorkNum();
         $arMsg = $this->create_data($model, $arData);
         $arMsg['content'] = $arData['strWorkNum'];
         return $arMsg;
@@ -118,7 +117,7 @@ class WorkApply extends \app\modules\base\models\BaseModel {
      * 获取新的流程流水号ID
      * @return string
      */
-    private function getWorkNum() {
+    public function getWorkNum() {
         $objectData = WorkApply::find()
                 ->where(['like', 'strWorkNum', date("Ymd")])
                 ->orderBy(['id' => SORT_DESC])

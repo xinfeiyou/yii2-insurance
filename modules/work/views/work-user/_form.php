@@ -33,6 +33,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'openId')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'avatarUrl')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'scene')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tCreateTime')->textInput() ?>
 

@@ -42,7 +42,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             [['nickName', 'language'], 'string', 'max' => 20],
             [['gender'], 'string', 'max' => 1],
             [['city', 'province', 'country', 'openId'], 'string', 'max' => 100],
-            [['avatarUrl'], 'string']
+            [['avatarUrl','scene'], 'string']
         ];
     }
 
@@ -63,6 +63,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             'country' => '国籍',
             'openId' => 'OpenID',
             'avatarUrl' => '头像地址',
+            'scene' => '推荐码',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];
