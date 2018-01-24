@@ -3,8 +3,8 @@
 namespace app\modules\work\controllers;
 
 use Yii;
-use app\modules\work\models\WorkOddinterest;
-use app\modules\work\models\search\WorkOddinterestSearch;
+use app\modules\base\models\WorkOddinterest;
+use app\modules\base\models\search\WorkOddinterestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -308,7 +308,7 @@ class NetWork {
      * @param type $msg
      * @param type $url
      */
-    public static function goBack($msg, $url = '') {
+    public static Function goBack($msg, $url = '') {
         if ($url == "exit") {
             echo "<script language=javascript>\n";
             echo "window.alert('$msg');";
@@ -336,4 +336,19 @@ class NetWork {
         exit();
     }
 
+    /**
+     * 参数接口返回值
+     * @author Panda Liu <admin@xinfeiyou.com>
+     * @param string $strTitle      标题
+     * @param string $strMsg        反馈信息
+     * @param string $enStatus      状态码
+     * @param array $arContent      返回的值
+     * @return array
+     */
+    public static function setMsg($strTitle, $strMsg, $enStatus, $arContent) {
+        $msg['ret'] = $enStatus;
+        $msg['data'] = ['title' => $strTitle, 'content' => $arContent, 'version' => '5.0.1', 'time' => time()];
+        $msg['msg'] = $strMsg;
+        return $msg;
+    }
 }

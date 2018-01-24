@@ -59,6 +59,9 @@ $config = [
         'work' => [
             'class' => 'app\modules\work\Module',
         ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
     ],
 ];
 

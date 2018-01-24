@@ -167,7 +167,7 @@ class MathArray {
         return max($al);
     }
 
-    public static function aL($arr, &$al, $level = 0) {
+    private static function aL($arr, &$al, $level = 0) {
         if (is_array($arr)) {
             $level++;
             $al[] = $level;
@@ -191,6 +191,20 @@ class MathArray {
             }
         }
         return $arrData;
+    }
+
+    /**
+     * 获取数组父节点KEY
+     * @param array $array  数组
+     * @return string
+     */
+    public static function getArrayKey($array) {
+        $key = array_keys($array)[0];
+        if (empty($key)) {
+            return false;
+        } else {
+            return $key;
+        }
     }
 
 }

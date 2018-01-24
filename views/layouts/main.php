@@ -95,33 +95,34 @@ AppAsset::register($this);
                         <a href="<?= Url::toRoute(['/']) ?>"><i class="fa fa-fw fa-home"></i> 首页</a>
                     </li>
                     <li>
-                        <a href="<?= Url::toRoute(['/work/work-odd/index']) ?>"><i class="fa fa-fw fa-folder"></i> 标的管理</a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::toRoute(['/work/work-oddinterest/index']) ?>"><i class="fa fa-fw fa-file-o"></i> 贷中管理</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-cog"></i> 贷后管理</a>
+                        <a href="<?= Url::toRoute(['/work/work-user/index']) ?>"><i class="fa fa-fw fa-bank"></i>用户管理</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 贷前管理 <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li class="dropdown-header">子类列表</li>
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li><a href="<?= Url::toRoute(['/work/work-apply/index']) ?>">车险申请</a></li>
+                            <li><a href="<?= Url::toRoute(['/work/work-odd/index']) ?>">标的管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 贷中管理 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-header">子类列表</li>
+                            <li><a href="<?= Url::toRoute(['/work/work-oddinterest/index']) ?>">还款列表</a></li>
+                            <li><a href="#">催收</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 贷后管理 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-header">子类列表</li>
+                            <li><a href="#">催收</a></li>
+                            <li><a href="#">逾期</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-twitter"></i> Last page</a>
+                        <a href="#"><i class="fa fa-fw fa-dropbox"></i> 系统设置</a>
                     </li>
                 </ul>
             </nav>

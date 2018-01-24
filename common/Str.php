@@ -203,4 +203,13 @@ class Str {
         return md5($id . microtime());
     }
 
+    /**
+     * 已json格式输出
+     * @param type $array
+     */
+    public static function echoJson($array) {
+        header('Content-Type:application/json; charset=utf-8');
+        exit(self::cnJsonEncode($array));
+    }
+
 }
