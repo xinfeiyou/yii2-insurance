@@ -38,7 +38,7 @@ class WorkCollectRecordController extends Controller {
         if ($model->load(Yii::$app->request->post())) {
             $strUserId = Yii::$app->user->identity->strUserId;
             $model->add($strUserId, $oddNumber, $intPeriod, Yii::$app->request->post('WorkCollectRecord'));
-            return $this->redirect(['create', 'oddNumber' => $oddNumber]);
+            return $this->redirect(['create', 'oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
         } else {
             $arData = $model->getAll($oddNumber, $intPeriod);
             return $this->render('create', [
