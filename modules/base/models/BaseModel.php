@@ -12,6 +12,22 @@ use app\modules\base\models\WorkConfig;
 class BaseModel extends \yii\db\ActiveRecord {
 
     /**
+     * 根据类型列出配置列表
+     * @param type $type
+     * @return type
+     */
+    public function getSysConfigInfoType($type) {
+        $array = [];
+        $arrObj = $this->hasMany(WorkConfig::className(), ['enType' => $type])
+                ->select(['strKey', 'strValue'])
+                ->all();
+        foreach ($arrObj as $v) {
+            $array[$v->strKey] = $v->strValue;
+        }
+        return $array;
+    }
+
+    /**
      * 获取微信token值
      * @return type
      */

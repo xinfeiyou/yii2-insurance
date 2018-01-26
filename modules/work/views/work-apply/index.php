@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'strWadingInsurance',
             // 'strScratchInsurance',
             // 'strExcessInsurance',
-            // 'strInsuranceOffice',
+            'strInsuranceOffice',
             'eStatus',
             'oddNumber',
             // 'tCreateTime',
