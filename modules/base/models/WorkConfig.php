@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "{{%work_config}}".
  *
  * @property string $id
+ * @property string $strType
  * @property string $strKey
  * @property string $strValue
  * @property string $tCreateTime
@@ -28,7 +29,7 @@ class WorkConfig extends \app\modules\base\models\BaseModel {
     public function rules() {
         return [
             [['tCreateTime', 'tUpdateTime'], 'safe'],
-            [['strKey'], 'string', 'max' => 50],
+            [['strKey', 'strType'], 'string', 'max' => 50],
             [['strValue'], 'string', 'max' => 255],
         ];
     }
@@ -39,24 +40,25 @@ class WorkConfig extends \app\modules\base\models\BaseModel {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'strKey' => 'Str Key',
-            'strValue' => 'Str Value',
-            'tCreateTime' => 'T Create Time',
-            'tUpdateTime' => 'T Update Time',
+            'strType' => '类型',
+            'strKey' => 'Key',
+            'strValue' => 'Value',
+            'tCreateTime' => '创建时间',
+            'tUpdateTime' => '更新时间',
         ];
     }
 
     /**
      * 根据关键字查找对应的值
-     * @param string $strKey
+     * @param string $strType
      * @return boolean|string
      */
-    public function getKeyToValue($strKey) {
-        $arObj = WorkConfig::findOne(['strKey' => $strKey]);
+    public function getKeyToValue($strType) {
+        $arObj = WorkConfig::findOne(['strType' => $strType]);
         if (empty($arObj)) {
             return false;
         } else {
-            return $arObj->strValue;
+            return $arObj->strKey;
         }
     }
 
@@ -76,6 +78,22 @@ class WorkConfig extends \app\modules\base\models\BaseModel {
             $arMsg = $this->create_data($model, ['strKey' => $strKey, 'strValue' => $strValue]);
         }
         return $arMsg;
+    }
+
+    /**
+     * 获取多条配置信息
+     * @param type $strType
+     * @return boolean
+     */
+    public function getKeyToValueAll($strType) {
+        $arObj = WorkConfig::find()
+                ->where(['strType' => $strType])
+                ->all();
+        if (empty($arObj)) {
+            return false;
+        } else {
+            return $arObj;
+        }
     }
 
 }
