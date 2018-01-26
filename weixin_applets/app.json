@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/bind/bind",
+    "pages/about/about",
+    "pages/market/market",
+    "pages/choose1/choose1",
+    "pages/choose2/choose2",
+    "pages/choose3/choose3",
+    "pages/choose4/choose4",
+    "pages/generalize/generalize",
+    "pages/repayHistory/repayHistory",
+    "pages/addCollection/addCollection",
+    "pages/collection/collection",
+    "pages/repayNearly/repayNearly",
+    "pages/repayDetail/repayDetail",
+    "pages/repayLate/repayLate",
+    "pages/idImg/idImg"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0d3c6e",
+    "navigationBarTitleText": "车险客户管理",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#444",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "车险月付",
+        "iconPath": "/img/car.png",
+        "selectedIconPath": "/img/car.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "我的",
+        "iconPath": "/img/people.png",
+        "selectedIconPath": "/img/people.png"
+      }
+    ]
+  }
+}

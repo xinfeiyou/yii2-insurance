@@ -1,0 +1,76 @@
+<!--标题模板  -->
+  <template name="zcText">
+    <view class="element text_title" >
+        <text class='index_title'>{{data.content}}</text>
+    </view>
+  </template>
+
+<!--带单位的模板  -->
+  <template name='zcUnit'>
+    <label class='lable_name_input'>
+      <text class='title'>{{data.title}}：</text>
+      <view class='input'>
+        <input placeholder='{{data.placeholder}}' value='' name="{{data.field}}" data-id="{{data.id}}"></input>
+      </view>
+      <view class='clearfix'></view>
+    </label>    
+  </template>
+
+<!--城市级联模板  -->
+<template name="zcRegion">
+  <label class='lable_region'>
+    <picker mode="region" bindchange="{{data.bindchange}}" data-id="{{data.id}}" value="{{data.value}}" name="{{data.field}}">
+     <view class="picker">
+      <text class='title'>{{data.title}}：</text>
+      <text class='aBleft'> {{data.value[0]}} {{data.value[1]}} {{data.value[2]}}</text>
+      <view class='clearfix'></view>
+     </view>
+    </picker>
+  </label>  
+</template>
+
+<!--上传车牌照片-->
+  <template name='zcUnits'>
+    <view class='lable_name_input'>
+      <text class='title'>{{data.title}}：</text>
+      <view class='input' style='position:relative'>
+        <input placeholder='{{data.placeholder}}' value='{{data.value}}' name="{{data.field}}" data-id="{{data.id}}" />
+        <button type="{{data.style}}" class="button" style='width:61px;padding:0;margin:0;line-height:21px;font-size:12px;position:absolute;top:3px;right:-86px;' catchtap='buttonEvent'>{{data.content}}</button>
+      </view>
+      <view class='clearfix'></view>
+    </view>
+  </template>
+
+  <template name="zcButton">
+      <view class='zcButton'>
+        <button form-type='{{data.type}}' type='{{data.style}}' class='button'>{{data.content}}</button>
+      </view>
+  </template> 
+
+<swiper indicator-dots="false" autoplay="true" interval="3000" duration="500">
+  <block wx:for="{{imgUrls}}" wx:key="">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image"  mode='aspectFill'/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<form class='form' bindsubmit="submitForm"  data-event-params="{{form.eventParams}}">
+
+  <template is="zcText" data="{{data:title[0]}}" />
+
+  <template is="zcUnit" data="{{data:form.content[0]}}" />
+
+  <template is="zcUnit" data="{{data:form.content[1]}}" />
+
+  <template is="zcText" data="{{data:title[1]}}" />
+
+  <template is="zcRegion" data = "{{data:form.content[2]}}"/>
+
+  <template is= "zcUnits" data="{{data:form.content[3]}}" />
+
+  <template is="zcButton" data="{{data:form.content[4]}}"/>
+
+  <input style='display:none;' name="state" value='{{form.compId}}'></input>
+
+</form>

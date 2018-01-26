@@ -1,0 +1,7 @@
+.lable_name_input .title,.lable_region .title{
+  width: 220rpx;
+}
+.slide-image{
+  width: 100%;
+ height: 169px;
+}

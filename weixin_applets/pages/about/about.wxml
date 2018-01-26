@@ -1,0 +1,76 @@
+<view class="app">
+  <template name="zcUserCenter">
+    <view class="user-center usercenter-mode1 background-ele with-horizontal-view">
+
+      <view class="show-view white">
+        <label class="empty-span"></label>
+        <image class="cover-thumb" src='{{data.user_src}}'></image>
+        <label class="nickname">{{data.name}}</label>
+      </view>
+      <view class='height'></view>
+        <view class="horizontal-view">
+          <view class="horizontal-router-container1">
+           
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}'>
+              <label  class="ico-moon"><image src="/img/icon-message.png" mode='aspectFit' style='width:20px;height:20px;'></image></label>
+                
+                <text>还款记录</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+
+              <text class='height'></text>
+
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayNearly}}'>
+                <label class="ico-moon">
+                  <image src="/img/icon-notify.png" mode='aspectFit' style='width:20px;height:20px;'></image>
+                </label>
+                <text>近期还款客户</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+
+
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayLate}}'>
+                <label class="ico-moon">
+                  <image src="/img/icon-overdue.png" mode='aspectFit' style='width:20px;height:20px;'></image>
+                </label>
+                <text>逾期客户列表</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+              
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.market}}'>
+                <label class="ico-moon" >
+                  <image src="/img/icon-generalize.png" mode='aspectFit' style='width:20px;height:20px;'></image>
+                </label>
+                <text>推广员列表</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.generalize}}'>
+                <label class="ico-moon">
+                  <image src="/img/icon-ewm.png" mode='aspectFit' style='width:20px;height:20px;'></image>
+                </label>
+                <text>我的推广码</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+
+              <text class='height'></text>
+
+              <view catchtap='{{data.setting}}'>
+                <label class="ico-moon icon-star-empty:before">
+                  <!-- <image src="/img/icon-ewm.png" mode='aspectFit' style='width:20px;height:20px;'></image> -->
+                </label>
+                <text>设置</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+
+          </view>
+        </view>
+    </view>
+  </template>
+
+
+  <view class="ele-container">
+    <template is="zcUserCenter" data="{{data:user_center}}"></template>
+  </view>
+
+</view>

@@ -1,0 +1,86 @@
+page{
+  background-color:#fff;
+}
+.user-container{
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.user-center{
+  padding: 10px;
+  background-color: #f5f4fa;
+}
+.show-view{
+  margin-left: 10px;
+}
+.show-view image{
+  width: 50px;
+  height: 50px;
+  border-radius:50%; 
+  padding: 1px;
+  border: 1px solid #dbd9d9;
+}
+.nickname{
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+.nickphone{
+  display: block;
+  font-size: 13px;
+  color: gray;
+  margin-top: 5px;
+}
+.userinfo{
+  padding-top: 2px;
+  margin-left: 32px;
+}
+.height-20{
+  height: 20px;
+}
+.zcLists{
+  font-size: 14px;
+  color: gray;
+  line-height:24px;
+  margin-right: 20px;
+  float: left;
+  min-width: 143px;
+}
+.zcLists .one{
+  color: #333
+}
+.title{
+  font-size: 14px;
+  color: #646464;
+  padding-bottom: 5px;
+}
+.user-info{
+  padding: 10px 20px;
+}
+.papers{
+  padding: 10px 20px;
+  font-size: 14px;
+}
+.index_title{
+  color: #000 !important;
+  font-weight: bold;
+}
+.icon-rightarrow{
+  margin-top:24rpx;
+  margin-right: 14px;
+}
+.label_name_date{
+  background-color: #f5f4fa;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  color: #606060;
+}
+.form-container{
+  padding: 0 10px;
+}
+
+.textareaBox{
+  padding:0 10px;
+}

@@ -1,0 +1,100 @@
+<!--标题模板  -->
+  <template name="zcText">
+    <view class="element text_title" >
+        <text class='index_title'>{{data.content}}</text>
+    </view>
+  </template>
+
+<!--Switch  -->
+  <template name='zcSwitch'>
+    <label class='lable_name_input' style='line-height:35px;padding:7px 0;'>
+      <text class='title'>{{data.title}}：</text>
+      <view class='input' style='float:right;margin-right:17px;'>
+         <switch name="{{data.field}}" color='#165ca7'/>
+      </view>
+      <view class='clearfix'></view>
+    </label>    
+  </template>
+  
+<!--date  -->
+  <template name="zcDate">
+    <label class='label_name_date' style='line-height:35px;padding:7px 0;'>
+      <picker mode="{{data.mode}}" value="{{data.value}}" start="{{data.start}}" end="{{data.end}}" bindchange="{{data.bindchange}}"  data-id='{{data.id}}' name="{{data.field}}">
+        <view class="picker">
+        <text class='title'>{{data.title}}：</text>
+        <text class='aBleft'>{{data.value}}</text>
+        <view class='clearfix'></view>
+        </view>
+      </picker>
+    </label> 
+  </template>
+
+<!--textarea  -->
+  <template name="zcTextarea">
+    <label>
+      <text style='{{data.style}}'>{{data.content}}</text>
+    </label>
+  </template>
+<!--radio  -->
+  <template name='zcPicker'>
+    <label class='label_name_date'>
+      <picker value="{{data.range[data.value]}}" range="{{data.range}}" mode="{{data.mode}}" data-id="{{data.id}}" bindchange="{{data.bindchange}}" name="{{data.field}}">
+          <view class="picker">
+           <text class='title'>{{data.title}}：</text>
+           <text class='aBleft'>{{data.range[data.value]}}</text>
+           <view class='clearfix'></view>
+          </view>
+      </picker>
+    </label>
+  </template>
+
+<!--submit  -->
+  <template name="zcButton">
+      <view class='zcButton' style='margin-bottom:20px;'>
+        <button form-type='{{data.type}}' type='{{data.style}}' class='button'>{{data.content}}</button>
+      </view>
+  </template> 
+
+<form class='form' data-type='{{typoe}}' bindsubmit="submitForm"  data-event-params="{{form.eventParams}}">
+
+  <template is="zcText" data="{{data:title[0]}}"/>
+
+  <template is="zcSwitch" data="{{data:form.content[0]}}"/>
+
+  <template is="zcDate" data="{{data:form.content[1]}}"/>
+
+  <template is="zcSwitch" data="{{data:form.content[2]}}" />
+
+  <template is= "zcDate" data="{{data:form.content[3]}}" />
+
+  <template is="zcTextarea" data="{{data:form.content[4]}}"/>
+
+  <template is="zcText" data="{{data:title[1]}}"/>
+
+  <template is ="zcPicker" data="{{data:form.content[5]}}" />
+
+  <template is="zcPicker" data="{{data:form.content[6]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[7]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[8]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[9]}}"/>
+
+  <template is="zcText" data="{{data:title[2]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[10]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[11]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[12]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[13]}}"/>
+
+  <template is="zcPicker" data="{{data:form.content[14]}}"/>
+
+  <template is="zcButton" data="{{data:form.content[15]}}"/>
+
+  <input style='display:none;' name="state" value='{{form.compId}}'></input>
+  
+</form>

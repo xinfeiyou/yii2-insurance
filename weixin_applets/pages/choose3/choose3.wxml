@@ -1,0 +1,90 @@
+<!--标题模板  -->
+  <template name="zcText">
+    <view class="element text_title" >
+        <text class='index_title'>{{data.content}}</text>
+    </view>
+  </template>
+
+
+<!--上传车牌照片-->
+  <template name='zcUpload'>
+  
+    <view class="element text_title" >
+        <text class='index_title'>{{data.title}}</text>
+    </view>
+    
+    <view class="weui-cells">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files">
+                <block wx:for="{{data.imageList}}" wx:for-item="image" wx:key="image" wx:for-index="id">
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img" src="{{image}}"></image>
+                     <!-- <view class='weui-uploader__view' style='background-image:url("/img/wrong.png");' bindtap="{{data.previewImage}}"  data-id="{{data.id}}"  data-field="{{data.field}}" data-srcIndex="{{id}}"></view> -->
+                  </view>
+                </block>
+              </view>
+              <view>
+
+                  <image src="/img/camera.png"  class="weui-uploader__input-box" bindtap="{{data.chooseImage}}" data-id="{{data.id}}" data-num="{{data.num}}" data-name="{{data.field}}"></image>
+                  <input style='display:none' name="{{data.field}}" value="{{[data.imageList]}}"></input>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>  
+  </template>
+
+<!--textarea  -->
+  <template name="zcTextarea">
+    <label>
+      <text style='{{data.style}}'>{{data.content}}</text>
+    </label>
+  </template>
+
+<!--示例模板  -->
+<template name="zcBank">
+  <label class='label_name_bank'>
+    <image src='{{data.imageSrc}}' mode="scaleToFill"  class='image'/>
+    <view class='radio' style='text-align:center;padding:0px;'>{{data.title}}</view> 
+  </label>
+</template>
+
+<!--submit  -->
+  <template name="zcButton">
+      <view class='zcButton' style='margin-bottom:20px;'>
+        <button form-type='{{data.type}}' type='{{data.style}}' class='button'>{{data.content}}</button>
+      </view>
+  </template> 
+
+<form class='form' data-type='{{typoe}}' bindsubmit="submitForm"  data-event-params="{{form.eventParams}}">
+
+  <!-- <template is="zcText" data="{{data:title[0]}}"/> -->
+
+  <template is="zcUpload" data="{{data:form.content[0]}}"/>
+{{formdata.strFaceIdCard}}
+
+  <template is="zcUpload" data="{{data:form.content[1]}}"/>
+
+  <template is="zcUpload" data="{{data:form.content[2]}}"/>
+
+  <template is="zcUpload" data="{{data:form.content[3]}}"/>
+
+  <template is="zcTextarea" data="{{data:form.content[4]}}"/>
+
+  <template is="zcBank" data="{{data:form.content[5]}}"/>
+
+  <template is="zcBank" data="{{data:form.content[6]}}"/>
+
+  <template is="zcBank" data="{{data:form.content[7]}}"/>
+
+  <template is="zcButton" data="{{data:form.content[8]}}"/>
+
+  <input style='display:none;' name="state" value='{{form.compId}}'></input>
+
+</form>
+

@@ -1,0 +1,41 @@
+<!--标题模板  -->
+  <template name="zcText">
+    <view class="element text_title" >
+        <text class='index_title'>{{data.content}}</text>
+    </view>
+  </template>
+
+<!--选择银行模板  -->
+  <template name='zcBank'>
+    <label class='lable_name_input label_name_bank'>
+      <view class='pull-left'>
+        <image src='{{data.imageSrc}}' mode="scaleToFill"  class='image'/>
+        <text class='title'>{{data.title}}</text>
+      </view>
+      <view class='input'>
+        <radio value="{{data.field}}" checked="{{data.checked}}"/>
+      </view>
+      <view class='clearfix'></view>
+    </label>    
+  </template>
+
+
+<!--submit  -->
+  <template name="zcButton">
+      <view class='zcButton' style='margin-bottom:20px;'>
+        <button form-type='{{data.type}}' type='{{data.style}}' class='button'>{{data.content}}</button>
+      </view>
+  </template> 
+
+<form class='form' data-type='{{typoe}}' bindsubmit="submitForm"  data-event-params="{{form.eventParams}}">
+
+  <template is="zcText" data="{{data:title[0]}}"/>
+  <radio-group bindchange="{{bindchange}}">
+    <template is="zcBank" data="{{data:data}}" wx:for="{{form.content}}" wx:for-index="id" wx:for-item="data" wx:key=""/>
+  </radio-group>
+
+  <input value='{{value}}' name="strInsuranceOffice" style='display:none'/>
+
+  <template is="zcButton" data="{{data:form.submit}}"/>
+
+</form>

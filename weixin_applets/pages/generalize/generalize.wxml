@@ -1,0 +1,3 @@
+<view class='imgBox'>
+  <image src="/img/pic.jpg" class="images"><image src='{{imgSrc}}' class='erweima' ></image></image>
+</view>

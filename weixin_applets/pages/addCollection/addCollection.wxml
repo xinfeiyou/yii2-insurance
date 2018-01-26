@@ -1,0 +1,96 @@
+<!--pages/repayDetail/repayDetail.wxml-->
+<!--列表  -->
+<template name="zcList">
+  <view class='zcLists' style="{{data.style ? 'width:auto' : 'width:100%'}}">
+    <text class='one'>{{data.title}}：</text>
+    <text>{{data.value}}</text>
+  </view>
+</template>
+
+<template name="zcDetail">
+  <view class=" user-container">
+     <view class="user-center">
+        <view class="show-view pull-left">
+          <image class="cover-thumb" src='{{data.user_src}}'></image>
+        </view>
+        <view class='pull-left userinfo'>
+          <text class='nickname'>{{data.name}}</text>
+          <text class='nickphone'>手机号码：{{data.phone}}</text>          
+        </view>
+          <view class='clearfix'></view>
+      </view>
+  </view>
+
+  <view>
+    <view class="element text_title" >
+        <text class='index_title'>{{data.car.title}}</text>
+    </view>
+    <view class='user-info'>
+      <view>
+          <view>
+            <template is="zcList" wx:for="{{data.car.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />
+            <view class='clearfix'></view>
+          </view>
+      </view>
+    </view>
+  </view>
+
+</template>
+
+
+
+<!--radio  -->
+  <template name='zcInput'>
+    <label class='label_name_date'>
+      <text class='title'>{{data.title}}：</text>
+      <input data-id="{{data.id}}" name="{{data.field}}" placeholder='{{placeholder}}'>
+      </input>
+    </label>
+  </template>
+
+<!--date  -->
+  <template name="zcDate">
+    <label class='label_name_date'>
+      <picker mode="{{data.mode}}" value="{{data.value}}" start="{{data.start}}" end="{{data.end}}" bindchange="{{data.bindchange}}"  data-id='{{data.id}}' name="{{data.field}}">
+        <view class="picker">
+        <text class='title'>{{data.title}}：</text>
+        <text class='aBleft'>{{data.value}}</text>
+        <view class='clearfix'></view>
+        </view>
+      </picker>
+    </label> 
+  </template>
+
+  <!--文本域  -->
+<template name="zcTextarea">
+  <label class='label_name_date'>
+      <view class='picker'>
+          <text class='title'>{{data.title}}：</text>
+          <view class='clearfix'></view>
+      </view>
+      <textarea  value='{{data.value}}' name="{{data.field}}" data-id="{{data.id}}" class='textareaBox' bindblur="{{data.bindblur}}"/>
+  </label>
+</template>
+
+
+<form class='form' bindsubmit="{{form.submitForm}}" >
+  <template is="zcDetail" data="{{data:listDetail}}" />
+
+  <view class='user-container form-container'>
+
+    <template is="zcInput" data="{{data:form.content[0]}}" />
+
+     <template is="zcInput" data="{{data:form.content[1]}}" />
+
+    <template is="zcDate" data="{{data:form.content[2]}}" />
+
+    <template is="zcTextarea" data="{{data:form.content[3]}}"/>
+
+  </view>
+
+
+  <view class='zcButton'>
+      <button form-type='submit' type='primary' class='button'>提交</button>
+  </view>
+  
+</form>

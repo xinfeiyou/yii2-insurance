@@ -1,0 +1,11 @@
+
+<template name="zcBank">
+  <view class="element text_title" >
+      <text class='index_title'>{{data.name}}：</text>
+  </view> 
+  <label class='label_name_bank' wx:for="{{data.list}}" wx:for-index="id" wx:for-item="data" wx:key="">
+    <image src='{{data.imgSrc}}' mode="scaleToFill"  class='image'/>
+  </label>
+</template>
+
+<template is="zcBank" data="{{data:data}}" wx:for="{{idImg}}" wx:for-index="id" wx:for-item="data" wx:key=""/>

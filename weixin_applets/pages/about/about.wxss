@@ -1,0 +1,21 @@
+page{
+  background-color:#f4f4f4;
+}
+.white{
+  background-color: #fff;
+}
+.nickname,.ico-moon{
+  color: #858585;
+}
+.height{
+  height: 40rpx;
+  width: 100%;
+  background-color:#f4f4f4; 
+  display: block;
+}
+.ico-moon{
+  width: 20px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}

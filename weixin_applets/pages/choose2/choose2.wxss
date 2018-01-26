@@ -1,0 +1,21 @@
+/* pages/choose2/choose2.wxss */
+.label_name_bank .image {
+  float: left;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.lable_name_input .title {
+  width: auto;
+  line-height: 50rpx;
+}
+.lable_name_input .input{
+  float: right;
+}
+.label_name_bank {
+  padding: 15px 15px 15px 25px;
+  display: block;
+  width: auto;
+}

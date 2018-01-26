@@ -1,0 +1,39 @@
+/* pages/bind/bind.wxss */
+.form-box{
+  width: 88%;
+  margin: 0 auto;
+  border-radius:10px;
+  background-color: #fff;
+  box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.1);
+  padding-top: 10px; 
+  position: relative;
+  top: -112px;
+}
+.pu-input input{
+  width: 77%;
+  display: block;
+  margin: 10px auto;
+  background-color: #f5f4fa;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+.pu-input .get-ms-ipt{
+  width: 120px;
+  margin-left:5.2%; 
+  float: left;
+}
+.pu-input .get-buttom{
+  width: 120px;
+  font-size: 14px;
+  float: right;
+  margin: 10px 0;
+  margin-right: 5.2%;
+  padding:3px;
+}
+.zcButton button{
+  width: 100%;
+  padding-left:0;
+  padding-right:0;
+  margin:71rpx 0px 0 0px !important;
+}

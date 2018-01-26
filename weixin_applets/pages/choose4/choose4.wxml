@@ -1,0 +1,21 @@
+
+<!--textarea  -->
+  <template name="zcTextarea">
+    <view style='margin-top:70px;padding-left:20px;padding-right:20px;width:150px;margin-left:auto;margin-right:auto;margin-bottom:-28px;'>
+      <image mode='aspectFit' src='{{data.imgSrc}}' style='width:100%;'/>
+    </view>
+    <view style='margin:10px 15px;'>
+      <text style='font-size:34rpx;color:#e64340;text-align:center;display:block;'>您的车辆保险分期订单已经提交！</text>
+      <text style='font-size:26rpx;color:#888888;text-align:center;display:block;margin-top:10px;'>您可以进入个人中心查看保单详情</text>
+    </view>
+</template>
+
+<template name="zcButton">
+    <view class='zcButton' style='margin-bottom:20px;'>
+      <button form-type='{{data.type}}' type='{{data.style}}' class='button' data-event-params="{{data.eventParams}}" catchtap='{{data.callback}}'>{{data.content}}</button>
+    </view>
+</template> 
+
+<template is="zcTextarea" data="{{data:displayBox}}" />
+
+<template is="zcButton" data="{{data:callback}}"/>

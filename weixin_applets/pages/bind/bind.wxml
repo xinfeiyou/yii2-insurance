@@ -1,0 +1,27 @@
+
+<view>
+  <image src='/img/bindbg.png' mode="scaleToFill" style="width:100%;"></image>
+</view>
+
+
+<form bindsubmit="submitForm" >
+  <view class='form-box'>
+    <label class='pu-input'>
+      <input placeholder='请输入11位手机号码' type='text' maxlength='11' name="strPhone"></input>
+    </label>
+    <!-- <label class='pu-input'>
+      <input placeholder='请输入密码' type='password' maxlength='18' style="margin-top:20px;" name="strPass"></input>
+    </label> -->
+    <view class='pu-input' style='display:block;'>
+      <input placeholder='请输入验证码' type='number' maxlength='6' class="get-ms-ipt" name="strCode"></input>
+      <button bindtap='getMs' type='primary' class='get-buttom' disabled='{{disabled}}'>{{btn}}</button>
+      <view class="clearfix"></view>
+    </view>  
+    <label>
+    <view class='zcButton'>
+      <button form-type='submit' type='primary'  class='button'>绑定</button>
+    </view>
+    </label>
+  </view>
+
+</form>

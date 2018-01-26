@@ -1,0 +1,6 @@
+/* pages/idImg/idImg.wxss */
+.title{
+  font-size: 14px;
+  font-weight: bold;
+  text-indent: 20px;
+}
