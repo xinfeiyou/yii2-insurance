@@ -11,7 +11,7 @@
         <view class="horizontal-view">
           <view class="horizontal-router-container1">
            
-              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}'>
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}' data-listid="{{data.strUserId}}">
               <label  class="ico-moon"><image src="/img/icon-message.png" mode='aspectFit' style='width:20px;height:20px;'></image></label>
                 
                 <text>还款记录</text>
