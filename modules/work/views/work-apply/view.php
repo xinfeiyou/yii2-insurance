@@ -34,7 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'strWadingInsurance',
             'strScratchInsurance',
             'strExcessInsurance',
-            'strInsuranceOffice',
+            [
+                'attribute' => 'strInsuranceOffice',
+                'value' => function($model) {
+                    return $model->getSysConfigInfoType('strInsuranceOffice')[$model->strInsuranceOffice];
+                },
+                'headerOptions' => ['width' => '70']
+            ],
             [
                 'attribute' => 'strFaceIdCard',
                 'label' => '身份证正面',

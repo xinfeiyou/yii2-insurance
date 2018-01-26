@@ -18,8 +18,9 @@ class BaseModel extends \yii\db\ActiveRecord {
      */
     public function getSysConfigInfoType($type) {
         $array = [];
-        $arrObj = $this->hasMany(WorkConfig::className(), ['enType' => $type])
-                ->select(['strKey', 'strValue'])
+        $arrObj = WorkConfig::find()
+                ->select(['strKey','strValue'])
+                ->where(['strType'=>$type])
                 ->all();
         foreach ($arrObj as $v) {
             $array[$v->strKey] = $v->strValue;

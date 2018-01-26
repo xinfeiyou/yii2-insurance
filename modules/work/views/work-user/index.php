@@ -64,17 +64,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'strUserType',
                 'value' => function($model) {
-                    switch ($model->strUserType) {
-                        case "1":$strUserTypeName = "业务员";
-                            break;
-                        case "2":$strUserTypeName = "推广员";
-                            break;
-                        case "3":$strUserTypeName = "客户";
-                            break;
-                    }
-                    return $strUserTypeName;
+                    return $model->getSysConfigInfoType('strUserType')[$model->strUserType];
                 },
-                'headerOptions' => ['width' => '100']
+                'headerOptions' => ['width' => '70']
             ],
             [
                 'attribute' => 'tCreateTime',
