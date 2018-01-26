@@ -41,7 +41,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             [['strUserId'], 'string', 'max' => 50],
             [['strPhone'], 'string', 'max' => 15],
             [['strPass'], 'string', 'max' => 64],
-            [['nickName', 'language','strUserType'], 'string', 'max' => 20],
+            [['nickName', 'language', 'strUserType'], 'string', 'max' => 20],
             [['gender'], 'string', 'max' => 1],
             [['city', 'province', 'country', 'openId'], 'string', 'max' => 100],
             [['avatarUrl', 'scene', 'strCodeImg'], 'string']
@@ -112,12 +112,31 @@ class WorkUser extends \app\modules\base\models\BaseModel {
     }
 
     /**
+     * 更加手机获取信息
+     * @param string $strPhone
+     * @return type
+     */
+    public function getPhone($strPhone) {
+        $arObj = WorkUser::findOne(['strPhone' => $strPhone]);
+        if(empty($arObj)){
+            return false;
+        }else{
+            return $arObj;
+        }
+    }
+
+    /**
      * 获取用户模型
      * @param type $strUserId
      * @return type
      */
     public function getModels($strUserId) {
-        return WorkUser::findOne(['strUserId' => $strUserId]);
+        $arObj = WorkUser::findOne(['strUserId' => $strUserId]);
+        if(empty($arObj)){
+            return false;
+        }else{
+            return $arObj;
+        }
     }
 
     /**

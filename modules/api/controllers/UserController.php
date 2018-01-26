@@ -23,11 +23,17 @@ class UserController extends BaseController {
      */
     public function actionBind() {
         $arPost = \Yii::$app->request->post();
-        unset($arPost['strCode']);
-        $arMsg = (new WorkUser())->add($arPost);
-        $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
-        $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
-        (new WorkPromoter())->add(['strUserId'=>$arMsg['content'],'strPromoterId'=>$arPost['scene']]);
+        $model = new WorkUser();
+        $arObj = $model->getPhone($arPost['strPhone']);
+        if (empty($arObj)) {
+            unset($arPost['strCode']);
+            $arMsg = (new WorkUser())->add($arPost);
+            $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
+            $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
+            (new WorkPromoter())->add(['strUserId' => $arMsg['content'], 'strPromoterId' => $arPost['scene']]);
+        } else {
+            $arReturn = NetWork::setMsg($this->strTitle, "成功", '0000', $arObj->strUserId);
+        }
         Str::echoJson($arReturn);
     }
 
@@ -76,14 +82,16 @@ class UserController extends BaseController {
         }
         Str::echoJson($arReturn);
     }
+
     /**
      * 获取当前用户推广员列表
      */
-    public function actionGetPromoter(){
+    public function actionGetPromoter() {
         //$strUserId = '2018012500000002';
         $strUserId = \Yii::$app->request->post('strUserId');
         $arPromoter = (new WorkPromoter())->getPromoterList($strUserId);
         $arReturn = NetWork::setMsg($this->strTitle, "获取成功", $arPromoter['ret'], $arPromoter['content']);
         Str::echoJson($arReturn);
     }
+
 }
