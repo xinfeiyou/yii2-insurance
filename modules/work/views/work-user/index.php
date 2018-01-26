@@ -11,7 +11,8 @@ $this->title = '用户列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="work-user-index">
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -33,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'gender',
                 'value' => function($model) {
-                    return ($model->gender)?'男':'女';
+                    return ($model->gender) ? '男' : '女';
                 },
                 'headerOptions' => ['width' => '70']
             ],
@@ -61,6 +62,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '100']
             ],
             [
+                'attribute' => 'strUserType',
+                'value' => function($model) {
+                    switch ($model->strUserType) {
+                        case "1":$strUserTypeName = "业务员";
+                            break;
+                        case "2":$strUserTypeName = "推广员";
+                            break;
+                        case "3":$strUserTypeName = "客户";
+                            break;
+                    }
+                    return $strUserTypeName;
+                },
+                'headerOptions' => ['width' => '100']
+            ],
+            [
                 'attribute' => 'tCreateTime',
                 'headerOptions' => ['width' => '180']
             ],
@@ -75,5 +91,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '100']
             ],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

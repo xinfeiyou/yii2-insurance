@@ -19,6 +19,7 @@ use Yii;
  * @property string $country
  * @property string $openId
  * @property string $strCodeImg
+ * @property string $strUserType
  * @property string $tCreateTime
  * @property string $tUpdateTime
  */
@@ -40,7 +41,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             [['strUserId'], 'string', 'max' => 50],
             [['strPhone'], 'string', 'max' => 15],
             [['strPass'], 'string', 'max' => 64],
-            [['nickName', 'language'], 'string', 'max' => 20],
+            [['nickName', 'language','strUserType'], 'string', 'max' => 20],
             [['gender'], 'string', 'max' => 1],
             [['city', 'province', 'country', 'openId'], 'string', 'max' => 100],
             [['avatarUrl', 'scene', 'strCodeImg'], 'string']
@@ -66,6 +67,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             'avatarUrl' => '头像地址',
             'scene' => '推荐码',
             'strCodeImg' => '推荐码',
+            'strUserType' => '用户类型',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];

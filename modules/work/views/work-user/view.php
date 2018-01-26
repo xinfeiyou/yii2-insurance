@@ -37,6 +37,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['image', ['width' => '40', 'height' => '40',]],
                 'headerOptions' => ['width' => '50']
             ],
+            [
+                'attribute' => 'strUserType',
+                'value' => function($model) {
+                    switch ($model->strUserType) {
+                        case "1":$strUserTypeName = "业务员";
+                            break;
+                        case "2":$strUserTypeName = "推广员";
+                            break;
+                        case "3":$strUserTypeName = "客户";
+                            break;
+                    }
+                    return $strUserTypeName;
+                },
+                'headerOptions' => ['width' => '100']
+            ],
             'tCreateTime',
             'tUpdateTime',
         ],

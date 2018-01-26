@@ -35,6 +35,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'avatarUrl')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'scene')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'strUserType')->dropDownList(['1' => '业务员', '2' => '推广员', '3' => '客户']) ?>
 
     <?= $form->field($model, 'tCreateTime')->textInput() ?>
 
