@@ -18,6 +18,7 @@ use Yii;
  * @property string $province
  * @property string $country
  * @property string $openId
+ * @property string $strCodeImg
  * @property string $tCreateTime
  * @property string $tUpdateTime
  */
@@ -42,7 +43,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             [['nickName', 'language'], 'string', 'max' => 20],
             [['gender'], 'string', 'max' => 1],
             [['city', 'province', 'country', 'openId'], 'string', 'max' => 100],
-            [['avatarUrl','scene'], 'string']
+            [['avatarUrl', 'scene', 'strCodeImg'], 'string']
         ];
     }
 
@@ -64,6 +65,7 @@ class WorkUser extends \app\modules\base\models\BaseModel {
             'openId' => 'OpenID',
             'avatarUrl' => '头像地址',
             'scene' => '推荐码',
+            'strCodeImg' => '推荐码',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];
@@ -105,6 +107,15 @@ class WorkUser extends \app\modules\base\models\BaseModel {
     public function edit($strUserId, $arData) {
         $model = WorkUser::findOne(['strUserId' => $strUserId]);
         return $this->edit_data($model, $arData);
+    }
+
+    /**
+     * 获取用户模型
+     * @param type $strUserId
+     * @return type
+     */
+    public function getModels($strUserId) {
+        return WorkUser::findOne(['strUserId' => $strUserId]);
     }
 
     /**

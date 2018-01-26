@@ -71,4 +71,21 @@ class Files {
           } */
     }
 
+    /**
+     * 存图片到本地
+     * @param type $imageData
+     */
+    public static Function writeFile($strName, $fContent, $fTag = 'a') {
+        $fFileName = \Yii::$app->basePath . '/web/upload/weixin/' . $strName;
+        ignore_user_abort(TRUE);
+        $fp = fopen($fFileName, $fTag);
+        if (flock($fp, LOCK_EX)) {
+            fwrite($fp, $fContent);
+            flock($fp, LOCK_UN);
+        }
+        fclose($fp);
+        ignore_user_abort(FALSE);
+        return true;
+    }
+
 }

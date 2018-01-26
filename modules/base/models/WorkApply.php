@@ -28,6 +28,8 @@ use Yii;
  * @property string $strScratchInsurance
  * @property string $strExcessInsurance
  * @property string $strInsuranceOffice
+ * @property string $eStatus
+ * @property string $oddNumber
  * @property string $tCreateTime
  * @property string $tUpdateTime
  */
@@ -45,12 +47,12 @@ class WorkApply extends \app\modules\base\models\BaseModel {
      */
     public function rules() {
         return [
-            [['strWorkNum', 'strRealName', 'strPhone', 'strTravelAdder','strUserId'], 'required'],
+            [['strWorkNum', 'strRealName', 'strPhone', 'strTravelAdder', 'strUserId'], 'required'],
             [['tCompulsoryInsuranceEffectiveTime', 'tCommercialInsuranceEffectiveTime', 'tCreateTime', 'tUpdateTime'], 'safe'],
-            [['strWorkNum','strUserId'], 'string', 'max' => 40],
+            [['strWorkNum', 'strUserId', 'eStatus', 'oddNumber'], 'string', 'max' => 40],
             [['strRealName', 'strPhone', 'strTravelAdder', 'strCarNumber', 'strCompulsoryInsurance', 'strCommercialInsurance', 'strLossInsurance', 'strThirdPartyInsurance', 'strTheftInsurance', 'strDriverLiabilityInsurance', 'strPassengerLiabilityInsurance', 'strGlassInsurance', 'strSelfIgnitionInsurance', 'strWadingInsurance', 'strScratchInsurance', 'strExcessInsurance'], 'string', 'max' => 50],
             [['strInsuranceOffice'], 'string', 'max' => 100],
-            [['strFaceIdCard','strFaceVehicleLicense','strReverseIdCard','strOther'],'string']
+            [['strFaceIdCard', 'strFaceVehicleLicense', 'strReverseIdCard', 'strOther'], 'string']
         ];
     }
 
@@ -85,6 +87,8 @@ class WorkApply extends \app\modules\base\models\BaseModel {
             'strFaceVehicleLicense' => '身份证背面',
             'strReverseIdCard' => '行驶证',
             'strOther' => '其他证件',
+            'eStatus' => '申请状态',
+            'oddNumber' => '借款编号',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];
@@ -114,6 +118,15 @@ class WorkApply extends \app\modules\base\models\BaseModel {
     }
 
     /**
+     * 根据借款编号获取申请资料
+     * @param type $oddNumber
+     * @return type
+     */
+    public function getApplyInfo($oddNumber) {
+        return WorkApply::findOne(['oddNumber' => $oddNumber]);
+    }
+
+    /**
      * 获取新的流程流水号ID
      * @return string
      */
@@ -129,7 +142,7 @@ class WorkApply extends \app\modules\base\models\BaseModel {
         } else {
             $number = date("Ymd") . "00000001";
         }
-        return 'LC'.$number;
+        return 'LC' . $number;
     }
 
 }

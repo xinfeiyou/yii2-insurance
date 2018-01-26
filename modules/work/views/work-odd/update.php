@@ -3,17 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\work\models\WorkOdd */
+/* @var $model app\modules\base\models\WorkOdd */
 
-$this->title = 'Update Work Odd: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Work Odds', 'url' => ['index']];
+$this->title = '项目ID: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => '项目列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = '编辑';
 ?>
 <div class="work-odd-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

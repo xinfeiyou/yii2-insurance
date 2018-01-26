@@ -17,10 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'id',
-            'strUserId',
-            'strPhone',
+            [
+                'attribute' => 'strUserId',
+                'headerOptions' => ['width' => '70']
+            ],
+            [
+                'attribute' => 'strPhone',
+                'headerOptions' => ['width' => '70']
+            ],
             //'strPass',
-            'nickName',
+            [
+                'attribute' => 'nickName',
+                'headerOptions' => ['width' => '200']
+            ],
             [
                 'attribute' => 'gender',
                 'value' => function($model) {
@@ -28,28 +37,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'headerOptions' => ['width' => '70']
             ],
-            [
-                'attribute' => 'language',
-                'headerOptions' => ['width' => '70']
-            ],
+//            [
+//                'attribute' => 'language',
+//                'headerOptions' => ['width' => '70']
+//            ],
             [
                 'attribute' => 'city',
-                'headerOptions' => ['width' => '70']
+                'headerOptions' => ['width' => '200']
             ],
             [
                 'attribute' => 'province',
-                'headerOptions' => ['width' => '70']
+                'headerOptions' => ['width' => '200']
             ],
-            [
-                'attribute' => 'country',
-                'headerOptions' => ['width' => '70']
-            ],
+//            [
+//                'attribute' => 'country',
+//                'headerOptions' => ['width' => '70']
+//            ],
             // 'openId',
             [
                 'attribute' => 'avatarUrl',
                 'label' => '头像',
                 'format' => ['image', ['width' => '40', 'height' => '40',]],
-                'headerOptions' => ['width' => '50']
+                'headerOptions' => ['width' => '100']
             ],
             [
                 'attribute' => 'tCreateTime',
@@ -63,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
                 'template' => '{view} &nbsp&nbsp;&nbsp;{update}',
-                'headerOptions' => ['width' => '70']
+                'headerOptions' => ['width' => '100']
             ],
         ],
     ]); ?>

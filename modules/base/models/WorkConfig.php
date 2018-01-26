@@ -13,21 +13,19 @@ use Yii;
  * @property string $tCreateTime
  * @property string $tUpdateTime
  */
-class WorkConfig extends \app\modules\base\models\BaseModel
-{
+class WorkConfig extends \app\modules\base\models\BaseModel {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%work_config}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['tCreateTime', 'tUpdateTime'], 'safe'],
             [['strKey'], 'string', 'max' => 50],
@@ -38,8 +36,7 @@ class WorkConfig extends \app\modules\base\models\BaseModel
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'strKey' => 'Str Key',
@@ -48,4 +45,37 @@ class WorkConfig extends \app\modules\base\models\BaseModel
             'tUpdateTime' => 'T Update Time',
         ];
     }
+
+    /**
+     * 根据关键字查找对应的值
+     * @param string $strKey
+     * @return boolean|string
+     */
+    public function getKeyToValue($strKey) {
+        $arObj = WorkConfig::findOne(['strKey' => $strKey]);
+        if (empty($arObj)) {
+            return false;
+        } else {
+            return $arObj->strValue;
+        }
+    }
+
+    /**
+     * 更新数据
+     * @param string $strKey
+     * @param string $strValue
+     * @return array
+     */
+    public function editKeyToValue($strKey, $strValue) {
+        $arObj = $this->getKeyToValue($strKey);
+        if ($arObj) {
+            $model = WorkConfig::findOne(['strKey' => $strKey]);
+            $arMsg = $this->edit_data($model, ['strValue' => $strValue]);
+        } else {
+            $model = new WorkConfig();
+            $arMsg = $this->create_data($model, ['strKey' => $strKey, 'strValue' => $strValue]);
+        }
+        return $arMsg;
+    }
+
 }

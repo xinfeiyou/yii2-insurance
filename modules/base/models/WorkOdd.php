@@ -3,7 +3,7 @@
 namespace app\modules\base\models;
 
 use Yii;
-use app\modules\base\models\BaseModel;
+
 /**
  * This is the model class for table "{{%work_odd}}".
  *
@@ -13,66 +13,42 @@ use app\modules\base\models\BaseModel;
  * @property string $oddTitle
  * @property double $oddYearRate
  * @property double $oddMoney
- * @property double $successMoney
- * @property double $startMoney
- * @property double $endMoney
- * @property string $oddBorrowStyle
  * @property string $oddRepaymentStyle
  * @property integer $oddBorrowPeriod
- * @property integer $oddBorrowValidTime
  * @property double $serviceFee
  * @property string $oddTrialTime
- * @property string $oddTrialRemark
  * @property string $oddRehearTime
- * @property string $oddRehearRemark
- * @property string $addtime
- * @property string $publishTime
- * @property string $fullTime
  * @property string $userId
- * @property string $progress
  * @property string $operator
- * @property integer $lookstatus
- * @property integer $investType
- * @property integer $readstatus
- * @property string $openTime
- * @property string $appointUserId
- * @property double $oddReward
- * @property string $oddStyle
+ * @property double $offlineMoney
  * @property double $offlineRate
- * @property integer $cerStatus
- * @property integer $fronStatus
- * @property string $firstFigure
  * @property integer $isCr
  * @property string $receiptUserId
  * @property integer $receiptStatus
- * @property integer $isATBiding
  * @property integer $finishType
  * @property string $finishTime
  */
-class WorkOdd extends BaseModel
-{
+class WorkOdd extends \app\modules\base\models\BaseModel {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%work_odd}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['oddNumber', 'oddType', 'oddTitle', 'oddYearRate', 'oddBorrowStyle', 'oddBorrowPeriod', 'oddBorrowValidTime'], 'required'],
-            [['oddYearRate', 'oddMoney', 'successMoney', 'startMoney', 'endMoney', 'serviceFee', 'oddReward', 'offlineRate'], 'number'],
-            [['oddBorrowStyle', 'oddRepaymentStyle', 'oddTrialRemark', 'oddRehearRemark', 'progress', 'oddStyle'], 'string'],
-            [['oddBorrowPeriod', 'oddBorrowValidTime', 'lookstatus', 'investType', 'readstatus', 'cerStatus', 'fronStatus', 'isCr', 'receiptStatus', 'isATBiding', 'finishType'], 'integer'],
-            [['oddTrialTime', 'oddRehearTime', 'addtime', 'publishTime', 'fullTime', 'openTime', 'finishTime'], 'safe'],
-            [['oddNumber', 'oddType', 'userId', 'operator', 'appointUserId', 'receiptUserId'], 'string', 'max' => 20],
+            [['oddNumber', 'oddType', 'oddTitle', 'oddYearRate', 'oddBorrowPeriod'], 'required'],
+            [['oddYearRate', 'oddMoney', 'serviceFee', 'offlineMoney', 'offlineRate'], 'number'],
+            [['oddRepaymentStyle'], 'string'],
+            [['oddBorrowPeriod', 'isCr', 'receiptStatus', 'finishType'], 'integer'],
+            [['oddTrialTime', 'oddRehearTime', 'finishTime'], 'safe'],
+            [['oddNumber', 'oddType', 'userId', 'operator', 'receiptUserId'], 'string', 'max' => 20],
             [['oddTitle'], 'string', 'max' => 100],
-            [['firstFigure'], 'string', 'max' => 120],
             [['oddNumber'], 'unique'],
         ];
     }
@@ -80,50 +56,40 @@ class WorkOdd extends BaseModel
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
-            'oddNumber' => 'Odd Number',
-            'oddType' => 'Odd Type',
-            'oddTitle' => 'Odd Title',
-            'oddYearRate' => 'Odd Year Rate',
-            'oddMoney' => 'Odd Money',
-            'successMoney' => 'Success Money',
-            'startMoney' => 'Start Money',
-            'endMoney' => 'End Money',
-            'oddBorrowStyle' => 'Odd Borrow Style',
-            'oddRepaymentStyle' => 'Odd Repayment Style',
-            'oddBorrowPeriod' => 'Odd Borrow Period',
-            'oddBorrowValidTime' => 'Odd Borrow Valid Time',
-            'serviceFee' => 'Service Fee',
-            'oddTrialTime' => 'Odd Trial Time',
-            'oddTrialRemark' => 'Odd Trial Remark',
-            'oddRehearTime' => 'Odd Rehear Time',
-            'oddRehearRemark' => 'Odd Rehear Remark',
-            'addtime' => 'Addtime',
-            'publishTime' => 'Publish Time',
-            'fullTime' => 'Full Time',
-            'userId' => 'User ID',
-            'progress' => 'Progress',
-            'operator' => 'Operator',
-            'lookstatus' => 'Lookstatus',
-            'investType' => 'Invest Type',
-            'readstatus' => 'Readstatus',
-            'openTime' => 'Open Time',
-            'appointUserId' => 'Appoint User ID',
-            'oddReward' => 'Odd Reward',
-            'oddStyle' => 'Odd Style',
-            'offlineRate' => 'Offline Rate',
-            'cerStatus' => 'Cer Status',
-            'fronStatus' => 'Fron Status',
-            'firstFigure' => 'First Figure',
-            'isCr' => 'Is Cr',
-            'receiptUserId' => 'Receipt User ID',
-            'receiptStatus' => 'Receipt Status',
-            'isATBiding' => 'Is Atbiding',
-            'finishType' => 'Finish Type',
-            'finishTime' => 'Finish Time',
+            'oddNumber' => '标的编号',
+            'oddType' => '标的类型',
+            'oddTitle' => '借标标题',
+            'oddYearRate' => '年化率',
+            'oddMoney' => '借款金额',
+            'oddRepaymentStyle' => '还款类型',
+            'oddBorrowPeriod' => '借款期限',
+            'serviceFee' => '借款服务费',
+            'oddTrialTime' => '初审时间',
+            'oddRehearTime' => '复审时间',
+            'userId' => '用户ID',
+            'operator' => '代发标人',
+            'offlineMoney' => '线下金额',
+            'offlineRate' => '线下利率',
+            'isCr' => '是否代偿',
+            'receiptUserId' => '收款人ID',
+            'receiptStatus' => '受托状态',
+            'finishType' => '完结类型',
+            'finishTime' => '完结时间',
         ];
     }
+
+    /**
+     * 根据用户ID获取项目信息
+     * @param type $strUserId
+     * @return type
+     */
+    public function getWorkList($strUserId) {
+        return WorkOdd::find()
+                        ->where(['userId' => $strUserId])
+                        ->all();
+    }
+
 }

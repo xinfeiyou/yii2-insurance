@@ -27,6 +27,7 @@ class NetWork {
         $ch = curl_init(); //初始化curl
         curl_setopt($ch, CURLOPT_URL, $url); //设置链接
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //设置是否返回信息
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//这个是重点
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json; charset=utf-8',
             'Content-Length: ' . strlen($json_string))

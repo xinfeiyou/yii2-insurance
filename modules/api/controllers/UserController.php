@@ -4,8 +4,11 @@ namespace app\modules\api\controllers;
 
 use app\modules\api\controllers\BaseController;
 use app\modules\base\models\WorkUser;
+use app\modules\base\models\WorkPromoter;
+use app\modules\base\models\WorkConfig;
 use app\common\Str;
 use app\common\NetWork;
+use app\common\Files;
 
 /**
  * Default controller for the `api` module
@@ -19,12 +22,12 @@ class UserController extends BaseController {
      * @return string
      */
     public function actionBind() {
-        $model = new WorkUser();
         $arPost = \Yii::$app->request->post();
         unset($arPost['strCode']);
-        $arMsg = $model->add($arPost);
+        $arMsg = (new WorkUser())->add($arPost);
         $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
         $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
+        (new WorkPromoter())->add(['strUserId'=>$arMsg['content'],'strPromoterId'=>$arPost['scene']]);
         Str::echoJson($arReturn);
     }
 
@@ -50,18 +53,37 @@ class UserController extends BaseController {
     }
 
     /**
-     * 获取微信客户openid
-     * @param type $code
-     * @return boolean
+     * 获取自己推广二维码
      */
-    public function getOpenId($code) {
-        if (empty($code)) {
-            return false;
+    public function actionGetQrcode() {
+        $strUserId = \Yii::$app->request->post('strUserId');
+        $arObj = (new WorkUser())->getModels($strUserId);
+        if (!empty($arObj->strCodeImg)) {
+            $arReturn = NetWork::setMsg($this->strTitle, "获取成功", "0000", ['url' => $arObj->strCodeImg]);
+            Str::echoJson($arReturn);
         }
-        $url = "https://api.weixin.qq.com/sns/jscode2session?appid=" . \Yii::$app->params['appId'] . "&secret=" . \Yii::$app->params['appSecret'] . "&js_code=" . $code . "&grant_type=authorization_code";
-        //{"session_key":"DicATNOsJ+2jSzrAXvdSfA==","openid":"o0iwU0VcajjPGAvspRKv0ZvfBJas"}
-        $arData = json_decode(file_get_contents($url), true);
-        return $arData['openid'];
+        $strToken = (new WorkConfig())->getKeyToValue('strToken');
+        if (empty($strToken)) {
+            $arReturn = NetWork::setMsg($this->strTitle, "获取token值失败", "1001", []);
+        } else {
+            $json_string = \Yii::$app->request->post('data');
+            $url = \Yii::$app->request->post('url') . '?access_token=';
+            $imageData = NetWork::CurlUrlData($json_string, $strToken, $url);
+            sleep(1);
+            Files::writeFile($strUserId . '.jpg', $imageData);
+            $imagUrl = $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/upload/weixin/' . $strUserId . '.jpg';
+            (new WorkUser())->edit($strUserId, ['strCodeImg' => $imagUrl]);
+            $arReturn = NetWork::setMsg($this->strTitle, "获取成功", "0000", ['url' => $imagUrl]);
+        }
+        Str::echoJson($arReturn);
     }
-
+    /**
+     * 获取当前用户推广员列表
+     */
+    public function actionGetPromoter(){
+        $strUserId = '2018012500000002';
+        $arPromoter = (new WorkPromoter())->getPromoterList($strUserId);
+        $arReturn = NetWork::setMsg($this->strTitle, "获取成功", $arPromoter['ret'], $arPromoter['content']);
+        Str::echoJson($arReturn);
+    }
 }

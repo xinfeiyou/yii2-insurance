@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\modules\base\models\WorkOdd;
 
 /**
- * WorkOddSearch represents the model behind the search form about `app\modules\work\models\WorkOdd`.
+ * WorkOddSearch represents the model behind the search form about `app\modules\base\models\WorkOdd`.
  */
 class WorkOddSearch extends WorkOdd
 {
@@ -18,9 +18,9 @@ class WorkOddSearch extends WorkOdd
     public function rules()
     {
         return [
-            [['id', 'oddBorrowPeriod', 'oddBorrowValidTime', 'lookstatus', 'investType', 'readstatus', 'cerStatus', 'fronStatus', 'isCr', 'receiptStatus', 'isATBiding', 'finishType'], 'integer'],
-            [['oddNumber', 'oddType', 'oddTitle', 'oddBorrowStyle', 'oddRepaymentStyle', 'oddTrialTime', 'oddTrialRemark', 'oddRehearTime', 'oddRehearRemark', 'addtime', 'publishTime', 'fullTime', 'userId', 'progress', 'operator', 'openTime', 'appointUserId', 'oddStyle', 'firstFigure', 'receiptUserId', 'finishTime'], 'safe'],
-            [['oddYearRate', 'oddMoney', 'successMoney', 'startMoney', 'endMoney', 'serviceFee', 'oddReward', 'offlineRate'], 'number'],
+            [['id', 'oddBorrowPeriod', 'isCr', 'receiptStatus', 'finishType'], 'integer'],
+            [['oddNumber', 'oddType', 'oddTitle', 'oddRepaymentStyle', 'oddTrialTime', 'oddRehearTime', 'userId', 'operator', 'receiptUserId', 'finishTime'], 'safe'],
+            [['oddYearRate', 'oddMoney', 'serviceFee', 'offlineMoney', 'offlineRate'], 'number'],
         ];
     }
 
@@ -63,28 +63,14 @@ class WorkOddSearch extends WorkOdd
             'id' => $this->id,
             'oddYearRate' => $this->oddYearRate,
             'oddMoney' => $this->oddMoney,
-            'successMoney' => $this->successMoney,
-            'startMoney' => $this->startMoney,
-            'endMoney' => $this->endMoney,
             'oddBorrowPeriod' => $this->oddBorrowPeriod,
-            'oddBorrowValidTime' => $this->oddBorrowValidTime,
             'serviceFee' => $this->serviceFee,
             'oddTrialTime' => $this->oddTrialTime,
             'oddRehearTime' => $this->oddRehearTime,
-            'addtime' => $this->addtime,
-            'publishTime' => $this->publishTime,
-            'fullTime' => $this->fullTime,
-            'lookstatus' => $this->lookstatus,
-            'investType' => $this->investType,
-            'readstatus' => $this->readstatus,
-            'openTime' => $this->openTime,
-            'oddReward' => $this->oddReward,
+            'offlineMoney' => $this->offlineMoney,
             'offlineRate' => $this->offlineRate,
-            'cerStatus' => $this->cerStatus,
-            'fronStatus' => $this->fronStatus,
             'isCr' => $this->isCr,
             'receiptStatus' => $this->receiptStatus,
-            'isATBiding' => $this->isATBiding,
             'finishType' => $this->finishType,
             'finishTime' => $this->finishTime,
         ]);
@@ -92,16 +78,9 @@ class WorkOddSearch extends WorkOdd
         $query->andFilterWhere(['like', 'oddNumber', $this->oddNumber])
             ->andFilterWhere(['like', 'oddType', $this->oddType])
             ->andFilterWhere(['like', 'oddTitle', $this->oddTitle])
-            ->andFilterWhere(['like', 'oddBorrowStyle', $this->oddBorrowStyle])
             ->andFilterWhere(['like', 'oddRepaymentStyle', $this->oddRepaymentStyle])
-            ->andFilterWhere(['like', 'oddTrialRemark', $this->oddTrialRemark])
-            ->andFilterWhere(['like', 'oddRehearRemark', $this->oddRehearRemark])
             ->andFilterWhere(['like', 'userId', $this->userId])
-            ->andFilterWhere(['like', 'progress', $this->progress])
             ->andFilterWhere(['like', 'operator', $this->operator])
-            ->andFilterWhere(['like', 'appointUserId', $this->appointUserId])
-            ->andFilterWhere(['like', 'oddStyle', $this->oddStyle])
-            ->andFilterWhere(['like', 'firstFigure', $this->firstFigure])
             ->andFilterWhere(['like', 'receiptUserId', $this->receiptUserId]);
 
         return $dataProvider;
