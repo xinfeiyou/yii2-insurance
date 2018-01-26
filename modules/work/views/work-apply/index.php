@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use app\modules\base\models\WorkApply;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\base\models\search\WorkApplySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -39,10 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'strExcessInsurance',
             [
                 'attribute' => 'strInsuranceOffice',
+                'headerOptions' => ['width' => '70'],
                 'value' => function($model) {
                     return $model->getSysConfigInfoType('strInsuranceOffice')[$model->strInsuranceOffice];
                 },
-                'headerOptions' => ['width' => '70']
+                'filter' => (new WorkApply())->getSysConfigInfoType('strInsuranceOffice')
             ],
             'eStatus',
             'oddNumber',

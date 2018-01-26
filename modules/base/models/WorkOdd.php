@@ -91,5 +91,4 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
                         ->where(['userId' => $strUserId])
                         ->all();
     }
-
 }

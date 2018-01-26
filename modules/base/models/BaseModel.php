@@ -13,7 +13,7 @@ class BaseModel extends \yii\db\ActiveRecord {
 
     /**
      * 根据类型列出配置列表
-     * @param type $type
+     * @param string $type
      * @return type
      */
     public function getSysConfigInfoType($type) {

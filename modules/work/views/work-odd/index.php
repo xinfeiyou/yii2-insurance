@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\modules\base\models\WorkOdd;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\base\models\search\WorkOddSearch */
@@ -11,12 +12,12 @@ $this->title = '项目列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="work-odd-index">
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             //'id',
             [
                 'attribute' => 'oddNumber',
@@ -24,7 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'oddType',
-                'headerOptions' => ['width' => '100']
+                'headerOptions' => ['width' => '120'],
+                'value' => function($model) {
+                    return $model->getSysConfigInfoType('oddType')[$model->oddType];
+                },
+                'filter' => (new WorkOdd())->getSysConfigInfoType('oddType'),
             ],
             'oddTitle',
             [
@@ -37,7 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'oddRepaymentStyle',
-                'headerOptions' => ['width' => '50']
+                'headerOptions' => ['width' => '120'],
+                'value' => function($model) {
+                    return $model->getSysConfigInfoType('oddRepaymentStyle')[$model->oddRepaymentStyle];
+                },
+                'filter' => (new WorkOdd())->getSysConfigInfoType('oddRepaymentStyle'),
             ],
             [
                 'attribute' => 'oddBorrowPeriod',
@@ -59,12 +68,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'offlineMoney',
-                'contentOptions' => ['style'=>'background-color:#61AFAF'],
+                'contentOptions' => ['style' => 'background-color:#61AFAF'],
                 'headerOptions' => ['width' => '70']
             ],
             [
                 'attribute' => 'offlineRate',
-                'contentOptions' => ['style'=>'background-color:#61AFAF'],
+                'contentOptions' => ['style' => 'background-color:#61AFAF'],
                 'headerOptions' => ['width' => '70']
             ],
             // 'isCr',
@@ -79,5 +88,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '70']
             ],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>
