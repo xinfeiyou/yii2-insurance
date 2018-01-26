@@ -10,24 +10,22 @@ use app\modules\base\models\WorkApply;
 /**
  * WorkApplySearch represents the model behind the search form about `app\modules\base\models\WorkApply`.
  */
-class WorkApplySearch extends WorkApply
-{
+class WorkApplySearch extends WorkApply {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id'], 'integer'],
-            [['strWorkNum', 'strRealName', 'strPhone', 'strTravelAdder', 'strCarNumber', 'strCompulsoryInsurance', 'tCompulsoryInsuranceEffectiveTime', 'strCommercialInsurance', 'tCommercialInsuranceEffectiveTime', 'strLossInsurance', 'strThirdPartyInsurance', 'strTheftInsurance', 'strDriverLiabilityInsurance', 'strPassengerLiabilityInsurance', 'strGlassInsurance', 'strSelfIgnitionInsurance', 'strWadingInsurance', 'strScratchInsurance', 'strExcessInsurance', 'strInsuranceOffice', 'tCreateTime', 'tUpdateTime'], 'safe'],
+            [['strWorkNum', 'strRealName', 'strPhone', 'strTravelAdder', 'strCarNumber', 'strCompulsoryInsurance', 'tCompulsoryInsuranceEffectiveTime', 'strCommercialInsurance', 'tCommercialInsuranceEffectiveTime', 'strLossInsurance', 'strThirdPartyInsurance', 'strTheftInsurance', 'strDriverLiabilityInsurance', 'strPassengerLiabilityInsurance', 'strGlassInsurance', 'strSelfIgnitionInsurance', 'strWadingInsurance', 'strScratchInsurance', 'strExcessInsurance', 'strInsuranceOffice', 'tCreateTime', 'tUpdateTime', 'eStatus', 'oddNumber'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +37,7 @@ class WorkApplySearch extends WorkApply
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = WorkApply::find();
 
         // add conditions that should always apply here
@@ -67,24 +64,27 @@ class WorkApplySearch extends WorkApply
         ]);
 
         $query->andFilterWhere(['like', 'strWorkNum', $this->strWorkNum])
-            ->andFilterWhere(['like', 'strRealName', $this->strRealName])
-            ->andFilterWhere(['like', 'strPhone', $this->strPhone])
-            ->andFilterWhere(['like', 'strTravelAdder', $this->strTravelAdder])
-            ->andFilterWhere(['like', 'strCarNumber', $this->strCarNumber])
-            ->andFilterWhere(['like', 'strCompulsoryInsurance', $this->strCompulsoryInsurance])
-            ->andFilterWhere(['like', 'strCommercialInsurance', $this->strCommercialInsurance])
-            ->andFilterWhere(['like', 'strLossInsurance', $this->strLossInsurance])
-            ->andFilterWhere(['like', 'strThirdPartyInsurance', $this->strThirdPartyInsurance])
-            ->andFilterWhere(['like', 'strTheftInsurance', $this->strTheftInsurance])
-            ->andFilterWhere(['like', 'strDriverLiabilityInsurance', $this->strDriverLiabilityInsurance])
-            ->andFilterWhere(['like', 'strPassengerLiabilityInsurance', $this->strPassengerLiabilityInsurance])
-            ->andFilterWhere(['like', 'strGlassInsurance', $this->strGlassInsurance])
-            ->andFilterWhere(['like', 'strSelfIgnitionInsurance', $this->strSelfIgnitionInsurance])
-            ->andFilterWhere(['like', 'strWadingInsurance', $this->strWadingInsurance])
-            ->andFilterWhere(['like', 'strScratchInsurance', $this->strScratchInsurance])
-            ->andFilterWhere(['like', 'strExcessInsurance', $this->strExcessInsurance])
-            ->andFilterWhere(['like', 'strInsuranceOffice', $this->strInsuranceOffice]);
+                ->andFilterWhere(['like', 'strRealName', $this->strRealName])
+                ->andFilterWhere(['like', 'strPhone', $this->strPhone])
+                ->andFilterWhere(['like', 'strTravelAdder', $this->strTravelAdder])
+                ->andFilterWhere(['like', 'strCarNumber', $this->strCarNumber])
+                ->andFilterWhere(['like', 'strCompulsoryInsurance', $this->strCompulsoryInsurance])
+                ->andFilterWhere(['like', 'strCommercialInsurance', $this->strCommercialInsurance])
+                ->andFilterWhere(['like', 'strLossInsurance', $this->strLossInsurance])
+                ->andFilterWhere(['like', 'strThirdPartyInsurance', $this->strThirdPartyInsurance])
+                ->andFilterWhere(['like', 'strTheftInsurance', $this->strTheftInsurance])
+                ->andFilterWhere(['like', 'strDriverLiabilityInsurance', $this->strDriverLiabilityInsurance])
+                ->andFilterWhere(['like', 'strPassengerLiabilityInsurance', $this->strPassengerLiabilityInsurance])
+                ->andFilterWhere(['like', 'strGlassInsurance', $this->strGlassInsurance])
+                ->andFilterWhere(['like', 'strSelfIgnitionInsurance', $this->strSelfIgnitionInsurance])
+                ->andFilterWhere(['like', 'strWadingInsurance', $this->strWadingInsurance])
+                ->andFilterWhere(['like', 'strScratchInsurance', $this->strScratchInsurance])
+                ->andFilterWhere(['like', 'strExcessInsurance', $this->strExcessInsurance])
+                ->andFilterWhere(['like', 'strInsuranceOffice', $this->strInsuranceOffice])
+                ->andFilterWhere(['like', 'eStatus', $this->eStatus])
+                ->andFilterWhere(['like', 'oddNumber', $this->oddNumber]);
 
         return $dataProvider;
     }
+
 }
