@@ -81,7 +81,8 @@ class UserController extends BaseController {
      * 获取当前用户推广员列表
      */
     public function actionGetPromoter(){
-        $strUserId = '2018012500000002';
+        //$strUserId = '2018012500000002';
+        $strUserId = \Yii::$app->request->post('strUserId');
         $arPromoter = (new WorkPromoter())->getPromoterList($strUserId);
         $arReturn = NetWork::setMsg($this->strTitle, "获取成功", $arPromoter['ret'], $arPromoter['content']);
         Str::echoJson($arReturn);
