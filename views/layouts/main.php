@@ -110,7 +110,6 @@ AppAsset::register($this);
                         <ul class="dropdown-menu" role="menu">
                             <li class="dropdown-header">子类列表</li>
                             <li><a href="<?= Url::toRoute(['/work/work-oddinterest/index']) ?>">还款列表</a></li>
-                            <li><a href="#">催收</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

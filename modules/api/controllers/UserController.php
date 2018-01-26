@@ -69,7 +69,6 @@ class UserController extends BaseController {
             $json_string = \Yii::$app->request->post('data');
             $url = \Yii::$app->request->post('url') . '?access_token=';
             $imageData = NetWork::CurlUrlData($json_string, $strToken, $url);
-            sleep(1);
             Files::writeFile($strUserId . '.jpg', $imageData);
             $imagUrl = $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/upload/weixin/' . $strUserId . '.jpg';
             (new WorkUser())->edit($strUserId, ['strCodeImg' => $imagUrl]);

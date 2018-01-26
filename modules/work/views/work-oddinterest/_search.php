@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\work\models\search\WorkOddinterestSearch */
+/* @var $model app\modules\base\models\search\WorkOddinterest */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -19,31 +19,41 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'oddNumber') ?>
 
-    <?= $form->field($model, 'qishu') ?>
+    <?= $form->field($model, 'intPeriod') ?>
 
-    <?= $form->field($model, 'benJin') ?>
+    <?= $form->field($model, 'fOnLineCost') ?>
 
-    <?= $form->field($model, 'interest') ?>
+    <?= $form->field($model, 'fOnLineInterest') ?>
 
-    <?php // echo $form->field($model, 'zongEr') ?>
+    <?php // echo $form->field($model, 'fOnLineTotal') ?>
 
-    <?php // echo $form->field($model, 'yuEr') ?>
+    <?php // echo $form->field($model, 'fOffLineCost') ?>
 
-    <?php // echo $form->field($model, 'realAmount') ?>
+    <?php // echo $form->field($model, 'fOffLineInterest') ?>
 
-    <?php // echo $form->field($model, 'realinterest') ?>
+    <?php // echo $form->field($model, 'fOffLineTotal') ?>
 
-    <?php // echo $form->field($model, 'userId') ?>
+    <?php // echo $form->field($model, 'fRemainder') ?>
 
-    <?php // echo $form->field($model, 'addtime') ?>
+    <?php // echo $form->field($model, 'fRealMonery') ?>
 
-    <?php // echo $form->field($model, 'endtime') ?>
+    <?php // echo $form->field($model, 'fRealinterest') ?>
 
-    <?php // echo $form->field($model, 'operatetime') ?>
+    <?php // echo $form->field($model, 'strUserId') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'tStartTime') ?>
 
-    <?php // echo $form->field($model, 'subsidy') ?>
+    <?php // echo $form->field($model, 'tEndTime') ?>
+
+    <?php // echo $form->field($model, 'tOperateTime') ?>
+
+    <?php // echo $form->field($model, 'strPaymentStatus') ?>
+
+    <?php // echo $form->field($model, 'fSubsidy') ?>
+
+    <?php // echo $form->field($model, 'tCreateTime') ?>
+
+    <?php // echo $form->field($model, 'tUpdateTime') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

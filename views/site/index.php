@@ -7,5 +7,5 @@ $this->title = 'index';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index" style="margin: 0 0 0 10px;">
-    waefawefawef
+    <?php print_r(Yii::$app->user->identity);?>
 </div>

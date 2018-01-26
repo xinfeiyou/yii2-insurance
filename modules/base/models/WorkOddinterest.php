@@ -3,27 +3,32 @@
 namespace app\modules\base\models;
 
 use Yii;
-use app\modules\base\models\BaseModel;
+
 /**
  * This is the model class for table "{{%work_oddinterest}}".
  *
  * @property string $id
  * @property string $oddNumber
- * @property integer $qishu
- * @property double $benJin
- * @property double $interest
- * @property double $zongEr
- * @property double $yuEr
- * @property double $realAmount
- * @property double $realinterest
- * @property string $userId
- * @property string $addtime
- * @property string $endtime
- * @property string $operatetime
- * @property integer $status
- * @property double $subsidy
+ * @property integer $intPeriod
+ * @property double $fOnLineCost
+ * @property double $fOnLineInterest
+ * @property double $fOnLineTotal
+ * @property double $fOffLineCost
+ * @property double $fOffLineInterest
+ * @property double $fOffLineTotal
+ * @property double $fRemainder
+ * @property double $fRealMonery
+ * @property double $fRealinterest
+ * @property string $strUserId
+ * @property string $tStartTime
+ * @property string $tEndTime
+ * @property string $tOperateTime
+ * @property integer $strPaymentStatus
+ * @property double $fSubsidy
+ * @property string $tCreateTime
+ * @property string $tUpdateTime
  */
-class WorkOddinterest extends BaseModel
+class WorkOddinterest extends \app\modules\base\models\BaseModel
 {
     /**
      * @inheritdoc
@@ -39,10 +44,10 @@ class WorkOddinterest extends BaseModel
     public function rules()
     {
         return [
-            [['qishu', 'status'], 'integer'],
-            [['benJin', 'interest', 'zongEr', 'yuEr', 'realAmount', 'realinterest', 'subsidy'], 'number'],
-            [['addtime', 'endtime', 'operatetime'], 'safe'],
-            [['oddNumber', 'userId'], 'string', 'max' => 20],
+            [['intPeriod', 'strPaymentStatus'], 'integer'],
+            [['fOnLineCost', 'fOnLineInterest', 'fOnLineTotal', 'fOffLineCost', 'fOffLineInterest', 'fOffLineTotal', 'fRemainder', 'fRealMonery', 'fRealinterest', 'fSubsidy'], 'number'],
+            [['tStartTime', 'tEndTime', 'tOperateTime', 'tCreateTime', 'tUpdateTime'], 'safe'],
+            [['oddNumber', 'strUserId'], 'string', 'max' => 20],
         ];
     }
 
@@ -54,19 +59,24 @@ class WorkOddinterest extends BaseModel
         return [
             'id' => 'ID',
             'oddNumber' => '借款单编号',
-            'qishu' => '期数',
-            'benJin' => '本金',
-            'interest' => '利息',
-            'zongEr' => '总额',
-            'yuEr' => '余额',
-            'realAmount' => '实还金额',
-            'realinterest' => '实还利息',
-            'userId' => '用户编号',
-            'addtime' => '添加时间',
-            'endtime' => '结束时间',
-            'operatetime' => '操作时间',
-            'status' => '状态',
-            'subsidy' => '罚息',
+            'intPeriod' => '期数',
+            'fOnLineCost' => '线上本金',
+            'fOnLineInterest' => '线上利息',
+            'fOnLineTotal' => '线上总额',
+            'fOffLineCost' => '线下本金',
+            'fOffLineInterest' => '线下利息',
+            'fOffLineTotal' => '线下总额',
+            'fRemainder' => '余额',
+            'fRealMonery' => '实还本金',
+            'fRealinterest' => '实还利息',
+            'strUserId' => '客户ID',
+            'tStartTime' => '开始时间',
+            'tEndTime' => '结束时间',
+            'tOperateTime' => '还款时间',
+            'strPaymentStatus' => '还款状态',
+            'fSubsidy' => '逾期罚息',
+            'tCreateTime' => '创建时间',
+            'tUpdateTime' => '更新时间',
         ];
     }
 }

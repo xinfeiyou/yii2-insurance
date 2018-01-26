@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\work\models\WorkOddinterest */
+/* @var $model app\modules\base\models\WorkOddinterest */
 
 $this->title = 'Create Work Oddinterest';
 $this->params['breadcrumbs'][] = ['label' => 'Work Oddinterests', 'url' => ['index']];

@@ -59,12 +59,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'offlineMoney',
-                'contentOptions' => ['style'=>'background-color:#99CCCC'],
+                'contentOptions' => ['style'=>'background-color:#61AFAF'],
                 'headerOptions' => ['width' => '70']
             ],
             [
                 'attribute' => 'offlineRate',
-                'contentOptions' => ['style'=>'background-color:#99CCCC'],
+                'contentOptions' => ['style'=>'background-color:#61AFAF'],
                 'headerOptions' => ['width' => '70']
             ],
             // 'isCr',

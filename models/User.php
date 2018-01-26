@@ -2,52 +2,31 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
-{
-    public $id;
+use app\modules\base\models\WorkAdmin;
+
+class User extends \yii\base\Object implements \yii\web\IdentityInterface {
+
+    public $strUserId;
+    public $realname;
     public $username;
     public $password;
     public $authKey;
     public $accessToken;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
-
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
-    {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+    public static function findIdentity($id) {
+        $user = self::getUserInfo(['strUserId' => $id]);
+        return empty($user) ? null : new static($user);
     }
 
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    public static function findIdentityByAccessToken($token, $type = null) {
+        $user = self::getUserInfo(['accessToken' => $token]);
+        return empty($user) ? null : new static($user);
     }
 
     /**
@@ -56,38 +35,29 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    public static function findByUsername($username) {
+        $user = self::getUserInfo(['username' => $username]);
+        return empty($user) ? null : new static($user);
     }
 
     /**
      * @inheritdoc
      */
-    public function getId()
-    {
-        return $this->id;
+    public function getId() {
+        return $this->strUserId;
     }
 
     /**
      * @inheritdoc
      */
-    public function getAuthKey()
-    {
+    public function getAuthKey() {
         return $this->authKey;
     }
 
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
-    {
+    public function validateAuthKey($authKey) {
         return $this->authKey === $authKey;
     }
 
@@ -97,8 +67,25 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    public function validatePassword($password)
-    {
+    public function validatePassword($password) {
         return $this->password === $password;
     }
+
+    /**
+     * 获取员工信息
+     * @param array $arWhere    条件
+     * @return array
+     */
+    public static function getUserInfo($arWhere) {
+        if (empty($arWhere)) {
+            return null;
+        }
+        $user = WorkAdmin::find()
+                ->select(['strUserId', 'username', 'password', 'authKey', 'accessToken', 'realname'])
+                ->where($arWhere)
+                ->asArray()
+                ->one();
+        return $user;
+    }
+
 }
