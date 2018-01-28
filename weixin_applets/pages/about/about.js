@@ -72,15 +72,6 @@ Page({
             this.setData({
               "isShow.height1": 0,
               "isShow.height2": 0
-
-
-
-
-
-
-
-
-              
             })
             break;
         }
