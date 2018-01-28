@@ -44,6 +44,9 @@ App({
   repayDetail: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply",
 
   idImg: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-idimg",
+
+  isShow: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-idimg",
+
   //userId
   strUserId:function(){
     return wx.getStorageSync("strUserId");

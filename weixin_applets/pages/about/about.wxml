@@ -11,16 +11,16 @@
         <view class="horizontal-view">
           <view class="horizontal-router-container1">
            
-              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}' data-listid="{{data.strUserId}}|haha">
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}' data-listid="{{data.strUserId}}|haha" style='display:{{data.isShow.repayHistory ?"block":"none"}}'>
               <label  class="ico-moon"><image src="/img/icon-message.png" mode='aspectFit' style='width:20px;height:20px;'></image></label>
                 
                 <text>还款记录</text>
                 <label class="ico-moon icon-rightarrow"></label>
               </view>
 
-              <text class='height'></text>
+              <text class='height' style='display:{{data.isShow.height1 ?"block":"none"}}'></text>
 
-              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayNearly}}'>
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayNearly}}' style='display:{{data.isShow.repayNearly ?"block":"none"}}'>
                 <label class="ico-moon">
                   <image src="/img/icon-notify.png" mode='aspectFit' style='width:20px;height:20px;'></image>
                 </label>
@@ -29,7 +29,7 @@
               </view>
 
 
-              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayLate}}'>
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayLate}}' style='display:{{data.isShow.repayLate ?"block":"none"}}'>
                 <label class="ico-moon">
                   <image src="/img/icon-overdue.png" mode='aspectFit' style='width:20px;height:20px;'></image>
                 </label>
@@ -37,7 +37,7 @@
                 <label class="ico-moon icon-rightarrow"></label>
               </view>
               
-              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.market}}'>
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.market}}' style='display:{{data.isShow.market?"block":"none"}}'>
                 <label class="ico-moon" >
                   <image src="/img/icon-generalize.png" mode='aspectFit' style='width:20px;height:20px;'></image>
                 </label>
@@ -45,7 +45,7 @@
                 <label class="ico-moon icon-rightarrow"></label>
               </view>
 
-              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.generalize}}'>
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.generalize}}' style='display:{{data.isShow.generalize?"block":"none"}}'>
                 <label class="ico-moon">
                   <image src="/img/icon-ewm.png" mode='aspectFit' style='width:20px;height:20px;'></image>
                 </label>
@@ -53,7 +53,7 @@
                 <label class="ico-moon icon-rightarrow"></label>
               </view>
 
-              <text class='height'></text>
+              <text class='height' style='display:{{data.isShow.height2? "block":"none"}}'></text>
 
               <view catchtap='{{data.setting}}'>
                 <label class="ico-moon icon-star-empty:before">

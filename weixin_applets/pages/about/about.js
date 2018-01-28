@@ -15,7 +15,16 @@ Page({
       "market": "{\"inner_page_link\":\"\\/pages\\/market\\/market\",\"is_redirect\":0}",
       "generalize": "{\"inner_page_link\":\"\\/pages\\/generalize\\/generalize\",\"is_redirect\":0}",
       "setting": "setting",
-      "strUserId": app.strUserId()
+      "strUserId": app.strUserId(),
+      "isShow":{
+        "repayHistory":0,
+        "repayNearly":0,
+        "repayLate": 0,
+        "market": 0,
+        "generalize":0,
+        "height1": 1,
+        "height2":1
+      }
     }
   },
 
@@ -23,6 +32,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let data = {
+      strUserId:app.strUserId()
+    }
+    wx.request({
+      url: app.isShow,
+      data:data,
+      method: "POST",
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      success:(e)=>{
+        let userInfo = e.data.data.content;
+        switch(userInfo){
+          case "1":
+            this.setData({
+              "isShow.repayHistory":1,
+              "isShow.height": 0                                                                          
+            })
+            break;
+          case "2":
+            this.setData({
+              "isShow.repayHistory": 1,
+              "isShow.repayNearly": 1,
+              "isShow.repayLate": 1,
+              "isShow.market": 1,
+              "isShow.generalize": 1,
+              "isShow.height1":0
+            })
+            break;
+          case "3":
+            this.setData({
+              "isShow.market": 1,
+              "isShow.generalize": 1,
+              "isShow.height1":0
+            })
+            break;
+          default:
+            this.setData({
+              "isShow.height1": 0,
+              "isShow.height2": 0
+            })
+            break;
+        }
+      }
+
+    })
 
   },
   setting: function (e) {
