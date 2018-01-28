@@ -7,6 +7,22 @@
   </view>
 </template>
 
+<template name="zcRepayList">
+  <view>
+    <view class="element text_title" >
+        <text class='index_title'>{{data.title}}</text>
+    </view>
+    <view class='user-info'>
+      <view>
+          <view>
+            <template is="zcList" wx:for="{{data.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />          <view class='clearfix'></view>
+          </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+
 <template name="zcDetail">
   <view class=" user-container">
      <view class="user-center">
@@ -15,73 +31,14 @@
         </view>
         <view class='pull-left userinfo'>
           <text class='nickname'>{{data.name}}</text>
-          <text class='nickphone'>手机号码：{{data.phone}}</text>          
+          <text class='nickAll'>借款总额：{{data.fOffLineTotal}}</text> 
+          <text class='nickAll'>借款期数：{{data.intPeriod}}</text>
         </view>
           <view class='clearfix'></view>
       </view>
   </view>
 
-  <view>
-    <view class="element text_title" >
-        <text class='index_title'>{{data.car.title}}</text>
-    </view>
-    <view class='user-info'>
-
-      <view>
-          <view>
-            <template is="zcList" wx:for="{{data.car.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />
-            <view class='clearfix'></view>
-          </view>
-      </view>
-    </view>
-  </view>
-
-  <view>
-    <view class="element text_title" >
-        <text class='index_title'>{{data.insurance.title}}</text>
-    </view>
-    <view class='user-info'>
-      <view>
-          <view>
-            <template is="zcList" wx:for="{{data.insurance.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />          <view class='clearfix'></view>
-          </view>
-      </view>
-    </view>
-  </view>
-
-  <view>
-    <view class="element text_title" >
-        <text class='index_title'>{{data.business.title}}</text>
-    </view>
-    <view class='user-info'>
-      <view>
-          <view>
-            <template is="zcList" wx:for="{{data.business.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />          <view class='clearfix'></view>
-          </view>
-      </view>
-    </view>
-  </view>
-
-
-  <view>
-    <view class="element text_title" >
-        <text class='index_title'>{{data.addition.title}}</text>
-    </view>
-    <view class='user-info'>
-      <view>
-          <view>
-            <template is="zcList" wx:for="{{data.addition.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />          <view class='clearfix'></view>
-          </view>
-      </view>
-    </view>
-  </view>
-
-  <view class='user-container'>
-    <view class="element text_title" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" data-listId="{{data.listid}}" data-listid="{{data.oddNumber}}">
-        <text class='index_title'>证件清单</text>
-        <label class="ico-moon icon-rightarrow pull-right"></label>
-    </view>
-  </view>
+  <template is='zcRepayList' wx:for="{{data.list}}" wx:key="" wx:for-index="id" wx:for-item="data" data="{{data:data}}" />
 
 </template>
 

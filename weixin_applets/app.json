@@ -1,7 +1,7 @@
 {
   "pages": [
+    "pages/repayDetail/repayDetail",
     "pages/index/index",
-    "pages/workHistory/workHistory",
     "pages/about/about",
     "pages/bind/bind",
     "pages/market/market",
@@ -11,10 +11,11 @@
     "pages/choose4/choose4",
     "pages/generalize/generalize",
     "pages/repayHistory/repayHistory",
+    "pages/workHistory/workHistory",
     "pages/addCollection/addCollection",
     "pages/collection/collection",
     "pages/repayNearly/repayNearly",
-    "pages/repayDetail/repayDetail",
+    "pages/workDetail/workDetail",
     "pages/repayLate/repayLate",
     "pages/idImg/idImg"
   ],

@@ -27,12 +27,11 @@ page{
   font-weight: bold;
   color: #333;
 }
-.nickAll{
-  display: inline-block;
+.nickphone{
+  display: block;
   font-size: 13px;
   color: gray;
   margin-top: 5px;
-  margin-right: 5px;
 }
 .userinfo{
   padding-top: 2px;

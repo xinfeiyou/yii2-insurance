@@ -37,7 +37,6 @@ Page({
         'content-type': "application/x-www-form-urlencoded"
       },
       success: (e) => {
-        console.log(e);
         this.setData({
           "list.list": e.data.data.content
         })
