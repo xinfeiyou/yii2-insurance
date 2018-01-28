@@ -9,6 +9,7 @@ Page({
     "user_center": {
       'user_src': '',
       'name': '',
+      "resHistory": "{\"inner_page_link\":\"\\/pages\\/resHistory\\/resHistory\",\"is_redirect\":0}",
       "repayHistory": "{\"inner_page_link\":\"\\/pages\\/repayHistory\\/repayHistory\",\"is_redirect\":0}",
       "repayNearly": "{\"inner_page_link\":\"\\/pages\\/repayNearly\\/repayNearly\",\"is_redirect\":0}",
       "repayLate": "{\"inner_page_link\":\"\\/pages\\/repayLate\\/repayLate\",\"is_redirect\":0}",
@@ -51,7 +52,8 @@ Page({
               "user_center.isShow.repayLate": 1,
               "user_center.isShow.market": 1,
               "user_center.isShow.generalize": 1,
-              "user_center.isShow.height2": 1                                                                          
+              "user_center.isShow.height2": 1,
+              "user_center.isShow.height1": 1                                                                          
             })
             break;
           case "2":

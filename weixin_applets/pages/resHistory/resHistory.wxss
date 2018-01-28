@@ -1,0 +1,67 @@
+.ele-contaier{
+  position: relative;
+  padding:10px 15px;
+  padding-top: 20px;
+}
+.ele-contaier:nth-child(2n+2){
+  background-color: #f5f4fa;
+  box-shadow: 0px 4px 10px 0px rgba(1, 1, 1, 0.09);
+}
+.money{
+  position: absolute;
+  top: 48rpx;
+  right: 20px;
+  font-size: 12px;
+  color: #e64340;
+}
+.ele-contaier .user{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #dbd9d9;
+  padding: 1px;
+}
+.ele-contaier .user image{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.content{
+  margin-left:15px; 
+}
+.userTitle{
+  display: block;
+  font-weight: bold;
+  font-size: 13px;
+  color: #222;
+  line-height: 20px;
+  margin-top: 5px;
+}
+.timerContent{
+  font-size: 12px;
+  color:#b2b2b2;
+  display: block;
+  line-height: 20px;
+}
+.end{
+  font-size: 14px;
+  text-align: center;
+  line-height: 26px;
+  color: #4e4e4e;
+  margin-top: 10px;
+}
+
+
+.info-title{
+  background-color: #e9e9e9;
+  font-size: 30rpx;
+  line-height: 40px;
+}
+.info-title image{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+
+}

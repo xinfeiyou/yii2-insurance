@@ -10,7 +10,15 @@
       <view class='height'></view>
         <view class="horizontal-view">
           <view class="horizontal-router-container1">
-           
+
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.resHistory}}' data-listid="{{data.strUserId}}">
+              <label  class="ico-moon"><image src="/img/icon-message.png" mode='aspectFit' style='width:20px;height:20px;'></image></label>
+                
+                <text>申请记录</text>
+                <label class="ico-moon icon-rightarrow"></label>
+              </view>
+
+
               <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}' data-listid="{{data.strUserId}}"  wx:if="{{data.isShow.repayHistory}}">
               <label  class="ico-moon"><image src="/img/icon-message.png" mode='aspectFit' style='width:20px;height:20px;'></image></label>
                 
