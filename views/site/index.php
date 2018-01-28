@@ -3,7 +3,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'index';
+$this->title = '主页';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index" style="margin: 0 0 0 10px;">
