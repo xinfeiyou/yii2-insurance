@@ -132,7 +132,7 @@ Page({
       oddNumber: options.listid //app.strUserId()
     }
     wx.request({
-      url: app.repayDetail,
+      url: app.workDetail,
       data: data,
       method: "POST",
       header: {

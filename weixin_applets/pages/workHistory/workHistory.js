@@ -30,7 +30,7 @@ Page({
       strUserId: options.listid //app.strUserId()
     }
     wx.request({
-      url: app.repayHistory,
+      url: app.marketHistory,
       data: data,
       method: "POST",
       header: {

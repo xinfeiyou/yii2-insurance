@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/repayDetail/repayDetail",
     "pages/index/index",
     "pages/about/about",
     "pages/bind/bind",
@@ -9,6 +8,7 @@
     "pages/choose2/choose2",
     "pages/choose3/choose3",
     "pages/choose4/choose4",
+    "pages/repayDetail/repayDetail",
     "pages/generalize/generalize",
     "pages/repayHistory/repayHistory",
     "pages/workHistory/workHistory",

@@ -7,62 +7,37 @@ Page({
    */
   data: {
     "listDetail":{
-      "user_src":"/img/user-face.png",
-      "name":"客户",
-      "fOffLineTotal":"200000",      
-      "intPeriod":"24",
-      "list":[
-          {
-            "title": "第一期",
-            "list":[
-              {
-                "title":"还款利息",
-                "value": "162",
-                "style": true
-              },
-              {
-                "title": "还款本金",
-                "value": "162",
-                "style": true
-              },
-              {
-                "title": "还款时间",
-                "value": "2018-10-20",
-                "style": true
-              },
-              {
-                "title": "还款xx",
-                "value": "162",
-                "style": true
-              }
-            ]
-          },
-          {
-            "title": "第二期",
-            "list": [
-              {
-                "title": "还款利息",
-                "value": "162",
-                "style": true
-              },
-              {
-                "title": "还款本金",
-                "value": "162",
-                "style": true
-              },
-              {
-                "title": "还款时间",
-                "value": "2018-10-20",
-                "style": true
-              },
-              {
-                "title": "还款xx",
-                "value": "162",
-                "style": true
-              }
-            ]
-          },
-        ]
+      // "user_src":"/img/user-face.png",
+      // "name":"客户",
+      // "fOffLineTotal":"200000",      
+      // "intPeriod":"24",
+      // "list":[
+      //     {
+      //       "title": "第一期",
+      //       "list":[
+      //         {
+      //           "title":"还款利息",
+      //           "value": "162",
+      //           "style": true
+      //         },
+      //         {
+      //           "title": "还款本金",
+      //           "value": "162",
+      //           "style": true
+      //         },
+      //         {
+      //           "title": "还款时间",
+      //           "value": "2018-10-20",
+      //           "style": true
+      //         },
+      //         {
+      //           "title": "还款xx",
+      //           "value": "162",
+      //           "style": true
+      //         }
+      //       ]
+      //     }
+      //   ]
       },
 
       "eventHandler":"eventHandler",

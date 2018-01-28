@@ -8,6 +8,7 @@ use app\modules\base\models\WorkApplyPage;
 use app\modules\base\models\WorkPromoter;
 use app\modules\base\models\WorkOdd;
 use app\modules\base\models\WorkUser;
+use app\modules\base\models\WorkOddinterest;
 use app\common\Str;
 use app\common\NetWork;
 
@@ -147,8 +148,7 @@ class WorkController extends BaseController {
         if (!empty($arPost['content'])) {
             $i = 0;
             foreach ($arPost['content'] as $v) {
-                $strUserId = $v['strUserId'];
-                $arOdd = $cWorkOdd->getWorkList($strUserId);
+                $arOdd = $cWorkOdd->getWorkList($v['strUserId']);
                 if (!empty($arOdd)) {
                     foreach ($arOdd as $obj) {
                         $arData[$i]['id'] = $i;
@@ -157,7 +157,7 @@ class WorkController extends BaseController {
                         $arData[$i]['money'] = $obj->oddMoney; //$money;
                         $arData[$i]['user'] = $v['user'];
                         $arData[$i]['detailsEvent'] = $v['detailsEvent'];
-                        $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/repayDetail\\/repayDetail\",\"is_redirect\":0}";
+                        $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";
                         $arData[$i]['oddNumber'] = $obj->oddNumber;
                         $i++;
                     }
@@ -260,6 +260,16 @@ class WorkController extends BaseController {
                 $i++;
             }
         }
+        $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
+        Str::echoJson($arReturn);
+    }
+
+    /**
+     * 还款列表明细
+     */
+    public function actionWorkUserOddReplay() {
+        $oddNumber = \Yii::$app->request->post('oddNumber');
+        $arData = (new WorkOddinterest())->getReplayDetail($oddNumber);
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
     }

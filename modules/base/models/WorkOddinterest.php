@@ -28,21 +28,19 @@ use Yii;
  * @property string $tCreateTime
  * @property string $tUpdateTime
  */
-class WorkOddinterest extends \app\modules\base\models\BaseModel
-{
+class WorkOddinterest extends \app\modules\base\models\BaseModel {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%work_oddinterest}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['intPeriod', 'strPaymentStatus'], 'integer'],
             [['fOnLineCost', 'fOnLineInterest', 'fOnLineTotal', 'fOffLineCost', 'fOffLineInterest', 'fOffLineTotal', 'fRemainder', 'fRealMonery', 'fRealinterest', 'fSubsidy'], 'number'],
@@ -54,8 +52,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'oddNumber' => '借款单编号',
@@ -79,4 +76,38 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel
             'tUpdateTime' => '更新时间',
         ];
     }
+
+    /**
+     * 项目还款明细
+     * @param type $strOddNumber
+     */
+    public function getReplayDetail($strOddNumber) {
+        $objOddInfo = WorkOdd::findOne(['oddNumber' => $strOddNumber]);
+        $arData['user_src'] = $objOddInfo->username->avatarUrl;
+        $arData['name'] = $objOddInfo->username->nickName;
+        $arData['fOffLineTotal'] = $objOddInfo->offlineMoney;
+        $arData['intPeriod'] = $objOddInfo->oddBorrowPeriod;
+        $arObj = WorkOddinterest::find()
+                ->where(['oddNumber' => $strOddNumber])
+                ->all();
+        $i = 0;
+        foreach ($arObj as $obj) {
+            $arData['list'][$i]['title'] = "第" . $obj->intPeriod . "期";
+            $arData['list'][$i]['list'][1]['title'] = "还款利息";
+            $arData['list'][$i]['list'][1]['value'] = $obj->fOffLineInterest;
+            $arData['list'][$i]['list'][1]['style'] = true;
+            $arData['list'][$i]['list'][2]['title'] = "还款本金";
+            $arData['list'][$i]['list'][2]['value'] = $obj->fOffLineCost;
+            $arData['list'][$i]['list'][2]['style'] = true;
+            $arData['list'][$i]['list'][3]['title'] = "还款时间";
+            $arData['list'][$i]['list'][3]['value'] = substr($obj->tEndTime, 0, 10);
+            $arData['list'][$i]['list'][3]['style'] = true;
+            $arData['list'][$i]['list'][4]['title'] = "实还金额";
+            $arData['list'][$i]['list'][4]['value'] = round(($obj->fRealMonery + $obj->fRealinterest), 2);
+            $arData['list'][$i]['list'][4]['style'] = true;
+            $i++;
+        }
+        return $arData;
+    }
+
 }

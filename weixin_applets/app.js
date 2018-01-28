@@ -39,9 +39,14 @@ App({
 
   market: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-promoter",
 
+  marketHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-promoter-odd-list",
+
   repayHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-list",
+
   //车险详情
-  repayDetail: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply",
+  repayDetail: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-replay",
+
+  workDetail: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply",
 
   idImg: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-idimg",
 

@@ -75,7 +75,7 @@ class WorkPromoter extends \app\modules\base\models\BaseModel {
                 $arData[$i]['phone'] = $obj->promoter->strPhone;
                 $arData[$i]['user'] = $obj->promoter->nickName;
                 $arData[$i]['detailsEvent'] = 'detailsEvent';
-                $arData[$i]['eventParams'] = '{"inner_page_link":"\/pages\/repayHistory\/repayHistory","is_redirect":0}';
+                $arData[$i]['eventParams'] = '{"inner_page_link":"\/pages\/workHistory\/workHistory","is_redirect":0}';
                 $i++;
             }
         }

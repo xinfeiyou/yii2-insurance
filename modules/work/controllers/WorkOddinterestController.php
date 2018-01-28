@@ -4,7 +4,7 @@ namespace app\modules\work\controllers;
 
 use Yii;
 use app\modules\base\models\WorkOddinterest;
-use app\modules\base\models\search\WorkOddinterest as WorkOddinterestSearch;
+use app\modules\base\models\search\WorkOddinterestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

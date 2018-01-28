@@ -91,11 +91,13 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
                         ->where(['userId' => $strUserId])
                         ->all();
     }
+
     /**
      * 获取用户名
      * @return type
      */
-    public function getUsername(){
-        return $this->hasOne(WorkUser::className(), ['strUserId'=>'userId']);
+    public function getUsername() {
+        return $this->hasOne(WorkUser::className(), ['strUserId' => 'userId']);
     }
+
 }
