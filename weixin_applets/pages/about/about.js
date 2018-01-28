@@ -36,42 +36,42 @@ Page({
       strUserId:app.strUserId()
     }
     wx.request({
-      url: app.isShow,
+      url: app.userInfo,
       data:data,
       method: "POST",
       header: {
         'content-type': "application/x-www-form-urlencoded"
       },
       success:(e)=>{
-        let userInfo = e.data.data.content;
+        let userInfo = e.data.data.content.strUserType;
         switch(userInfo){
           case "1":
             this.setData({
-              "isShow.repayHistory":1,
-              "isShow.height": 0                                                                          
+              "user_center.isShow.repayHistory":1,
+              "user_center.isShow.height": 0                                                                          
             })
             break;
           case "2":
             this.setData({
-              "isShow.repayHistory": 1,
-              "isShow.repayNearly": 1,
-              "isShow.repayLate": 1,
-              "isShow.market": 1,
-              "isShow.generalize": 1,
-              "isShow.height1":0
+              "user_center.isShow.repayHistory": 1,
+              "user_center.isShow.repayNearly": 1,
+              "user_center.isShow.repayLate": 1,
+              "user_center.isShow.market": 1,
+              "user_center.isShow.generalize": 1,
+              "user_center.isShow.height1":0
             })
             break;
           case "3":
             this.setData({
-              "isShow.market": 1,
-              "isShow.generalize": 1,
-              "isShow.height1":0
+              "user_center.isShow.market": 1,
+              "user_center.isShow.generalize": 1,
+              "user_center.isShow.height1":0
             })
             break;
           default:
             this.setData({
-              "isShow.height1": 0,
-              "isShow.height2": 0
+              "user_center.isShow.height1": 0,
+              "user_center.isShow.height2": 0
             })
             break;
         }

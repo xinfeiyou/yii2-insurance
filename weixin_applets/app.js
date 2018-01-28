@@ -45,7 +45,7 @@ App({
 
   idImg: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-idimg",
 
-  isShow: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-user-info",
+  userInfo: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-user-info",
 
   //userId
   strUserId:function(){
