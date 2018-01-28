@@ -94,4 +94,18 @@ class UserController extends BaseController {
         Str::echoJson($arReturn);
     }
 
+    /**
+     * 获取当前用户基础信息
+     */
+    public function actionGetUserInfo() {
+        $strUserId = \Yii::$app->request->post('strUserId');
+        $arRow = (new WorkUser())->getModels($strUserId);
+        $arData['strUserId'] = $arRow->strUserId;
+        $arData['nickName'] = $arRow->nickName;
+        $arData['avatarUrl'] = $arRow->avatarUrl;
+        $arData['strUserType'] = $arRow->strUserType;
+        $arReturn = NetWork::setMsg($this->strTitle, "获取成功", "0000", $arData);
+        Str::echoJson($arReturn);
+    }
+
 }
