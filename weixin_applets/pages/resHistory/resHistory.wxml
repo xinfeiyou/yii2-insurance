@@ -1,6 +1,6 @@
 <!--列表-->
 <template name="zcList">
-  <view class='ele-contaier' catchtap='{{data.detailsEvent}}'  data-event-params="{{data.eventParams}}" data-listId="{{data.id}}" data-listid="{{data.oddNumber}}">
+  <view class='ele-contaier' catchtap='{{data.detailsEvent}}'  data-event-params="{{data.eventParams}}" data-listId="{{data.id}}" data-listid="{{data.strWorkNum}}">
     <view class='pull-left user'>
       <image src='{{data.faceSrc}}' mode='aspectFit'/>
     </view>
@@ -9,7 +9,7 @@
         <text class='timerContent'>申请时间：{{data.timer}}</text>      
     </view>
     <view class='money'>
-      <text>申请金额￥：{{data.money}}</text>
+      <text>申请状态￥：{{data.eStatus}}</text>
     </view>
     <view class='clearfix'></view>
   </view>
@@ -17,7 +17,7 @@
 
   <view class='info-title'>
     <image src='/img/icon-down.png'  mode='aspectFit'/>
-    <text>共有{{list.list.length}}条还款记录</text>
+    <text>共有{{list.list.length}}条申请记录</text>
   </view> 
 
 

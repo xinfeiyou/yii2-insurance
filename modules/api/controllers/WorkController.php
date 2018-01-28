@@ -142,28 +142,19 @@ class WorkController extends BaseController {
      */
     public function actionWorkPromoterOddList() {
         $cWorkOdd = new WorkOdd();
+        //$strUserId = \Yii::$app->request->post('strUserId');
+        $strUserId = '2018012800000002';
+        $arData = (new WorkUser())->getPromoterOddList($strUserId);
+        $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
+        Str::echoJson($arReturn);
+    }
+
+    /**
+     * 获取当前用户申请列表
+     */
+    public function actionWorkUserOddApplyList() {
         $strUserId = \Yii::$app->request->post('strUserId');
-        $arPost = (new WorkPromoter())->getPromoterList($strUserId);
-        $arData = [];
-        if (!empty($arPost['content'])) {
-            $i = 0;
-            foreach ($arPost['content'] as $v) {
-                $arOdd = $cWorkOdd->getWorkList($v['strUserId']);
-                if (!empty($arOdd)) {
-                    foreach ($arOdd as $obj) {
-                        $arData[$i]['id'] = $i;
-                        $arData[$i]['faceSrc'] = $v['faceSrc'];
-                        $arData[$i]['timer'] = $obj->oddRehearTime; //$timer;
-                        $arData[$i]['money'] = $obj->oddMoney; //$money;
-                        $arData[$i]['user'] = $v['user'];
-                        $arData[$i]['detailsEvent'] = $v['detailsEvent'];
-                        $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";
-                        $arData[$i]['oddNumber'] = $obj->oddNumber;
-                        $i++;
-                    }
-                }
-            }
-        }
+        $arData = (new WorkApply())->getApplyList($strUserId);
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
     }
@@ -172,8 +163,8 @@ class WorkController extends BaseController {
      * 获取用户申请详情
      */
     public function actionWorkUserOddApply() {
-        $oddNumber = \Yii::$app->request->post('oddNumber');
-        $arObj = (new WorkApply())->getApplyInfo($oddNumber);
+        $strWorkNum = \Yii::$app->request->post('oddNumber');
+        $arObj = (new WorkApply())->getApplyInfo($strWorkNum);
         $arData['user_src'] = (new WorkUser())->getModels($arObj->strUserId)->avatarUrl;
         $arData['name'] = $arObj->strRealName;
         $arData['phone'] = $arObj->strPhone;
@@ -235,7 +226,7 @@ class WorkController extends BaseController {
         $arData['eventHandler'] = 'eventHandler';
         $arData['eventParams'] = '{"inner_page_link":"/pages/idImg/idImg","is_redirect":0}';
         $arData['listid'] = '';
-        $arData['oddNumber'] = $oddNumber;
+        $arData['oddNumber'] = $arObj->oddNumber;
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
     }

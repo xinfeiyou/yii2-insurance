@@ -118,12 +118,37 @@ class WorkApply extends \app\modules\base\models\BaseModel {
     }
 
     /**
-     * 根据借款编号获取申请资料
-     * @param type $oddNumber
+     * 根据申请编号获取申请资料
+     * @param string $strWorkNum
      * @return type
      */
-    public function getApplyInfo($oddNumber) {
-        return WorkApply::findOne(['oddNumber' => $oddNumber]);
+    public function getApplyInfo($strWorkNum) {
+        return WorkApply::findOne(['strWorkNum' => $strWorkNum]);
+    }
+
+    /**
+     * 获取用户申请列表
+     * @param type $strUserId
+     * @return type
+     */
+    public function getApplyList($strUserId) {
+        $arObj = WorkApply::find()
+                ->where(['strUserId' => $strUserId])
+                ->all();
+        $arData = [];
+        $i = 0;
+        foreach ($arObj as $obj) {
+            $arData[$i]['id'] = $obj->id;
+            $arData[$i]['faceSrc'] = $obj->username->avatarUrl;
+            $arData[$i]['timer'] = substr($obj->tUpdateTime, 0, 10);
+            $arData[$i]['eStatus'] = $this->getSysConfigInfoType('strApplyStatus')[$obj->eStatus];
+            $arData[$i]['user'] = $obj->strRealName;
+            $arData[$i]['detailsEvent'] = 'detailsEvent';
+            $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";
+            $arData[$i]['strWorkNum'] = $obj->strWorkNum;
+            $i++;
+        }
+        return $arData;
     }
 
     /**
@@ -143,6 +168,14 @@ class WorkApply extends \app\modules\base\models\BaseModel {
             $number = date("Ymd") . "00000001";
         }
         return 'LC' . $number;
+    }
+
+    /**
+     * 获取用户信息
+     * @return type
+     */
+    public function getUsername() {
+        return $this->hasOne(WorkUser::className(), ['strUserId' => 'strUserId']);
     }
 
 }

@@ -118,9 +118,9 @@ class WorkUser extends \app\modules\base\models\BaseModel {
      */
     public function getPhone($strPhone) {
         $arObj = WorkUser::findOne(['strPhone' => $strPhone]);
-        if(empty($arObj)){
+        if (empty($arObj)) {
             return false;
-        }else{
+        } else {
             return $arObj;
         }
     }
@@ -132,11 +132,44 @@ class WorkUser extends \app\modules\base\models\BaseModel {
      */
     public function getModels($strUserId) {
         $arObj = WorkUser::findOne(['strUserId' => $strUserId]);
-        if(empty($arObj)){
+        if (empty($arObj)) {
             return false;
-        }else{
+        } else {
             return $arObj;
         }
+    }
+
+    /**
+     * 获取推荐人对应的项目列表
+     * @param string $strUserId 推荐人的ID 约定推荐码等于推荐人ID
+     */
+    public function getPromoterOddList($strUserId) {
+        $arObj = WorkUser::find()
+                ->where(['scene' => $strUserId])
+                ->all();
+        $arData = [];
+        $i = 0;
+        foreach ($arObj as $obj) {
+            $odd = $obj->oddinfo;
+            $arData[$i]['id'] = $i;
+            $arData[$i]['faceSrc'] = $obj->avatarUrl;
+            $arData[$i]['timer'] = $odd->oddRehearTime; //$timer;
+            $arData[$i]['money'] = $odd->oddMoney; //$money;
+            $arData[$i]['user'] = $obj->nickName;
+            $arData[$i]['detailsEvent'] = 'detailsEvent';
+            $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";
+            $arData[$i]['strWorkNum'] = $odd->applyinfo->strWorkNum;
+            $i++;
+        }
+        return $arData;
+    }
+
+    /**
+     * 获取借款信息
+     * @return type
+     */
+    public function getOddinfo() {
+        return $this->hasOne(WorkOdd::className(), ['userId' => 'strUserId']);
     }
 
     /**

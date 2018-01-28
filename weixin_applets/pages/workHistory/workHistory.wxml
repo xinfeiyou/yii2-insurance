@@ -1,6 +1,6 @@
 <!--列表-->
 <template name="zcList">
-  <view class='ele-contaier' catchtap='{{data.detailsEvent}}'  data-event-params="{{data.eventParams}}" data-listId="{{data.id}}" data-listid="{{data.oddNumber}}">
+  <view class='ele-contaier' catchtap='{{data.detailsEvent}}'  data-event-params="{{data.eventParams}}" data-listId="{{data.id}}" data-listid="{{data.strWorkNum}}">
     <view class='pull-left user'>
       <image src='{{data.faceSrc}}' mode='aspectFit'/>
     </view>

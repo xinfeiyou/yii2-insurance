@@ -9,15 +9,15 @@ Page({
     list:{
       "name":"项目记录",
       "list":[
-        {
-          "id": "1",
-          "faceSrc":"/img/user-face.png",
-          "timer": "2017-10-20",
-          "money": "2020",
-          "user": "客户1",
-          "detailsEvent":"detailsEvent",
-          "eventParams":"{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}"
-        }
+        // {
+        //   "id": "1",
+        //   "faceSrc":"/img/user-face.png",
+        //   "timer": "2017-10-20",
+        //   "eStatus": "2020",
+        //   "user": "客户1",
+        //   "detailsEvent":"detailsEvent",
+        //   "eventParams":"{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}"
+        // }
       ]
     }
   },
@@ -29,7 +29,7 @@ Page({
     let data = {
       strUserId: options.listid //app.strUserId()
     }
-    return
+    //return
     wx.request({
       url: app.resHistory,
       data: data,

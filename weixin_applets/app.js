@@ -52,7 +52,7 @@ App({
 
   userInfo: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-user-info",
 
-  resHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-user-info",
+  resHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-list",
 
   //userId
   strUserId:function(){
