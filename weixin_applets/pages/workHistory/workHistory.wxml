@@ -1,0 +1,24 @@
+<!--列表-->
+<template name="zcList">
+  <view class='ele-contaier' catchtap='{{data.detailsEvent}}'  data-event-params="{{data.eventParams}}" data-listId="{{data.id}}" data-listid="{{data.oddNumber}}">
+    <view class='pull-left user'>
+      <image src='{{data.faceSrc}}' mode='aspectFit'/>
+    </view>
+    <view class="pull-left content">
+        <text class='userTitle'>{{data.user}}</text>
+        <text class='timerContent'>借款时间：{{data.timer}}</text>      
+    </view>
+    <view class='money'>
+      <text>借款金额￥：{{data.money}}</text>
+    </view>
+    <view class='clearfix'></view>
+  </view>
+</template>
+
+  <view class='info-title'>
+    <image src='/img/icon-down.png'  mode='aspectFit'/>
+    <text>共有{{list.list.length}}条还款记录</text>
+  </view> 
+
+
+<template is="zcList" wx:for="{{list.list}}" wx:for-index="id" wx:for-item="data" wx:key="" data="{{data:data}}" />

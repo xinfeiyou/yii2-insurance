@@ -17,13 +17,13 @@ Page({
       "setting": "setting",
       "strUserId": app.strUserId(),
       "isShow":{
-        "repayHistory":0,
+        "repayHistory":1,
         "repayNearly":0,
         "repayLate": 0,
         "market": 0,
         "generalize":0,
-        "height1": 1,
-        "height2":1
+        "height1": 0,
+        "height2":0
       }
     }
   },
@@ -47,25 +47,23 @@ Page({
         switch(userInfo){
           case "1":
             this.setData({
-              "user_center.isShow.repayHistory":1,
-              "user_center.isShow.height": 0                                                                          
+              "user_center.isShow.repayNearly":1,
+              "user_center.isShow.repayLate": 1,
+              "user_center.isShow.market": 1,
+              "user_center.isShow.generalize": 1,
+              "user_center.isShow.height2": 1                                                                          
             })
             break;
           case "2":
             this.setData({
-              "user_center.isShow.repayHistory": 1,
-              "user_center.isShow.repayNearly": 1,
-              "user_center.isShow.repayLate": 1,
               "user_center.isShow.market": 1,
               "user_center.isShow.generalize": 1,
-              "user_center.isShow.height1":0
+              "user_center.isShow.height2": 1
             })
             break;
           case "3":
             this.setData({
-              "user_center.isShow.market": 1,
-              "user_center.isShow.generalize": 1,
-              "user_center.isShow.height1":0
+              "user_center.isShow.height1":1
             })
             break;
           default:

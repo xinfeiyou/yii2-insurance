@@ -116,6 +116,32 @@ class WorkController extends BaseController {
     public function actionWorkUserOddList() {
         $cWorkOdd = new WorkOdd();
         $strUserId = \Yii::$app->request->post('strUserId');
+        $arData = [];
+        $arOdd = $cWorkOdd->getWorkList($strUserId);
+        if (!empty($arOdd)) {
+            $i = 0;
+            foreach ($arOdd as $obj) {
+                $arData[$i]['id'] = $i;
+                $arData[$i]['faceSrc'] = $obj->username->avatarUrl;
+                $arData[$i]['timer'] = $obj->oddRehearTime; //$timer;
+                $arData[$i]['money'] = $obj->oddMoney; //$money;
+                $arData[$i]['user'] = $obj->username->nickName;
+                $arData[$i]['detailsEvent'] = "detailsEvent";
+                $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/repayDetail\\/repayDetail\",\"is_redirect\":0}";
+                $arData[$i]['oddNumber'] = $obj->oddNumber;
+                $i++;
+            }
+        }
+        $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
+        Str::echoJson($arReturn);
+    }
+
+    /**
+     * 获取用户项目列表
+     */
+    public function actionWorkPromoterOddList() {
+        $cWorkOdd = new WorkOdd();
+        $strUserId = \Yii::$app->request->post('strUserId');
         $arPost = (new WorkPromoter())->getPromoterList($strUserId);
         $arData = [];
         if (!empty($arPost['content'])) {
@@ -221,10 +247,10 @@ class WorkController extends BaseController {
         $oddNumber = \Yii::$app->request->post('oddNumber');
         $arObj = (new WorkApply())->getApplyInfo($oddNumber);
         $arData[0]['name'] = "身份证";
-        $arData[0]['list'][0]['imgSrc'] = 'http://'.$_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strFaceIdCard;
-        $arData[0]['list'][1]['imgSrc'] = 'http://'.$_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strFaceVehicleLicense;
+        $arData[0]['list'][0]['imgSrc'] = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strFaceIdCard;
+        $arData[0]['list'][1]['imgSrc'] = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strFaceVehicleLicense;
         $arData[1]['name'] = "行驶证";
-        $arData[1]['list'][0]['imgSrc'] = 'http://'.$_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strReverseIdCard;
+        $arData[1]['list'][0]['imgSrc'] = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strReverseIdCard;
         $arData[2]['name'] = "其他证件";
         if (!empty($arObj->strOther)) {
             $arTmp = explode(',', $arObj->strOther);
@@ -237,4 +263,5 @@ class WorkController extends BaseController {
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
     }
+
 }
