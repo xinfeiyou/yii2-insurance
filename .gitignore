@@ -30,3 +30,5 @@ tests/_output/*
 tests/_support/_generated
 
 web/upload
+
+weixin_applets/project.config.json
