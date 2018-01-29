@@ -17,9 +17,9 @@ class WorkOddinterestSearch extends WorkOddinterest {
      */
     public function rules() {
         return [
-            [['id', 'qishu', 'status'], 'integer'],
-            [['oddNumber', 'userId', 'addtime', 'endtime', 'operatetime'], 'safe'],
-            [['benJin', 'interest', 'zongEr', 'yuEr', 'realAmount', 'realinterest', 'subsidy'], 'number'],
+            [['id', 'intPeriod', 'strPaymentStatus'], 'integer'],
+            [['oddNumber', 'strUserId', 'tStartTime', 'tEndTime', 'tOperateTime'], 'safe'],
+            [['fOnLineCost', 'fOnLineInterest', 'fOnLineTotal', 'fRemainder', 'fOffLineCost', 'fOffLineInterest', 'fSubsidy','fOffLineTotal','fRealMonery','fRealinterest'], 'number'],
         ];
     }
 
@@ -59,22 +59,24 @@ class WorkOddinterestSearch extends WorkOddinterest {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'qishu' => $this->qishu,
-            'benJin' => $this->benJin,
-            'interest' => $this->interest,
-            'zongEr' => $this->zongEr,
-            'yuEr' => $this->yuEr,
-            'realAmount' => $this->realAmount,
-            'realinterest' => $this->realinterest,
-            'addtime' => $this->addtime,
-            'endtime' => $this->endtime,
-            'operatetime' => $this->operatetime,
-            'status' => $this->status,
-            'subsidy' => $this->subsidy,
+            'intPeriod' => $this->intPeriod,
+            'fOnLineCost' => $this->fOnLineCost,
+            'fOnLineInterest' => $this->fOnLineInterest,
+            'fOnLineTotal' => $this->fOnLineTotal,
+            'fRemainder' => $this->fRemainder,
+            'fRealMonery' => $this->fRealMonery,
+            'fRealinterest' => $this->fRealinterest,
+            'fOffLineCost' => $this->fOffLineCost,
+            'tStartTime' => $this->tStartTime,
+            'tEndTime' => $this->tEndTime,
+            'tOperateTime' => $this->tOperateTime,
+            'strPaymentStatus' => $this->strPaymentStatus,
+            'fSubsidy' => $this->fSubsidy,
+            'fOffLineTotal' => $this->fOffLineTotal,
         ]);
 
         $query->andFilterWhere(['like', 'oddNumber', $this->oddNumber])
-                ->andFilterWhere(['like', 'userId', $this->userId]);
+                ->andFilterWhere(['like', 'strUserId', $this->strUserId]);
 
         return $dataProvider;
     }
