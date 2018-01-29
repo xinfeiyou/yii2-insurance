@@ -19,12 +19,12 @@
               </view>
 
 
-              <!-- <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}' data-listid="{{data.strUserId}}"  wx:if="{{data.isShow.repayHistory}}">
+              <view catchtap='tapInnerLinkHandler' data-event-params='{{data.repayHistory}}' data-listid="{{data.strUserId}}"  wx:if="{{data.isShow.repayHistory}}">
                 <label  class="ico-moon"><image src="/img/icon-message.png" mode='aspectFit' style='width:20px;height:20px;'></image></label>
                 
                 <text>还款记录</text>
                 <label class="ico-moon icon-rightarrow"></label>
-              </view> -->
+              </view>
 
               <text class='height' wx:if="{{data.isShow.height1}}"></text>
 
