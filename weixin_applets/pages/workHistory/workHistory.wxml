@@ -17,7 +17,7 @@
 
   <view class='info-title'>
     <image src='/img/icon-down.png'  mode='aspectFit'/>
-    <text>共有{{list.list.length}}条还款记录</text>
+    <text>共有{{list.list.length}}条项目记录</text>
   </view> 
 
 

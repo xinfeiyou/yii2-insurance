@@ -26,11 +26,12 @@ class UserController extends BaseController {
         $model = new WorkUser();
         $arObj = $model->getPhone($arPost['strPhone']);
         if (empty($arObj)) {
-            unset($arPost['strCode']);
             $arMsg = (new WorkUser())->add($arPost);
             $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
             $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
-            (new WorkPromoter())->add(['strUserId' => $arMsg['content'], 'strPromoterId' => $arPost['scene']]);
+            if ('undefined' != $arPost['scene']) {
+                (new WorkPromoter())->add(['strUserId' => $arMsg['content'], 'strPromoterId' => $arPost['scene']]);
+            }
         } else {
             $arReturn = NetWork::setMsg($this->strTitle, "成功", '0000', $arObj->strUserId);
         }

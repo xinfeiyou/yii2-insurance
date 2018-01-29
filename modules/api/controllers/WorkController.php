@@ -141,10 +141,11 @@ class WorkController extends BaseController {
      * 获取用户项目列表
      */
     public function actionWorkPromoterOddList() {
-        $cWorkOdd = new WorkOdd();
-        //$strUserId = \Yii::$app->request->post('strUserId');
-        $strUserId = '2018012800000002';
-        $arData = (new WorkUser())->getPromoterOddList($strUserId);
+        $strUserId = \Yii::$app->request->post('strUserId');
+        $arPromoter = (new WorkPromoter())->getPromoterAllList($strUserId);
+        $cWorkUser = new WorkUser();
+        $arUserId = $cWorkUser->getPromoterToUser($strUserId, $arPromoter);
+        $arData = $cWorkUser->getPromoterOddList($arUserId);
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
     }

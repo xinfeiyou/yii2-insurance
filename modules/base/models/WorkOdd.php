@@ -91,6 +91,18 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
                         ->where(['userId' => $strUserId])
                         ->all();
     }
+
+    /**
+     * 通过用户组获取odd列表
+     * @param array $arUserId
+     * @return array
+     */
+    public function getWorkAllList($arUserId) {
+        return WorkOdd::find()
+                        ->where(['in', 'userId', $arUserId])
+                        ->all();
+    }
+
     /**
      * 获取申请信息
      * @return type
@@ -98,6 +110,7 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
     public function getApplyinfo() {
         return $this->hasOne(WorkApply::className(), ['oddNumber' => 'oddNumber']);
     }
+
     /**
      * 获取用户名
      * @return type

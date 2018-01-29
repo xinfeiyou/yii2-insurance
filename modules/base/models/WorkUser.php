@@ -140,26 +140,48 @@ class WorkUser extends \app\modules\base\models\BaseModel {
     }
 
     /**
-     * 获取推荐人对应的项目列表
-     * @param string $strUserId 推荐人的ID 约定推荐码等于推荐人ID
+     * 通过推荐人列表获取用户ID列表
+     * @param string $strUserId  主推荐人ID
+     * @param array $arPromoter  推荐人数组
+     * @return array 客户数组
      */
-    public function getPromoterOddList($strUserId) {
+    public function getPromoterToUser($strUserId, $arPromoter) {
         $arObj = WorkUser::find()
-                ->where(['scene' => $strUserId])
+                ->select(['strUserId'])
+                ->where(['in', 'scene', $arPromoter])
+                ->all();
+        $arUserId[0] = $strUserId;
+        $i = 1;
+        foreach ($arObj as $obj) {
+            $arUserId[$i] = $obj->strUserId;
+            $i++;
+        }
+        return $arUserId;
+    }
+
+    /**
+     * 获取推荐人对应的项目列表
+     * @param string $arUserId 推荐人的ID 约定推荐码等于推荐人ID
+     */
+    public function getPromoterOddList($arUserId) {
+        $arObj = WorkUser::find()
+                ->where(['in', 'strUserId', $arUserId])
                 ->all();
         $arData = [];
         $i = 0;
         foreach ($arObj as $obj) {
             $odd = $obj->oddinfo;
-            $arData[$i]['id'] = $i;
-            $arData[$i]['faceSrc'] = $obj->avatarUrl;
-            $arData[$i]['timer'] = $odd->oddRehearTime; //$timer;
-            $arData[$i]['money'] = $odd->oddMoney; //$money;
-            $arData[$i]['user'] = $obj->nickName;
-            $arData[$i]['detailsEvent'] = 'detailsEvent';
-            $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";
-            $arData[$i]['strWorkNum'] = $odd->applyinfo->strWorkNum;
-            $i++;
+            if (!empty($odd)) {
+                $arData[$i]['id'] = $i;
+                $arData[$i]['faceSrc'] = $obj->avatarUrl;
+                $arData[$i]['timer'] = $odd->oddRehearTime; //$timer;
+                $arData[$i]['money'] = $odd->oddMoney; //$money;
+                $arData[$i]['user'] = $obj->nickName;
+                $arData[$i]['detailsEvent'] = 'detailsEvent';
+                $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";
+                $arData[$i]['strWorkNum'] = $odd->applyinfo->strWorkNum;
+                $i++;
+            }
         }
         return $arData;
     }

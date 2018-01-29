@@ -3,7 +3,7 @@
 namespace app\modules\base\models;
 
 use Yii;
-
+use app\modules\base\models\WorkOdd;
 /**
  * This is the model class for table "{{%work_promoter}}".
  *
@@ -14,6 +14,8 @@ use Yii;
  * @property string $tUpdateTime
  */
 class WorkPromoter extends \app\modules\base\models\BaseModel {
+
+    public $arPromoter = [];
 
     /**
      * @inheritdoc
@@ -83,7 +85,45 @@ class WorkPromoter extends \app\modules\base\models\BaseModel {
     }
 
     /**
-     * 获取地下推广人信息列
+     * 获取全部推荐信息
+     * @return type
+     */
+    public function getPromoterAllData() {
+        return WorkPromoter::find()
+                        ->select(['strUserId', 'strPromoterId'])
+                        ->asArray()
+                        ->all();
+    }
+    /**
+     * 通过递归获取当前推广员下面所有的推广员列表
+     * @param string $strUserId 推广员ID
+     * @param type $arData
+     */
+    public function getUserToPromoter($strUserId, $arData) {
+        foreach ($arData as $v) {
+            if ($v['strUserId'] == $strUserId) {
+                array_push($this->arPromoter, $v['strPromoterId']);
+                $this->getUserToPromoter($v['strPromoterId'], $arData);
+            } else {
+                continue;
+            }
+        }
+    }
+
+    /**
+     * 获取用户下的所有推荐人
+     * @param type $strUserId
+     * @return type
+     */
+    public function getPromoterAllList($strUserId) {
+        $arData = $this->getPromoterAllData();
+        $this->getUserToPromoter($strUserId, $arData);
+        //array_push($this->arPromoter, $strUserId);
+        return $this->arPromoter;
+    }
+    
+    /**
+     * 获取推广人信息列
      * @return type
      */
     public function getPromoter() {
