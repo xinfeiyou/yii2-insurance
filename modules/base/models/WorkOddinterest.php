@@ -84,7 +84,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
      * @param type $strOddNumber
      */
     public function getReplayDetail($strOddNumber) {
-        $objOddInfo = WorkOdd::findOne(['oddNumber' => $strOddNumber]);
+        $objOddInfo = WorkOdd::findOne(['strWorkNum' => $strOddNumber]);
         $arData['user_src'] = $objOddInfo->username->avatarUrl;
         $arData['name'] = $objOddInfo->username->nickName;
         $arData['fOffLineTotal'] = $objOddInfo->offlineMoney;
