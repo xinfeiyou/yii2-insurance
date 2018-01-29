@@ -45,6 +45,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
             [['intPeriod', 'strPaymentStatus'], 'integer'],
             [['fOnLineCost', 'fOnLineInterest', 'fOnLineTotal', 'fOffLineCost', 'fOffLineInterest', 'fOffLineTotal', 'fRemainder', 'fRealMonery', 'fRealinterest', 'fSubsidy'], 'number'],
             [['tStartTime', 'tEndTime', 'tOperateTime', 'tCreateTime', 'tUpdateTime'], 'safe'],
+            [['strWorkNum'], 'string', 'max' => 40],
             [['oddNumber', 'strUserId'], 'string', 'max' => 20],
         ];
     }
@@ -55,6 +56,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
     public function attributeLabels() {
         return [
             'id' => 'ID',
+            'strWorkNum' => '申请编号',
             'oddNumber' => '借款单编号',
             'intPeriod' => '期数',
             'fOnLineCost' => '线上本金',

@@ -129,7 +129,7 @@ class WorkController extends BaseController {
                 $arData[$i]['user'] = $obj->username->nickName;
                 $arData[$i]['detailsEvent'] = "detailsEvent";
                 $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/repayDetail\\/repayDetail\",\"is_redirect\":0}";
-                $arData[$i]['oddNumber'] = $obj->oddNumber;
+                $arData[$i]['oddNumber'] = $obj->strWorkNum;
                 $i++;
             }
         }
@@ -227,7 +227,7 @@ class WorkController extends BaseController {
         $arData['eventHandler'] = 'eventHandler';
         $arData['eventParams'] = '{"inner_page_link":"/pages/idImg/idImg","is_redirect":0}';
         $arData['listid'] = '';
-        $arData['oddNumber'] = $arObj->oddNumber;
+        $arData['oddNumber'] = $strWorkNum;
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
     }
@@ -236,8 +236,8 @@ class WorkController extends BaseController {
      * 获取证件详情
      */
     public function actionWorkUserOddIdimg() {
-        $oddNumber = \Yii::$app->request->post('oddNumber');
-        $arObj = (new WorkApply())->getApplyInfo($oddNumber);
+        $strWorkNum = \Yii::$app->request->post('oddNumber');
+        $arObj = (new WorkApply())->getApplyInfo($strWorkNum);
         $arData[0]['name'] = "身份证";
         $arData[0]['list'][0]['imgSrc'] = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strFaceIdCard;
         $arData[0]['list'][1]['imgSrc'] = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . $arObj->strFaceVehicleLicense;

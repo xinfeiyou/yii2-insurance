@@ -9,7 +9,7 @@
         <text class='timerContent'>申请时间：{{data.timer}}</text>      
     </view>
     <view class='money'>
-      <text>申请状态￥：{{data.eStatus}}</text>
+      <text>申请状态：{{data.eStatus}}</text>
     </view>
     <view class='clearfix'></view>
   </view>

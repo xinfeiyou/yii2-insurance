@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'strExcessInsurance',
             [
                 'attribute' => 'strInsuranceOffice',
-                'headerOptions' => ['width' => '90'],
+                'headerOptions' => ['width' => '120'],
                 'value' => function($model) {
                     return $model->getSysConfigInfoType('strInsuranceOffice')[$model->strInsuranceOffice];
                 },

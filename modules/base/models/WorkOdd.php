@@ -48,6 +48,7 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
             [['oddBorrowPeriod', 'isCr', 'receiptStatus', 'finishType'], 'integer'],
             [['oddTrialTime', 'oddRehearTime', 'finishTime'], 'safe'],
             [['oddNumber', 'oddType', 'userId', 'operator', 'receiptUserId'], 'string', 'max' => 20],
+            [['strWorkNum'], 'string', 'max' => 40],
             [['oddTitle'], 'string', 'max' => 100],
             [['oddNumber'], 'unique'],
         ];
@@ -59,6 +60,7 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
     public function attributeLabels() {
         return [
             'id' => 'ID',
+            'strWorkNum' => '申请编号',
             'oddNumber' => '标的编号',
             'oddType' => '标的类型',
             'oddTitle' => '借标标题',
