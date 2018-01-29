@@ -167,7 +167,7 @@ class MathArray {
         return max($al);
     }
 
-    private static function aL($arr, &$al, $level = 0) {
+    public static function aL($arr, &$al, $level = 0) {
         if (is_array($arr)) {
             $level++;
             $al[] = $level;
