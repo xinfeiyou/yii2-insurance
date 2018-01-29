@@ -72,3 +72,6 @@ page{
   margin-top:24rpx;
   margin-right: 14px;
 }
+.zcButton .button {
+  margin-top: 35rpx;
+}

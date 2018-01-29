@@ -115,15 +115,29 @@ Page({
       //     }
       //   ]
       // },
-      // "eventHandler":"eventHandler",
-      // "eventParams": "{\"inner_page_link\":\"\\/pages\\/idImg\\/idImg\",\"is_redirect\":0}",
-      // "listid": ""
-    }
+      "eventHandler":"eventHandler",
+      "eventParams": "{\"inner_page_link\":\"\\/pages\\/idImg\\/idImg\",\"is_redirect\":0}",
+      "eventParams1": "{\"inner_page_link\":\"\\/pages\\/repayHistory\\/repayHistory\",\"is_redirect\":0}",
+      "listid": ""
+    },
+    Button:[
+      {
+        "content": "确认",
+        "type": "submit",
+        "style": "primary"
+      },
+      {
+        "content": "取消",
+        "type": "submit",
+        "style": "defult"
+      }
+    ]
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    return
     // console.log(options);
     // this.setData({
     //   "listDetail.listid": options.listid
@@ -155,7 +169,35 @@ Page({
   onReady: function () {
   
   },
+  submitForm:function(e){
+    console.log(e);
+    wx.request({
+      url: app.resSubmit,
+      data:e.detail.value,
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      success:function(e){
+        if(e.ret=="0000"){
+          app.alert({
+            type: 1,
+            argument: {
+              title: "提交成功"
+            }
+          })
+          app.turnToPage("/pages/index/index")
+        }else{
+          app.alert({
+            type: 1,
+            argument: {
+              title: "取消成功"
+            }
+          })
 
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/workDetail/workDetail",
     "pages/about/about",
     "pages/bind/bind",
     "pages/market/market",
@@ -16,7 +17,6 @@
     "pages/addCollection/addCollection",
     "pages/collection/collection",
     "pages/repayNearly/repayNearly",
-    "pages/workDetail/workDetail",
     "pages/repayLate/repayLate",
     "pages/idImg/idImg"
   ],
