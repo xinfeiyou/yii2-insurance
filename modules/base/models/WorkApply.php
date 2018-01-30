@@ -49,11 +49,11 @@ class WorkApply extends \app\modules\base\models\BaseModel {
         return [
             [['strWorkNum', 'strRealName', 'strPhone', 'strTravelAdder', 'strUserId'], 'required'],
             [['tCompulsoryInsuranceEffectiveTime', 'tCommercialInsuranceEffectiveTime', 'tCreateTime', 'tUpdateTime'], 'safe'],
-            [['strWorkNum', 'strUserId', 'eStatus', 'oddNumber','oddRepaymentStyle'], 'string', 'max' => 40],
+            [['strWorkNum', 'strUserId', 'eStatus', 'oddNumber', 'oddRepaymentStyle', 'eApplyStatus'], 'string', 'max' => 40],
             [['strRealName', 'strPhone', 'strTravelAdder', 'strCarNumber', 'strCompulsoryInsurance', 'strCommercialInsurance', 'strLossInsurance', 'strThirdPartyInsurance', 'strTheftInsurance', 'strDriverLiabilityInsurance', 'strPassengerLiabilityInsurance', 'strGlassInsurance', 'strSelfIgnitionInsurance', 'strWadingInsurance', 'strScratchInsurance', 'strExcessInsurance'], 'string', 'max' => 50],
             [['strInsuranceOffice'], 'string', 'max' => 100],
             [['strFaceIdCard', 'strFaceVehicleLicense', 'strReverseIdCard', 'strOther'], 'string'],
-            [['offlineMoney','offlineRate','oddBorrowPeriod'],'number']
+            [['offlineMoney', 'offlineRate', 'oddBorrowPeriod'], 'number']
         ];
     }
 
@@ -94,6 +94,7 @@ class WorkApply extends \app\modules\base\models\BaseModel {
             'offlineRate' => '线下利率',
             'oddBorrowPeriod' => '期限',
             'oddRepaymentStyle' => '还款类型',
+            'eApplyStatus' => '是否购买',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];
@@ -173,6 +174,18 @@ class WorkApply extends \app\modules\base\models\BaseModel {
             $number = date("Ymd") . "00000001";
         }
         return 'LC' . $number;
+    }
+
+    /**
+     * 编辑购买状态
+     * @param string $strWorkNum
+     * @param string $eStatus
+     * @return type
+     */
+    public function editApplyStatus($strWorkNum, $eStatus) {
+        $model = WorkApply::findOne(['strWorkNum' => $strWorkNum]);
+        $arData['eApplyStatus'] = $eStatus;
+        return $model->edit_data($model, $arData);
     }
 
     /**

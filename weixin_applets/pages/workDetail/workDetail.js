@@ -123,13 +123,17 @@ Page({
     Button:[
       {
         "content": "确认",
-        "type": "submit",
-        "style": "primary"
+        "type": "button",
+        "style": "primary",
+        "buttonType":"yes",
+        "btnsubmit":"btnsubmit"
       },
       {
         "content": "取消",
-        "type": "submit",
-        "style": "defult"
+        "type": "button",
+        "style": "defult",
+        "buttonType": "no",
+        "btnsubmit": "btnsubmit"
       }
     ]
   },
@@ -148,7 +152,7 @@ Page({
         'content-type': "application/x-www-form-urlencoded"
       },
       success: (e) => {
-        console.log(e);
+        //console.log(e);
         this.setData({
           "listDetail": e.data.data.content
         })
@@ -164,20 +168,27 @@ Page({
   onReady: function () {
   
   },
-  submitForm:function(e){
-    console.log(e);
+  btnsubmit:function(e){
+    
+    let data = {
+      oddNumber: this.data.listDetail.oddNumber,
+      buttonType: e.target.dataset.button
+    }
+    //console.log(data)
     wx.request({
       url: app.resSubmit,
-      data:e.detail.value,
+      data:data,
       header: {
         'content-type': "application/x-www-form-urlencoded"
       },
+      method:"POST",
       success:function(e){
-        if(e.ret=="0000"){
+        console.log(e)
+        if(e.data.ret=="0000"){
           app.alert({
             type: 1,
             argument: {
-              title: "提交成功"
+              title: "操作成功"
             }
           })
           app.turnToPage("/pages/index/index")
@@ -185,7 +196,7 @@ Page({
           app.alert({
             type: 1,
             argument: {
-              title: "取消成功"
+              title: "操作成功"
             }
           })
 

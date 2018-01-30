@@ -98,15 +98,11 @@
 <!--提交按钮  -->
 <template name="zcButton">
     <view class='zcButton' style='margin-bottom:0px;'>
-      <button form-type='{{data.type}}' type='{{data.style}}' class='button'>{{data.content}}</button>
+      <button form-type='{{data.type}}' type='{{data.style}}' class='button' data-button="{{data.buttonType}}" catchtap='{{data.btnsubmit}}'>{{data.content}}</button>
     </view>
 </template> 
 
 
 
-<form class='form' bindsubmit="submitForm">
-  <input value='{{listDetail.oddNumber}}' style='display:none' name="oddNumber"></input>
 
   <template is = "zcButton" data="{{data:data}}" wx:for="{{Button}}" wx:for-index="id" wx:for-item="data" wx:key="" />
-
-</form>

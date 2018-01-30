@@ -272,6 +272,18 @@ class WorkController extends BaseController {
      */
     public function actionWorkUserOddApplyOperat() {
         $strWorkNum = \Yii::$app->request->post('oddNumber');
+        $buttonType = \Yii::$app->request->post('buttonType');
+        switch ($buttonType) {
+            case 'yes':
+                $eStatus = "1";
+                break;
+            case 'no':
+                $eStatus = "-1";
+                break;
+        }
+        $arData = (new WorkApply())->editApplyStatus($strWorkNum, $eStatus);
+        $arReturn = NetWork::setMsg($this->strTitle, '成功', $arData['ret'], $arData['content']);
+        Str::echoJson($arReturn);
     }
 
 }
