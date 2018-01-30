@@ -3,7 +3,6 @@
 
 # netbeans project files
 nbproject
-config
 
 # zend studio for eclipse project files
 .buildpath
@@ -33,3 +32,6 @@ tests/_support/_generated
 web/upload
 
 weixin_applets/project.config.json
+
+# web config
+config
