@@ -178,7 +178,7 @@ class WorkController extends BaseController {
         $arData['car']['list'][1]['style'] = "";
         $arData['insurance']['title'] = "保险信息";
         $arData['insurance']['list'][0]['title'] = "保险公司";
-        $arData['insurance']['list'][0]['value'] = $arObj->strInsuranceOffice;
+        $arData['insurance']['list'][0]['value'] = $arObj->getSysConfigInfoType('strInsuranceOffice')[$arObj->strInsuranceOffice];
         $arData['insurance']['list'][0]['style'] = "";
         $arData['insurance']['list'][1]['title'] = "交强险+车船险";
         $arData['insurance']['list'][1]['value'] = ($arObj->strCompulsoryInsurance) ? '投保' : '不投保';
@@ -226,6 +226,7 @@ class WorkController extends BaseController {
         $arData['addition']['list'][4]['style'] = "";
         $arData['eventHandler'] = 'eventHandler';
         $arData['eventParams'] = '{"inner_page_link":"/pages/idImg/idImg","is_redirect":0}';
+        $arData['eventParams1'] = "{\"inner_page_link\":\"\\/pages\\/repayDetail\\/repayDetail\",\"is_redirect\":0}";
         $arData['listid'] = '';
         $arData['oddNumber'] = $strWorkNum;
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
@@ -260,10 +261,17 @@ class WorkController extends BaseController {
      * 还款列表明细
      */
     public function actionWorkUserOddReplay() {
-        $oddNumber = \Yii::$app->request->post('oddNumber');
-        $arData = (new WorkOddinterest())->getReplayDetail($oddNumber);
+        $strWorkNum = \Yii::$app->request->post('oddNumber');
+        $arData = (new WorkOddinterest())->getReplayDetail($strWorkNum);
         $arReturn = NetWork::setMsg($this->strTitle, '成功', '0000', $arData);
         Str::echoJson($arReturn);
+    }
+
+    /**
+     * 确认或取消申请
+     */
+    public function actionWorkUserOddApplyOperat() {
+        $strWorkNum = \Yii::$app->request->post('oddNumber');
     }
 
 }

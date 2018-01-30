@@ -115,10 +115,10 @@ Page({
       //     }
       //   ]
       // },
-      "eventHandler":"eventHandler",
-      "eventParams": "{\"inner_page_link\":\"\\/pages\\/idImg\\/idImg\",\"is_redirect\":0}",
-      "eventParams1": "{\"inner_page_link\":\"\\/pages\\/repayHistory\\/repayHistory\",\"is_redirect\":0}",
-      "listid": ""
+      // "eventHandler":"eventHandler",
+      // "eventParams": "{\"inner_page_link\":\"\\/pages\\/idImg\\/idImg\",\"is_redirect\":0}",
+      // "eventParams1": "{\"inner_page_link\":\"\\/pages\\/repayDetail\\/repayDetail\",\"is_redirect\":0}",
+      // "listid": ""
     },
     Button:[
       {
@@ -137,11 +137,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    return
-    // console.log(options);
-    // this.setData({
-    //   "listDetail.listid": options.listid
-    // })
     let data = {
       oddNumber: options.listid //app.strUserId()
     }

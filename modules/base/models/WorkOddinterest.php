@@ -82,16 +82,16 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
 
     /**
      * 项目还款明细
-     * @param type $strOddNumber
+     * @param type $strWorkNum
      */
-    public function getReplayDetail($strOddNumber) {
-        $objOddInfo = WorkOdd::findOne(['strWorkNum' => $strOddNumber]);
+    public function getReplayDetail($strWorkNum) {
+        $objOddInfo = WorkApply::findOne(['strWorkNum' => $strWorkNum]);
         $arData['user_src'] = $objOddInfo->username->avatarUrl;
         $arData['name'] = $objOddInfo->username->nickName;
         $arData['fOffLineTotal'] = $objOddInfo->offlineMoney;
         $arData['intPeriod'] = $objOddInfo->oddBorrowPeriod;
         $arObj = WorkOddinterest::find()
-                ->where(['oddNumber' => $strOddNumber])
+                ->where(['strWorkNum' => $strWorkNum])
                 ->all();
         $i = 0;
         foreach ($arObj as $obj) {

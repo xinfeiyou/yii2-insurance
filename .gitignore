@@ -34,3 +34,5 @@ web/upload
 weixin_applets/project.config.json
 
 /baofu/
+/config/db.php
+/config/params.php

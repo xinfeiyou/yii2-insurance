@@ -54,7 +54,7 @@ App({
 
   resHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-list",
 
-  resSubmit: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-list",
+  resSubmit: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-operat",
 
   //userId
   strUserId:function(){
