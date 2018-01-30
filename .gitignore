@@ -32,5 +32,6 @@ tests/_support/_generated
 web/upload
 
 weixin_applets/project.config.json
+
 # 测试宝付代扣
-/111
+baofu/
