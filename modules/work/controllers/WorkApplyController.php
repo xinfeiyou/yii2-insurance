@@ -98,15 +98,6 @@ class WorkApplyController extends Controller {
     public function actionEditOffMoney($strWorkNum) {
         $model = (new WorkApply())->getApplyInfo($strWorkNum);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $arPost = \Yii::$app->request->post('WorkApply');
-            $oddRepaymentStyle = 1;
-            switch ($arPost['oddRepaymentStyle']) {
-                case 'monthpay': $oddRepaymentStyle = 1;
-                    break;
-                case 'matchpay': $oddRepaymentStyle = 3;
-                    break;
-            }
-            (new WorkOddinterest())->editWorkOffLineInterest($strWorkNum, $arPost['offlineMoney'], $arPost['offlineRate'], $arPost['oddBorrowPeriod'], $oddRepaymentStyle);
             return $this->redirect(['edit-off-money', 'strWorkNum' => $strWorkNum]);
         } else {
             $arInterest = (new WorkOddinterest())->getWorkNumToOddinterest($strWorkNum);
@@ -115,6 +106,22 @@ class WorkApplyController extends Controller {
                         'arInterest' => $arInterest,
             ]);
         }
+    }
+
+    /**
+     * 生成还款明细
+     */
+    public function actionReloadOnlineInterest($strWorkNum) {
+        $model = (new WorkApply())->getApplyInfo($strWorkNum);
+        $oddRepaymentStyle = 1;
+        switch ($model->oddRepaymentStyle) {
+            case 'monthpay': $oddRepaymentStyle = 1;
+                break;
+            case 'matchpay': $oddRepaymentStyle = 3;
+                break;
+        }
+        $arReturn = (new WorkOddinterest())->editWorkOffLineInterest($strWorkNum, $model->offlineMoney, $model->offlineRate, $model->oddBorrowPeriod, $oddRepaymentStyle);
+        return $this->redirect(['edit-off-money', 'strWorkNum' => $strWorkNum]);
     }
 
     /**

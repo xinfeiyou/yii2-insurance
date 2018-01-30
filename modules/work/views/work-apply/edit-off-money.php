@@ -44,7 +44,9 @@ $this->params['breadcrumbs'][] = '生成线下还款列表';
         ])->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-        <?= Html::submitButton( '生成线下还款明细', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton( '保存保单信息', ['class' => 'btn btn-primary']) ?>
+            &nbsp;&nbsp;
+            <?= Html::a('生成还款明细', ['reload-online-interest', 'strWorkNum' => $model->strWorkNum], ['class' => 'btn btn-primary']) ?>
         </div>
         <?php ActiveForm::end(); ?>
 
