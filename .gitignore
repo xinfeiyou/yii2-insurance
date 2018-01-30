@@ -33,5 +33,4 @@ web/upload
 
 weixin_applets/project.config.json
 
-# 测试宝付代扣
-baofu/
+/baofu/
