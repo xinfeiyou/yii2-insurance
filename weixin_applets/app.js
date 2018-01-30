@@ -56,6 +56,8 @@ App({
 
   resSubmit: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-operat",
 
+  qrcode: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-qrcode",
+
   //userId
   strUserId:function(){
     return wx.getStorageSync("strUserId");

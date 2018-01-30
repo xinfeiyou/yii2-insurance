@@ -44,7 +44,7 @@ Page({
 
       }
       wx.request({
-        url: app.serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-qrcode",
+        url: app.qrcode,
         data: data,
         header: {
           'content-type': "application/x-www-form-urlencoded"

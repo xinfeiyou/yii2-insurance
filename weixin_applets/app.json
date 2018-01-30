@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/workDetail/workDetail",
     "pages/about/about",
     "pages/bind/bind",
     "pages/market/market",
@@ -14,6 +13,7 @@
     "pages/repayDetail/repayDetail",
     "pages/generalize/generalize",
     "pages/workHistory/workHistory",
+    "pages/workDetail/workDetail",
     "pages/addCollection/addCollection",
     "pages/collection/collection",
     "pages/repayNearly/repayNearly",
