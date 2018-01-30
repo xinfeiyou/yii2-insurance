@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'oddMoney')->textInput() ?>
 
-    <?= $form->field($model, 'oddRepaymentStyle')->dropDownList([ 'monthpay' => 'Monthpay', 'weekpay' => 'Weekpay', 'matchpay' => 'Matchpay', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'oddRepaymentStyle')->dropDownList($model->getSysConfigInfoType('oddRepaymentStyle')) ?>
 
     <?= $form->field($model, 'oddBorrowPeriod')->textInput() ?>
 

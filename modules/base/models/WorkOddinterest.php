@@ -3,6 +3,7 @@
 namespace app\modules\base\models;
 
 use Yii;
+use app\common\MathPayment;
 
 /**
  * This is the model class for table "{{%work_oddinterest}}".
@@ -110,6 +111,43 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
             $i++;
         }
         return $arData;
+    }
+
+    /**
+     * 根据申请编号获取还款明细
+     * @param string $strWorkNum
+     * @return type
+     */
+    public function getWorkNumToOddinterest($strWorkNum) {
+        return WorkOddinterest::find()
+                        ->where(['strWorkNum' => $strWorkNum])
+                        ->all();
+    }
+
+    /**
+     * 重置线下还款列表
+     * @param string $strWorkNum    申请流水号
+     * @param string $offlineMoney
+     * @param double $offlineRate
+     * @param int $oddBorrowPeriod
+     * @param int $oddRepaymentStyle
+     * @return type
+     */
+    public function editWorkOffLineInterest($strWorkNum, $offlineMoney, $offlineRate, $oddBorrowPeriod, $oddRepaymentStyle) {
+        $arObj = WorkOddinterest::findOne(['strWorkNum' => $strWorkNum]);
+        if (empty($arObj)) {
+            $arDataAll = MathPayment::PayInterest($offlineMoney, $offlineRate, $oddBorrowPeriod, 'month', $oddRepaymentStyle);
+            foreach ($arDataAll['notes'] as $ar) {
+                $model = new WorkOddinterest();
+                $arData['strWorkNum'] = $strWorkNum;
+                $arData['intPeriod'] = $ar['month'];
+                $arData['fOffLineCost'] = $ar['benjin'];
+                $arData['fOffLineInterest'] = $ar['lixi'];
+                $arData['fOffLineTotal'] = $ar['zonger'];
+                $this->create_data($model, $arData);
+            }
+        }
+        return $this->setReturnMsg('0000');
     }
 
 }

@@ -60,6 +60,7 @@ class MathPayment {
         $money = floatval($money);
         $yearInterest = floatval($yearInterest);
         $interset = round((($money * $yearInterest) / 12), 2);
+        $yingli = 0;
         if ('month' == $oddType) {
             $num = $month;
         } else {
@@ -99,7 +100,7 @@ class MathPayment {
                         $array['notes'][$i]['stime'] = $time;
                         $array['notes'][$i]['etime'] = $etime;
                     }
-                    $yingli = 3 * $interset;
+                    $yingli += $oddlixi;
                 }
                 $array['yingli'] = $yingli;
                 break;
@@ -154,15 +155,16 @@ class MathPayment {
                             break;
                     }
                     $array['notes'][$k]['lixi'] = $oddlixi;
-                    $array['notes'][$k]['benji'] = $zonger - $oddlixi;
+                    $array['notes'][$k]['benjin'] = $zonger - $oddlixi;
                     $array['notes'][$k]['zonger'] = $zonger;
                     $array['notes'][$k]['yuer'] = $j * $zonger;
                     $array['notes'][$k]['stime'] = $time;
                     $array['notes'][$k]['etime'] = $etime;
+                    $yingli += $oddlixi;
                     $time = $etime;
                     $k++;
                 }
-                $array['yingli'] = $zonger * 3 - $money;
+                $array['yingli'] = $yingli;
                 break;
             case '4'://等额本金
                 $benjin = round(($money / $month), 2);
