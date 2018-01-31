@@ -142,6 +142,7 @@ class WorkController extends BaseController {
      */
     public function actionWorkPromoterOddList() {
         $strUserId = \Yii::$app->request->post('strUserId');
+        $strUserId = '2018013100000002';
         $arPromoter = (new WorkPromoter())->getPromoterAllList($strUserId);
         $cWorkUser = new WorkUser();
         $arUserId = $cWorkUser->getPromoterToUser($strUserId, $arPromoter);

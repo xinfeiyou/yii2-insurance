@@ -29,8 +29,8 @@ class WorkConfig extends \app\modules\base\models\BaseModel {
     public function rules() {
         return [
             [['tCreateTime', 'tUpdateTime'], 'safe'],
-            [['strKey', 'strType'], 'string', 'max' => 50],
-            [['strValue'], 'string', 'max' => 255],
+            [['strType'], 'string', 'max' => 50],
+            [['strKey', 'strValue'], 'string', 'max' => 255],
         ];
     }
 
@@ -53,8 +53,8 @@ class WorkConfig extends \app\modules\base\models\BaseModel {
      * @param string $strType
      * @return boolean|string
      */
-    public function getKeyToValue($strType) {
-        $arObj = WorkConfig::findOne(['strType' => $strType]);
+    public function getKeyToValue($strKey) {
+        $arObj = WorkConfig::findOne(['strType' => $strKey]);
         if (empty($arObj)) {
             return false;
         } else {
@@ -70,12 +70,16 @@ class WorkConfig extends \app\modules\base\models\BaseModel {
      */
     public function editKeyToValue($strKey, $strValue) {
         $arObj = $this->getKeyToValue($strKey);
-        if ($arObj) {
-            $model = WorkConfig::findOne(['strKey' => $strKey]);
-            $arMsg = $this->edit_data($model, ['strValue' => $strValue]);
-        } else {
+        if (empty($arObj)) {
             $model = new WorkConfig();
-            $arMsg = $this->create_data($model, ['strKey' => $strKey, 'strValue' => $strValue]);
+            $arData['strType'] = $strKey;
+            $arData['strKey'] = $strValue;
+            $arData['strValue'] = "微信token值";
+            $arMsg = $this->create_data($model, $arData);
+        } else {
+            $model = WorkConfig::findOne(['strType' => $strKey]);
+            $arData['strKey'] = $strValue;
+            $arMsg = $this->edit_data($model, $arData);
         }
         return $arMsg;
     }
