@@ -11,7 +11,8 @@ $this->params['breadcrumbs'][] = ['label' => '车险申请列表', 'url' => ['in
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="work-apply-view">
-    <?= DetailView::widget([
+    <?=
+    DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -37,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'strInsuranceOffice',
                 'value' => function($model) {
-                    return $model->getSysConfigInfoType('strInsuranceOffice')[$model->strInsuranceOffice];
+                    return $model->getSysConfigInfoTypeValue('strInsuranceOffice', $model->strInsuranceOffice);
                 },
                 'headerOptions' => ['width' => '70']
             ],
@@ -47,11 +48,37 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['image', ['width' => '40', 'height' => '40',]],
                 'headerOptions' => ['width' => '50']
             ],
+            [
+                'attribute' => 'strFaceVehicleLicense',
+                'label' => '身份证反面',
+                'format' => ['image', ['width' => '40', 'height' => '40',]],
+                'headerOptions' => ['width' => '50']
+            ],
+            [
+                'attribute' => 'strReverseIdCard',
+                'label' => '行驶证件',
+                'format' => ['image', ['width' => '40', 'height' => '40',]],
+                'headerOptions' => ['width' => '50']
+            ],
+            [
+                'attribute' => 'strOther',
+                'label' => '其他证件',
+                'format' => ['image', ['width' => '40', 'height' => '40',]],
+                'headerOptions' => ['width' => '50']
+            ],
+            'eStatus',
+            'oddNumber',
+            'offlineMoney',
+            'offlineRate',
+            'oddRepaymentStyle',
+            'oddBorrowPeriod',
+            'eApplyStatus',
             'tCreateTime',
             'tUpdateTime',
         ],
-    ]) ?>
+    ])
+    ?>
     <p>
-        <?= Html::a('编辑', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+<?= Html::a('编辑', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 </div>

@@ -29,6 +29,21 @@ class BaseModel extends \yii\db\ActiveRecord {
     }
 
     /**
+     * 获取具体配置信息
+     * @param type $type
+     * @param type $key
+     * @return string
+     */
+    public function getSysConfigInfoTypeValue($type, $key) {
+        $arData = $this->getSysConfigInfoType($type);
+        if (empty($arData[$key])) {
+            return "未选择";
+        } else {
+            return $arData[$key];
+        }
+    }
+
+    /**
      * 获取微信token值
      * @return type
      */

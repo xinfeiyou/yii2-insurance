@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'strInsuranceOffice',
                 'headerOptions' => ['width' => '120'],
                 'value' => function($model) {
-                    return $model->getSysConfigInfoType('strInsuranceOffice')[$model->strInsuranceOffice];
+                    return $model->getSysConfigInfoTypeValue('strInsuranceOffice', $model->strInsuranceOffice);
                 },
                 'filter' => (new WorkApply())->getSysConfigInfoType('strInsuranceOffice'),
             ],
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'eStatus',
                 'headerOptions' => ['width' => '90'],
                 'value' => function($model) {
-                    return $model->getSysConfigInfoType('strApplyStatus')[$model->eStatus];
+                    return $model->getSysConfigInfoTypeValue('strApplyStatus', $model->eStatus);
                 },
                 'filter' => (new WorkApply())->getSysConfigInfoType('strApplyStatus'),
             ],

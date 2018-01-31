@@ -147,7 +147,7 @@ class WorkApply extends \app\modules\base\models\BaseModel {
             $arData[$i]['id'] = $obj->id;
             $arData[$i]['faceSrc'] = $obj->username->avatarUrl;
             $arData[$i]['timer'] = substr($obj->tUpdateTime, 0, 10);
-            $arData[$i]['eStatus'] = $this->getSysConfigInfoType('strApplyStatus')[$obj->eStatus];
+            $arData[$i]['eStatus'] = $this->getSysConfigInfoTypeValue('strApplyStatus',$obj->eStatus);   
             $arData[$i]['user'] = $obj->strRealName;
             $arData[$i]['detailsEvent'] = 'detailsEvent';
             $arData[$i]['eventParams'] = "{\"inner_page_link\":\"\\/pages\\/workDetail\\/workDetail\",\"is_redirect\":0}";

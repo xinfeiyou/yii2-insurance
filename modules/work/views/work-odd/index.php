@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'oddType',
                 'headerOptions' => ['width' => '120'],
                 'value' => function($model) {
-                    return $model->getSysConfigInfoType('oddType')[$model->oddType];
+                    return $model->getSysConfigInfoType('oddType',$model->oddType);
                 },
                 'filter' => (new WorkOdd())->getSysConfigInfoType('oddType'),
             ],
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'oddRepaymentStyle',
                 'headerOptions' => ['width' => '120'],
                 'value' => function($model) {
-                    return $model->getSysConfigInfoType('oddRepaymentStyle')[$model->oddRepaymentStyle];
+                    return $model->getSysConfigInfoType('oddRepaymentStyle',$model->oddRepaymentStyle);
                 },
                 'filter' => (new WorkOdd())->getSysConfigInfoType('oddRepaymentStyle'),
             ],

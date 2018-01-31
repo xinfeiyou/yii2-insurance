@@ -178,7 +178,7 @@ class WorkController extends BaseController {
         $arData['car']['list'][1]['style'] = "";
         $arData['insurance']['title'] = "保险信息";
         $arData['insurance']['list'][0]['title'] = "保险公司";
-        $arData['insurance']['list'][0]['value'] = $arObj->getSysConfigInfoType('strInsuranceOffice')[$arObj->strInsuranceOffice];
+        $arData['insurance']['list'][0]['value'] = $arObj->getSysConfigInfoTypeValue('strInsuranceOffice', $arObj->strInsuranceOffice);
         $arData['insurance']['list'][0]['style'] = "";
         $arData['insurance']['list'][1]['title'] = "交强险+车船险";
         $arData['insurance']['list'][1]['value'] = ($arObj->strCompulsoryInsurance) ? '投保' : '不投保';
