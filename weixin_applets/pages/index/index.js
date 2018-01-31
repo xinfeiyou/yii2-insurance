@@ -127,8 +127,17 @@ Page({
     app.login();
     wx.getLocation({
       success: (res)=>{
+        console.log(res);
+        let data={};
+        data.latitude = res.latitude;
+        data.longitude = res.longitude;
         wx.request({
-          url: `http://apis.map.qq.com/ws/geocoder/v1/?location=${res.latitude},${res.longitude}&key=${app.key}`,
+          url: app.cityUrl,
+          data: data,
+          method: "POST",
+          header: {
+            'content-type': "application/x-www-form-urlencoded"
+          },
           success:  (e)=>{
            this.setData({
              "form.content[2].value[0]": e.data.result.address_component.province,

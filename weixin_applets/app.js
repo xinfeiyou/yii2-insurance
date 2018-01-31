@@ -1,8 +1,8 @@
 //app.js
-const serverUrl = "http://192.168.1.38";
+const serverUrl = "https://carapi.91hc.com";
 
 //图片文件提交地址
-const uploadFileUrl = `${serverUrl}/yii2-insurance/web/index.php?r=api/work/work-user-image`; 
+const uploadFileUrl = `${serverUrl}/index.php?r=api/work/work-user-image`; 
 App({
   //弹窗组件
   alert:function(e){
@@ -22,42 +22,43 @@ App({
     }
   },
   //服务器地址
-  serverUrl:"http://192.168.1.38",
+  serverUrl:"https://carapi.91hc.com",
   key: "GUGBZ-VLRC3-R2N3V-YXBTW-VWKA2-QXBYH",
    // 第一张表单
-  workUserdata: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-data",
+  workUserdata: serverUrl + "/index.php?r=api/work/work-user-data",
   // 第二张表单
-  chooseinsurancetype: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-insurance-data",
+  chooseinsurancetype: serverUrl + "/index.php?r=api/work/work-insurance-data",
   // 第三张表单
-  chooseinsurancecompany: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-office-data",
+  chooseinsurancecompany: serverUrl + "/index.php?r=api/work/work-office-data",
   // 第四张表单
-  submitmaterial: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-card",
+  submitmaterial: serverUrl + "/index.php?r=api/work/work-user-card",
   // 绑定
-  bind: serverUrl + "/yii2-insurance/web/index.php?r=api/user/bind",
+  bind: serverUrl + "/index.php?r=api/user/bind",
 
-  getPage: serverUrl +"/yii2-insurance/web/index.php?r=api/work/work-get-page",
+  getPage: serverUrl +"/index.php?r=api/work/work-get-page",
 
-  market: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-promoter",
+  market: serverUrl + "/index.php?r=api/user/get-promoter",
 
-  marketHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-promoter-odd-list",
+  marketHistory: serverUrl + "/index.php?r=api/work/work-promoter-odd-list",
 
-  repayHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-list",
+  repayHistory: serverUrl + "/index.php?r=api/work/work-user-odd-list",
 
   //车险详情
-  repayDetail: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-replay",
+  repayDetail: serverUrl + "/index.php?r=api/work/work-user-odd-replay",
 
-  workDetail: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply",
+  workDetail: serverUrl + "/index.php?r=api/work/work-user-odd-apply",
 
-  idImg: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-idimg",
+  idImg: serverUrl + "/index.php?r=api/work/work-user-odd-idimg",
 
-  userInfo: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-user-info",
+  userInfo: serverUrl + "/index.php?r=api/user/get-user-info",
 
-  resHistory: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-list",
+  resHistory: serverUrl + "/index.php?r=api/work/work-user-odd-apply-list",
 
-  resSubmit: serverUrl + "/yii2-insurance/web/index.php?r=api/work/work-user-odd-apply-operat",
+  resSubmit: serverUrl + "/index.php?r=api/work/work-user-odd-apply-operat",
 
-  qrcode: serverUrl + "/yii2-insurance/web/index.php?r=api/user/get-qrcode",
+  qrcode: serverUrl + "/index.php?r=api/user/get-qrcode",
 
+  cityUrl: serverUrl + "/index.php?r=api/user/get-city",
   //userId
   strUserId:function(){
     return wx.getStorageSync("strUserId");
@@ -188,7 +189,7 @@ App({
               datas.code = data.code;
               datas.strUserId = this.strUserId();
               wx.request({
-                url: serverUrl + "/yii2-insurance/web/index.php?r=api/user/check-login",
+                url: serverUrl + "/index.php?r=api/user/check-login",
                 header: {
                   'content-type': "application/x-www-form-urlencoded"
                 },

@@ -27,7 +27,7 @@ Page({
    */
   onLoad: function (options) {
     let data = {
-      strUserId: options.listid //app.strUserId()
+      strUserId:app.strUserId() //app.strUserId()
     }
     //return
     wx.request({

@@ -67,7 +67,6 @@ Page({
     if (scene) {
       data.scene = scene;
     }
-//    return;
     wx.request({
       url: app.bind,
       header: {
@@ -76,7 +75,13 @@ Page({
       data:data,
       method:"POST",
       success:function(e){
-        console.log(e);
+        app.alert({
+          type: 1,
+          argument: {
+            image: '/img/terror.png',
+            title: e
+          }
+        })
         if(e.data.ret=="0000"){
           console.log(e.data.data.content);
           wx.setStorageSync("strUserId", e.data.data.content)
@@ -90,6 +95,24 @@ Page({
             }
           })
         }
+      },
+      fail:function(e){
+        app.alert({
+          type: 1,
+          argument: {
+            image: '/img/terror.png',
+            title: e
+          }
+        })
+      },
+      complate:function(e){
+        app.alert({
+          type: 1,
+          argument: {
+            image: '/img/terror.png',
+            title: e
+          }
+        })
       }
     })
 
