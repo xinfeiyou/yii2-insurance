@@ -42,7 +42,6 @@ class WorkUserSearch extends WorkUser
     public function search($params)
     {
         $query = WorkUser::find();
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -75,7 +74,6 @@ class WorkUserSearch extends WorkUser
             ->andFilterWhere(['like', 'country', $this->country])
             ->andFilterWhere(['like', 'openId', $this->openId])
             ->andFilterWhere(['like', 'avatarUrl', $this->avatarUrl]);
-
         return $dataProvider;
     }
 }

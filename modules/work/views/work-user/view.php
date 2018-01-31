@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'strUserType',
                 'value' => function($model) {
-                    return $model->getSysConfigInfoType('strUserType',$model->strUserType);
+                    return $model->getSysConfigInfoTypeValue('strUserType',$model->strUserType);
                 },
                 'headerOptions' => ['width' => '70']
             ],
