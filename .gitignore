@@ -34,4 +34,4 @@ web/upload
 weixin_applets/project.config.json
 
 # web config
-config/
+config/*

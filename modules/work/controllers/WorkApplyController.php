@@ -6,14 +6,13 @@ use Yii;
 use app\modules\base\models\WorkApply;
 use app\modules\base\models\search\WorkApplySearch;
 use app\modules\base\models\WorkOddinterest;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * WorkApplyController implements the CRUD actions for WorkApply model.
  */
-class WorkApplyController extends Controller {
+class WorkApplyController extends BaseController {
 
     /**
      * @inheritdoc

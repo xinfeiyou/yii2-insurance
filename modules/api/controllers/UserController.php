@@ -109,4 +109,16 @@ class UserController extends BaseController {
         Str::echoJson($arReturn);
     }
 
+    /**
+     * 获取客户的经纬度
+     */
+    public function actionGetCity() {
+        $latitude = \Yii::$app->request->post('latitude');
+        $longitude = \Yii::$app->request->post('longitude');
+        if (!empty($latitude) && !empty($longitude)) {
+            $array = $this->getCity($latitude, $longitude);
+            Str::echoJson($array);
+        }
+    }
+
 }

@@ -94,6 +94,7 @@ AppAsset::register($this);
                     <li>
                         <a href="<?= Url::toRoute(['/']) ?>"><i class="fa fa-fw fa-home"></i> 首页</a>
                     </li>
+                    <?php if(empty(\Yii::$app->user->isGuest)){?>
                     <li>
                         <a href="<?= Url::toRoute(['/work/work-user/index']) ?>"><i class="fa fa-fw fa-bank"></i>用户管理</a>
                     </li>
@@ -123,6 +124,7 @@ AppAsset::register($this);
                     <li>
                         <a href="#"><i class="fa fa-fw fa-dropbox"></i> 系统设置</a>
                     </li>
+                    <?php }?>
                 </ul>
             </nav>
             <!-- /#sidebar-wrapper -->

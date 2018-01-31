@@ -40,5 +40,15 @@ class BaseController extends Controller {
         $arData = json_decode($json, true);
         return (new WorkConfig())->editKeyToValue('strToken', $arData['access_token']);
     }
-
+    /**
+     * 根据经纬度获取城市信息
+     * @param string $latitude  经度
+     * @param string $longitude 纬度
+     * @return array
+     */
+    public function getCity($latitude,$longitude){
+        $url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$latitude.','.$longitude.'&key='.\Yii::$app->params['openTencentKey'];
+        $array = json_decode(file_get_contents($url));
+        return $array;
+    }
 }

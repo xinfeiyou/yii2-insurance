@@ -5,14 +5,13 @@ namespace app\modules\work\controllers;
 use Yii;
 use app\modules\base\models\WorkUser;
 use app\modules\base\models\search\WorkUserSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * WorkUserController implements the CRUD actions for WorkUser model.
  */
-class WorkUserController extends Controller
+class WorkUserController extends BaseController
 {
     /**
      * @inheritdoc

@@ -4,15 +4,12 @@ namespace app\modules\work\controllers;
 
 use Yii;
 use app\modules\base\models\WorkCollectRecord;
-use app\modules\base\models\search\WorkCollectRecordSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * WorkCollectRecordController implements the CRUD actions for WorkCollectRecord model.
  */
-class WorkCollectRecordController extends Controller {
+class WorkCollectRecordController extends BaseController {
 
     /**
      * @inheritdoc

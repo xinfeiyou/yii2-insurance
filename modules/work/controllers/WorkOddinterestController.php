@@ -5,14 +5,13 @@ namespace app\modules\work\controllers;
 use Yii;
 use app\modules\base\models\WorkOddinterest;
 use app\modules\base\models\search\WorkOddinterestSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * WorkOddinterestController implements the CRUD actions for WorkOddinterest model.
  */
-class WorkOddinterestController extends Controller {
+class WorkOddinterestController extends BaseController {
 
     /**
      * @inheritdoc
