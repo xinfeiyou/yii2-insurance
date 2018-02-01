@@ -23,17 +23,30 @@ class UserController extends BaseController {
      */
     public function actionBind() {
         $arPost = \Yii::$app->request->post();
-        $model = new WorkUser();
-        $arObj = $model->getPhone($arPost['strPhone']);
-        if (empty($arObj)) {
-            $arMsg = (new WorkUser())->add($arPost);
-            $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
-            $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
-            if ('undefined' != $arPost['scene']) {
-                (new WorkPromoter())->add(['strUserId' => $arMsg['content'], 'strPromoterId' => $arPost['scene']]);
-            }
+        $url = \Yii::$app->params['api_url'] . '/common/register';
+        $arData['phone'] = $arPost['strPhone'];
+        $arData['smsCode'] = $arPost['strCode'];
+        $arData['password'] = md5(rand(1000, 9999));
+//{"status":0,"info":"该手机号已经被占用！","data":{"version": "0.1.0","time": 1517453007}}
+//{"status":1,"info":"注册成功！","userId":"2000000161","data":{"version":"0.1.0","time":1517454980}}
+        $strJson = NetWork::CurlPost($url, $arData);
+        $obj = json_decode($strJson);
+        if (empty($obj->userId)) {
+            $arReturn = NetWork::setMsg($this->strTitle, $obj->info, '1001', []);
         } else {
-            $arReturn = NetWork::setMsg($this->strTitle, "成功", '0000', $arObj->strUserId);
+            $model = new WorkUser();
+            $arObj = $model->getPhone($arPost['strPhone']);
+            if (empty($arObj)) {
+                $arPost['strUserId'] = $obj->userId;
+                $arMsg = (new WorkUser())->add($arPost);
+                $strMsg = ('0000' == $arMsg['ret']) ? '成功' : '失败';
+                $arReturn = NetWork::setMsg($this->strTitle, $strMsg, $arMsg['ret'], $arMsg['content']);
+                if ('undefined' != $arPost['scene']) {
+                    (new WorkPromoter())->add(['strUserId' => $arMsg['content'], 'strPromoterId' => $arPost['scene']]);
+                }
+            } else {
+                $arReturn = NetWork::setMsg($this->strTitle, "成功", '0000', $arObj->strUserId);
+            }
         }
         Str::echoJson($arReturn);
     }
@@ -46,7 +59,7 @@ class UserController extends BaseController {
         $openId = $this->getOpenId($arPost['code']);
         $model = new WorkUser();
         if ($model->checkOpenId($openId)) {
-            //已经登录
+//已经登录
             $arMsg['ret'] = '0000';
             $arMsg['content'] = [];
         } else {
@@ -88,7 +101,7 @@ class UserController extends BaseController {
      * 获取当前用户推广员列表
      */
     public function actionGetPromoter() {
-        //$strUserId = '2018012500000002';
+//$strUserId = '2018012500000002';
         $strUserId = \Yii::$app->request->post('strUserId');
         $arPromoter = (new WorkPromoter())->getPromoterList($strUserId);
         $arReturn = NetWork::setMsg($this->strTitle, "获取成功", $arPromoter['ret'], $arPromoter['content']);
@@ -119,6 +132,19 @@ class UserController extends BaseController {
             $array = $this->getCity($latitude, $longitude);
             Str::echoJson($array);
         }
+    }
+
+    /**
+     * 发送短信
+     * @return type
+     */
+    public function actionSendSms() {
+        $url = \Yii::$app->params['api_url'] . '/common/sms';
+        $phone = \Yii::$app->request->post('strPhone');
+        $arData['phone'] = $phone;
+        $arData['msgType'] = 'register';
+//{"status":1,"info":"\u53d1\u9001\u6210\u529f\uff01","data":{"version":"0.1.0","time":1517452454}}
+        return NetWork::CurlPost($url, $arData);
     }
 
 }

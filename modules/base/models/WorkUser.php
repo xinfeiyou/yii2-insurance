@@ -94,7 +94,9 @@ class WorkUser extends \app\modules\base\models\BaseModel {
      */
     public function add($arData) {
         $model = new WorkUser();
-        $arData['strUserId'] = $this->getUserId();
+        if (empty($arData['strUserId'])) {
+            $arData['strUserId'] = $this->getUserId();
+        }
         $arMsg = $this->create_data($model, $arData);
         $arMsg['content'] = $arData['strUserId'];
         return $arMsg;
