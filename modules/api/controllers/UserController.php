@@ -90,7 +90,7 @@ class UserController extends BaseController {
             $url = \Yii::$app->request->post('url') . '?access_token=';
             $imageData = NetWork::CurlUrlData($json_string, $strToken, $url);
             Files::writeFile($strUserId . '.jpg', $imageData);
-            $imagUrl = $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . '/upload/weixin/' . $strUserId . '.jpg';
+            $imagUrl = 'https://'.$_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . 'upload/weixin/' . $strUserId . '.jpg';
             (new WorkUser())->edit($strUserId, ['strCodeImg' => $imagUrl]);
             $arReturn = NetWork::setMsg($this->strTitle, "获取成功", "0000", ['url' => $imagUrl]);
         }
