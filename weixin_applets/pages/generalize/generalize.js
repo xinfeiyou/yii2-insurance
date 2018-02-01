@@ -14,8 +14,6 @@ Page({
    */
   onLoad: function (options) {
 
-   
-
   },
 
   /**
@@ -27,7 +25,7 @@ Page({
     if (tuiguan){
 
       this.setData({
-        imgSrc: "http://" + tuiguan
+        imgSrc: tuiguan
       })
 
     }else{
@@ -53,7 +51,7 @@ Page({
         success: (e) => {
           wx.setStorageSync("tuiguan", e.data.data.content.url);
           this.setData({
-            imgSrc: "http://" + e.data.data.content.url
+            imgSrc: e.data.data.content.url
           })
         }
       })

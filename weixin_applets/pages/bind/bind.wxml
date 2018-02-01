@@ -7,7 +7,7 @@
 <form bindsubmit="submitForm" >
   <view class='form-box'>
     <label class='pu-input'>
-      <input placeholder='请输入11位手机号码' type='text' maxlength='11' name="strPhone"></input>
+      <input placeholder='请输入11位手机号码' type='text' maxlength='11' name="strPhone" bindblur='phoneInputEvent'></input>
     </label>
     <!-- <label class='pu-input'>
       <input placeholder='请输入密码' type='password' maxlength='18' style="margin-top:20px;" name="strPass"></input>

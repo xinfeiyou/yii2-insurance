@@ -24,7 +24,9 @@ App({
   //服务器地址
   serverUrl:"https://carapi.91hc.com",
   key: "GUGBZ-VLRC3-R2N3V-YXBTW-VWKA2-QXBYH",
-   // 第一张表单
+  //发送短信
+  sendSms: serverUrl + "/index.php?r=api/user/send-sms",
+  // 第一张表单
   workUserdata: serverUrl + "/index.php?r=api/work/work-user-data",
   // 第二张表单
   chooseinsurancetype: serverUrl + "/index.php?r=api/work/work-insurance-data",
