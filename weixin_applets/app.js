@@ -1,5 +1,5 @@
 //app.js
-const serverUrl = "https://carapi.91hc.com";
+const serverUrl = "https://api.xinfeiyou.com";
 
 //图片文件提交地址
 const uploadFileUrl = `${serverUrl}/index.php?r=api/work/work-user-image`; 
@@ -22,7 +22,7 @@ App({
     }
   },
   //服务器地址
-  serverUrl:"https://carapi.91hc.com",
+  serverUrl:"https://api.xinfeiyou.com",
   key: "GUGBZ-VLRC3-R2N3V-YXBTW-VWKA2-QXBYH",
   //发送短信
   sendSms: serverUrl + "/index.php?r=api/user/send-sms",
