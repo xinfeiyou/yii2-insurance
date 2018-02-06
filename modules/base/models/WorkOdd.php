@@ -42,7 +42,6 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
      */
     public function rules() {
         return [
-            [['oddNumber', 'oddType', 'oddTitle', 'oddYearRate', 'oddBorrowPeriod'], 'required'],
             [['oddYearRate', 'oddMoney', 'serviceFee', 'offlineMoney', 'offlineRate'], 'number'],
             [['oddRepaymentStyle'], 'string'],
             [['oddBorrowPeriod', 'isCr', 'receiptStatus', 'finishType'], 'integer'],

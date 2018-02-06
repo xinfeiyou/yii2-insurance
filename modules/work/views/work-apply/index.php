@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'tUpdateTime',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'header' => Html::a('申请', ['create'], ['class' => 'btn btn-success']),
+                'header' => '操作',
                 'template' => '{view}&nbsp&nbsp;{update}&nbsp&nbsp;{editMoney}',
                 'buttons' => [
                     'editMoney' => function ($url, $model) {

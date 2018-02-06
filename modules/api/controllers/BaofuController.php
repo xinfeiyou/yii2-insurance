@@ -8,44 +8,65 @@ use app\common\baofu\Tools;
 use app\common\baofu\Log;
 use app\common\baofu\BFRSA;
 use app\common\baofu\HttpClient;
+use app\modules\base\models\BaofuRequest;
+use app\modules\base\models\BaofuResult;
+use app\modules\base\models\BaofuSearch;
+use yii\base\Exception;
+use app\common\NetWork;
+use app\common\Str;
 
 /**
  * Default controller for the `api` module
  */
 class BaofuController extends BaseController {
 
+    public $strTitle = '宝付代扣';
+
     /**
      * 绑定用户银行卡
      */
     public function actionBindUserBank() {
-        print_r(Yii::$app->params);
-        exit();
         $strPhone = Yii::$app->request->post('phone'); //手机号
         $strName = Yii::$app->request->post('name'); //真实姓名
-        $strBankCode = isset($_POST["bankCode"]) ? $_POST["bankCode"] : ""; //银行卡编码
+        $strBankCode = Yii::$app->request->post('bankCode'); //银行卡编码
         $strBankNum = Yii::$app->request->post('bankNum'); //银行卡号
         $strCardNum = Yii::$app->request->post('cardnum'); //身份证号
-        $fMoney = 0.01;
+        $fMoney = Yii::$app->request->post('money'); //身份证号 0.01;
         if (!empty($strPhone) && !empty($strName) && !empty($strBankNum) && !empty($strCardNum)) {
             $strJson = $this->setPayData($strName, $strCardNum, $strBankCode, $strBankNum, $strPhone, $fMoney);
+            $arData = json_decode($strJson, true);
+            $arReturn = NetWork::setMsg($this->strTitle, $arData['resp_msg'], $arData['resp_code'], []);
         } else {
-            exit('参数不能为空');
+            $arReturn = NetWork::setMsg($this->strTitle, '参数不能为空', '4001', []);
         }
+        Str::echoJson($arReturn);
     }
 
     /**
      * 查询
      */
     public function actionSearchUserBank() {
-        //
+        $trans_id = $this->setTransId(); //商户订单号
+        $orig_trans_id = Yii::$app->request->post('orig_trans_id'); //"TI15178879016149";
+        $orig_trade_date = Yii::$app->request->post('orig_trade_date'); //"20180206113141";
+        if (!empty($orig_trans_id) && !empty($orig_trade_date)) {
+            $strJson = $this->setSearchData($trans_id, $orig_trans_id, $orig_trade_date);
+            $arData = json_decode($strJson, true);
+            $status = ('S' == trim($arData['order_stat'])) ? '0000' : $arData['order_stat'];
+            $arReturn = NetWork::setMsg($this->strTitle, $arData['resp_msg'], $status, []);
+        } else {
+            $arReturn = NetWork::setMsg($this->strTitle, '参数不能为空', '4001', []);
+        }
+        Str::echoJson($arReturn);
     }
+
     /**
      * 需处理的json字符串
      * @param string $txn_sub_type	提交类型
      * @param string $Encrypted_string
      * @throws Exception
      */
-    public function postData($txn_sub_type,$Encrypted_string) {
+    public function postData($txn_sub_type, $Encrypted_string) {
         $BFRsa = new BFRSA(\Yii::$app->params['baofu']["pfx_file_name"], \Yii::$app->params['baofu']["cer_file_name"], \Yii::$app->params['baofu']["private_key_password"]); //实例化加密类。
         $Encrypted = $BFRsa->encryptedByPrivateKey($Encrypted_string); //先BASE64进行编码再RSA加密
         $PostArry = array("version" => \Yii::$app->params['baofu']['version'],
@@ -66,6 +87,11 @@ class BaofuController extends BaseController {
         if (!empty($return_decode)) {//解析XML、JSON
             $endata_content = json_decode($return_decode, TRUE);
         }
+        if ('13' == $txn_sub_type) {
+            (new BaofuResult())->add($endata_content);
+        } else {
+            (new BaofuSearch())->add($endata_content);
+        }
         if (is_array($endata_content) && (count($endata_content) > 0)) {
             if (array_key_exists("resp_code", $endata_content)) {
                 if ($endata_content["resp_code"] == "0000") {
@@ -76,8 +102,7 @@ class BaofuController extends BaseController {
                     $return_decode = json_encode($endata_content, JSON_UNESCAPED_UNICODE);
                     //$return_decode = "订单状态码：" . $endata_content["resp_code"] . ", 商户订单号：" . $endata_content["trans_id"] . ", 返回消息：" . $endata_content["resp_msg"] . json_encode($endata_content, JSON_UNESCAPED_UNICODE);
                 }
-                echo $return_decode; //输出
-                die();
+                return $return_decode; //输出
             } else {
                 throw new Exception("[resp_code]返回码不存在!");
             }
@@ -108,7 +133,6 @@ class BaofuController extends BaseController {
 //====================系统动态生成值=======================================
         $trans_serial_no = "TSN" . Tools::getTransid() . Tools::getRand4(); //商户流水号
         $trade_date = Tools::getTime(); //订单日期
-
         $data_content_parms = array('txn_sub_type' => $txn_sub_type,
             'biz_type' => $biz_type,
             'terminal_id' => \Yii::$app->params['baofu']['terminal_id'],
@@ -130,9 +154,11 @@ class BaofuController extends BaseController {
         $data_content_parms["valid_no"] = $valid_no;
         $data_content_parms["trans_id"] = $trans_id;
         $data_content_parms["txn_amt"] = $txn_amt;
+        (new BaofuRequest())->add($data_content_parms);
         $Encrypted_string = str_replace("\\/", "/", json_encode($data_content_parms)); //转JSON
         Log::LogWirte("序列化结果：" . $Encrypted_string);
-        return $Encrypted_string;
+        $strMsg = $this->postData($txn_sub_type, $Encrypted_string);
+        return $strMsg;
     }
 
     /**
@@ -166,7 +192,8 @@ class BaofuController extends BaseController {
         $data_content_parms["orig_trade_date"] = $orig_trade_date;
         $Encrypted_string = str_replace("\\/", "/", json_encode($data_content_parms)); //转JSON
         Log::LogWirte("序列化结果：" . $Encrypted_string);
-        return $Encrypted_string;
+        $strMsg = $this->postData($txn_sub_type, $Encrypted_string);
+        return $strMsg;
     }
 
     /**
@@ -175,13 +202,13 @@ class BaofuController extends BaseController {
      * @return type
      */
     public function setTransId($trans_id = "") {
-        return isset($trans_id) ? trim($trans_id) : "TI" . Tools::getTransid() . Tools::getRand4(); //商户订单号
+        return empty($trans_id) ? "TI" . Tools::getTransid() . Tools::getRand4() : trim($trans_id); //商户订单号
     }
 
     public function actionTxt() {
         $money = 200000;
-        $rate = 0.114;
-        $a = \app\common\MathPayment::PayInterest($money, $rate, 6, 'month');
+        $rate = 0.09;
+        $a = \app\common\MathPayment::PayInterest($money, $rate, 2, 'month');
         print_r($a);
     }
 

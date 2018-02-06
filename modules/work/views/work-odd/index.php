@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'finishTime',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'header' => '操作',
+                'header' => Html::a('新增', ['create'], ['class' => 'btn btn-success']),
                 'template' => '{view} &nbsp&nbsp;&nbsp;{update}',
                 'headerOptions' => ['width' => '70']
             ],

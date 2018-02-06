@@ -13,7 +13,13 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'oddNumber')->textInput(['maxlength' => true]) ?>
+   
+    <?= $form->field($model, 'offlineMoney')->textInput() ?>
 
+    <?= $form->field($model, 'offlineRate')->textInput() ?>
+    
+    <?= $form->field($model, 'oddRepaymentStyle')->dropDownList($model->getSysConfigInfoType('oddRepaymentStyle')) ?>
+    
     <?= $form->field($model, 'oddType')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'oddTitle')->textInput(['maxlength' => true]) ?>
@@ -21,8 +27,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'oddYearRate')->textInput() ?>
 
     <?= $form->field($model, 'oddMoney')->textInput() ?>
-
-    <?= $form->field($model, 'oddRepaymentStyle')->dropDownList($model->getSysConfigInfoType('oddRepaymentStyle')) ?>
 
     <?= $form->field($model, 'oddBorrowPeriod')->textInput() ?>
 
@@ -35,10 +39,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'userId')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'operator')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'offlineMoney')->textInput() ?>
-
-    <?= $form->field($model, 'offlineRate')->textInput() ?>
 
     <?= $form->field($model, 'isCr')->textInput() ?>
 
