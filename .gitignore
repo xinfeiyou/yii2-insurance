@@ -13,7 +13,7 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-#/vendor
+/vendor
 
 # composer itself is not needed
 composer.phar
@@ -34,5 +34,5 @@ web/upload
 weixin_applets/project.config.json
 
 # web config
-config/*
-common/baofu
+/config
+/common/baofu
