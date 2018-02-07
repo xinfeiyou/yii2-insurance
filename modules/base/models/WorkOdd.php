@@ -105,6 +105,15 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
     }
 
     /**
+     * 通过借款编号获取借款信息
+     * @param string $strOddNumber
+     * @return obj
+     */
+    public function getOddInfo($strOddNumber) {
+        return WorkOdd::findOne(['oddNumber' => $strOddNumber]);
+    }
+
+    /**
      * 获取申请信息
      * @return type
      */

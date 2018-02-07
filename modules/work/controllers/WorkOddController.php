@@ -5,6 +5,7 @@ namespace app\modules\work\controllers;
 use Yii;
 use app\modules\base\models\WorkOdd;
 use app\modules\base\models\search\WorkOddSearch;
+use app\modules\base\models\WorkOddinterest;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -80,11 +81,45 @@ class WorkOddController extends BaseController {
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            print_r($model->getErrors()); exit();
             return $this->render('create', [
                         'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Deletes an existing WorkOddinterest model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionEditOffMoney($strOddNum) {
+        $model = (new WorkOdd())->getOddInfo($strOddNum);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['edit-off-money', 'strOddNum' => $strOddNum]);
+        } else {
+            $arInterest = (new WorkOddinterest())->getOddNumToOddinterest($strOddNum);
+            return $this->render('edit-off-money', [
+                        'model' => $model,
+                        'arInterest' => $arInterest,
+            ]);
+        }
+    }
+
+    /**
+     * 生成还款明细
+     */
+    public function actionReloadOnlineInterest($strOddNum) {
+        $model = (new WorkOdd())->getOddInfo($strOddNum);
+        $oddRepaymentStyle = 1;
+        switch ($model->oddRepaymentStyle) {
+            case 'monthpay': $oddRepaymentStyle = 1;
+                break;
+            case 'matchpay': $oddRepaymentStyle = 3;
+                break;
+        }
+        $arReturn = (new WorkOddinterest())->editOddOffLineInterest($strOddNum, $model->offlineMoney, $model->offlineRate, $model->oddBorrowPeriod, $oddRepaymentStyle);
+        return $this->redirect(['edit-off-money', 'strOddNum' => $strOddNum]);
     }
 
     /**

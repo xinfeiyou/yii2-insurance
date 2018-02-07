@@ -125,6 +125,17 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
     }
 
     /**
+     * 根据申请编号获取还款明细
+     * @param string $strWorkNum
+     * @return type
+     */
+    public function getOddNumToOddinterest($strOddNum) {
+        return WorkOddinterest::find()
+                        ->where(['oddNumber' => $strOddNum])
+                        ->all();
+    }
+
+    /**
      * 重置线下还款列表
      * @param string $strWorkNum    申请流水号
      * @param string $offlineMoney
@@ -144,6 +155,35 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
                 $arData['fOffLineCost'] = $ar['benjin'];
                 $arData['fOffLineInterest'] = $ar['lixi'];
                 $arData['fOffLineTotal'] = $ar['zonger'];
+                $this->create_data($model, $arData);
+            }
+        }
+        return $this->setReturnMsg('0000');
+    }
+
+    /**
+     * 重置线下还款列表
+     * @param string $strOddNum    申请流水号
+     * @param string $offlineMoney
+     * @param double $offlineRate
+     * @param int $oddBorrowPeriod
+     * @param int $oddRepaymentStyle
+     * @return type
+     */
+    public function editOddOffLineInterest($strOddNum, $offlineMoney, $offlineRate, $oddBorrowPeriod, $oddRepaymentStyle) {
+        $arObj = WorkOddinterest::findOne(['oddNumber' => $strOddNum]);
+        if (empty($arObj)) {
+            $arDataAll = MathPayment::PayInterest($offlineMoney, $offlineRate, $oddBorrowPeriod, 'month', $oddRepaymentStyle);
+            foreach ($arDataAll['notes'] as $ar) {
+                $model = new WorkOddinterest();
+                $arData['oddNumber'] = $strOddNum;
+                $arData['intPeriod'] = $ar['month'];
+                $arData['fOffLineCost'] = $ar['benjin'];
+                $arData['fOffLineInterest'] = $ar['lixi'];
+                $arData['fOffLineTotal'] = $ar['zonger'];
+                $arData['fRemainder'] = $ar['yuer'];
+                $arData['tStartTime'] = $ar['stime'];
+                $arData['tEndTime'] = $ar['etime'];
                 $this->create_data($model, $arData);
             }
         }

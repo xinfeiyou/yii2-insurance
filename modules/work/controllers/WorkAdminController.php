@@ -3,16 +3,17 @@
 namespace app\modules\work\controllers;
 
 use Yii;
-use app\modules\base\models\WorkOddinterest;
-use app\modules\base\models\search\WorkOddinterestSearch;
+use app\modules\base\models\WorkAdmin;
+use app\modules\base\models\search\WorkAdminSearch;
+use app\modules\work\controllers\BaseController;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 use yii\filters\VerbFilter;
-use app\common\MathPayment;
 
 /**
- * WorkOddinterestController implements the CRUD actions for WorkOddinterest model.
+ * WorkAdminController implements the CRUD actions for WorkAdmin model.
  */
-class WorkOddinterestController extends BaseController {
+class WorkAdminController extends BaseController {
 
     /**
      * @inheritdoc
@@ -29,11 +30,14 @@ class WorkOddinterestController extends BaseController {
     }
 
     /**
-     * Lists all WorkOddinterest models.
+     * Lists all WorkAdmin models.
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new WorkOddinterestSearch();
+        if (empty(Yii::$app->user->identity->EIsAdmin)) {
+            throw new UnauthorizedHttpException('你无权操作');
+        }
+        $searchModel = new WorkAdminSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,24 +47,15 @@ class WorkOddinterestController extends BaseController {
     }
 
     /**
-     * Displays a single WorkOddinterest model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id) {
-        return $this->render('view', [
-                    'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new WorkOddinterest model.
+     * Creates a new WorkAdmin model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate() {
-        $model = new WorkOddinterest();
-
+        if (empty(Yii::$app->user->identity->EIsAdmin)) {
+            throw new UnauthorizedHttpException('你无权操作');
+        }
+        $model = new WorkAdmin();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -71,16 +66,16 @@ class WorkOddinterestController extends BaseController {
     }
 
     /**
-     * Updates an existing WorkOddinterest model.
+     * Updates an existing WorkAdmin model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id) {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    public function actionUpdate($username) {
+        $model = $this->findModel($username);
+        if (!empty(Yii::$app->request->post())) {
+            $model->edit($model, Yii::$app->request->post('WorkAdmin'));
+            return $this->redirect(['update', 'username' => $model->username]);
         } else {
             return $this->render('update', [
                         'model' => $model,
@@ -89,27 +84,28 @@ class WorkOddinterestController extends BaseController {
     }
 
     /**
-     * 计算器
+     * Deletes an existing WorkAdmin model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param string $id
+     * @return mixed
      */
-    public function actionCal() {
-        $arData = [];
-        if (!empty(Yii::$app->request->post())) {
-            $arPost = Yii::$app->request->post('WorkOdd');
-            $arDataAll = MathPayment::PayInterest($arPost['offlineMoney'], $arPost['offlineRate'], $arPost['oddBorrowPeriod'], 'month', $arPost['oddRepaymentStyle']);
-            $arData = $arDataAll['notes'];
+    public function actionDelete($id) {
+        if (empty(Yii::$app->user->identity->EIsAdmin)) {
+            throw new UnauthorizedHttpException('你无权操作');
         }
-        return $this->renderPartial('cal', ['arData' => $arData]);
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**
-     * Finds the WorkOddinterest model based on its primary key value.
+     * Finds the WorkAdmin model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return WorkOddinterest the loaded model
+     * @return WorkAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id) {
-        if (($model = WorkOddinterest::findOne($id)) !== null) {
+    protected function findModel($username) {
+        if (($model = WorkAdmin::findOne(['username' => $username])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

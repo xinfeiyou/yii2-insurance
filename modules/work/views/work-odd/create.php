@@ -19,7 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'offlineRate')->textInput() ?>
     
+    <?= $form->field($model, 'oddBorrowPeriod')->textInput() ?>
+    
     <?= $form->field($model, 'oddRepaymentStyle')->dropDownList($model->getSysConfigInfoType('oddRepaymentStyle')) ?>
+    
     <?php /* $this->render('_form', [
         'model' => $model,
     ]) */?>

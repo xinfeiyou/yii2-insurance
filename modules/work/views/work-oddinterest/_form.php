@@ -34,12 +34,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fSubsidy')->textInput() ?>
 
-    <?= $form->field($model, 'tCreateTime')->textInput() ?>
+    <?php // $form->field($model, 'tCreateTime')->textInput() ?>
 
-    <?= $form->field($model, 'tUpdateTime')->textInput() ?>
+    <?php // $form->field($model, 'tUpdateTime')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '新建' : '编辑', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

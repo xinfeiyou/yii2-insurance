@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'oddTitle',
             [
                 'attribute' => 'oddYearRate',
-                'headerOptions' => ['width' => '50']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'oddMoney',
@@ -84,8 +84,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Html::a('新增', ['create'], ['class' => 'btn btn-success']),
-                'template' => '{view} &nbsp&nbsp;&nbsp;{update}',
-                'headerOptions' => ['width' => '70']
+                'template' => '{view} &nbsp&nbsp;&nbsp;{update}&nbsp&nbsp;{editMoney}',
+                'buttons' => [
+                    'editMoney' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-yen"></span>', ['/work/work-odd/edit-off-money', 'strOddNum' => $model->oddNumber], ['title' => '填写线下放款利率']);
+                    },
+                ],
+                'headerOptions' => ['width' => '120']
             ],
         ],
     ]);

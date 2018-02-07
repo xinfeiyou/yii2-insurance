@@ -12,6 +12,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface {
     public $password;
     public $authKey;
     public $accessToken;
+    public $EIsAdmin;
 
     /**
      * @inheritdoc
@@ -68,7 +69,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface {
      * @return bool if password provided is valid for current user
      */
     public function validatePassword($password) {
-        return $this->password === $password;
+        return $this->password === md5($password);
     }
 
     /**
@@ -81,7 +82,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface {
             return null;
         }
         $user = WorkAdmin::find()
-                ->select(['strUserId', 'username', 'password', 'authKey', 'accessToken', 'realname'])
+                ->select(['strUserId', 'username', 'password', 'authKey', 'accessToken', 'realname', 'EIsAdmin'])
                 ->where($arWhere)
                 ->asArray()
                 ->one();
