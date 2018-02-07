@@ -54,9 +54,11 @@ class MathPayment {
      * @param type $type  1：按月付息，到期还本  2：一次性还款  3：等额本息
      * @return type array
      */
-    public static Function PayInterest($money, $yearInterest, $month, $oddType, $type = '1') {
+    public static Function PayInterest($money, $yearInterest, $month, $oddType, $type = '1', $time = "") {
         $array = array();
-        $time = date("Y-m-d H:i:s", time());
+        if (empty($time)) {
+            $time = date("Y-m-d H:i:s", time());
+        }
         $money = floatval($money);
         $yearInterest = floatval($yearInterest);
         $interset = round((($money * $yearInterest) / 12), 2);

@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 use yii\widgets\ActiveForm;
 use yii\web\View;
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -28,17 +29,11 @@ AppAsset::register($this);
 
                     <?php $form = ActiveForm::begin(); ?>
 
-                    <div class="form-group field-workodd-oddnumber">
-                        <label class="control-label" for="workodd-oddnumber">标的编号</label>
-                        <input type="text" id="workodd-oddnumber" class="form-control" name="WorkOdd[oddNumber]" value="2018020600002" disabled="" maxlength="20">
-                        <div class="help-block"></div>
-                    </div>
-
                     <div class="form-group field-workodd-offlinemoney has-success">
                         <label class="control-label" for="workodd-offlinemoney">线下金额</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="text" id="workodd-offlinemoney" class="form-control" name="WorkOdd[offlineMoney]" value="200000" aria-invalid="false">
+                            <input type="text" id="workodd-offlinemoney" class="form-control" name="WorkOdd[offlineMoney]" value="<?= isset($arData['info']['offlineMoney']) ? $arData['info']['offlineMoney'] : ""; ?>" aria-invalid="false">
                             <span class="input-group-addon">.00</span>
                         </div>
                     </div> 
@@ -48,7 +43,7 @@ AppAsset::register($this);
                         <label class="control-label" for="workodd-offlinerate">线下利率</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="text" id="workodd-offlinerate" class="form-control" name="WorkOdd[offlineRate]" value="0.36">
+                            <input type="text" id="workodd-offlinerate" class="form-control" name="WorkOdd[offlineRate]" value="<?= isset($arData['info']['offlineRate']) ? $arData['info']['offlineRate'] : ""; ?>">
                             <span class="input-group-addon">.00</span>
                         </div>
                     </div>
@@ -57,8 +52,16 @@ AppAsset::register($this);
                     <div class="form-group field-workodd-oddrepaymentstyle">
                         <label class="control-label" for="workodd-oddrepaymentstyle">还款类型</label>
                         <select id="workodd-oddrepaymentstyle" class="form-control" name="WorkOdd[oddRepaymentStyle]">
-                            <option value="1">先息后本</option>
-                            <option value="3">等额本息</option>
+                            <option value="1" <?php
+                            if (isset($arData['info']['oddRepaymentStyle'])) {
+                                echo ('1' == $arData['info']['oddRepaymentStyle']) ? 'selected' : '';
+                            }
+                            ?>>先息后本</option>
+                            <option value="3" <?php
+                            if (isset($arData['info']['oddRepaymentStyle'])) {
+                                echo ('3' == $arData['info']['oddRepaymentStyle']) ? 'selected' : '';
+                            }
+                            ?>>等额本息</option>
                         </select>
                         <div class="help-block"></div>
                     </div>
@@ -66,11 +69,18 @@ AppAsset::register($this);
                     <div class="form-group field-workodd-oddborrowperiod">
                         <label class="control-label" for="workodd-oddborrowperiod">借款期限</label>
                         <div class="input-group">
-                            <input type="text" id="workodd-oddborrowperiod" class="form-control" name="WorkOdd[oddBorrowPeriod]" value="6">
+                            <input type="text" id="workodd-oddborrowperiod" class="form-control" name="WorkOdd[oddBorrowPeriod]" value="<?= isset($arData['info']['oddBorrowPeriod']) ? $arData['info']['oddBorrowPeriod'] : ""; ?>">
                             <span class="input-group-addon" id="basic-addon2">月</span>
                         </div>
                     </div>
 
+                    <div class="form-group field-workodd-oddborrowperiod">
+                        <label class="control-label" for="workodd-oddborrowtime">还款时间</label>
+                        <div class="input-group">
+                            <input type="text" id="workodd-oddborrowperiod" class="form-control" name="WorkOdd[oddBorrowTime]" value="<?= isset($arData['info']['oddBorrowTime']) ? $arData['info']['oddBorrowTime'] : date("Y-m-d H:i:s"); ?>">
+                            <span class="input-group-addon" id="basic-addon2">日期</span>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <?= Html::submitButton('生成还款明细', ['class' => 'btn btn-primary']) ?>
                     </div>
@@ -90,8 +100,10 @@ AppAsset::register($this);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($arData)) {
-                            foreach ($arData as $obj) { ?>
+                        <?php
+                        if (!empty($arData['list'])) {
+                            foreach ($arData['list'] as $obj) {
+                                ?>
                                 <tr>
                                     <th scope="row"><?= $obj['month']; ?></th>
                                     <td><?= $obj['benjin']; ?></td>
@@ -101,14 +113,16 @@ AppAsset::register($this);
                                     <td><?= $obj['stime']; ?></td>
                                     <td><?= $obj['etime']; ?></td>
                                 </tr>
-    <?php }
-} ?>
+                                <?php
+                            }
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
 
         </div>
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

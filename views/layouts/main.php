@@ -185,12 +185,15 @@ AppAsset::register($this);
             </div>
             <!-- /#page-content-wrapper -->
         </div>
+        <?php if(empty(Yii::$app->user->isGuest)){ ?>
         <div id="tool_boxs">
             <ul class="list-unstyled">
                 <li>
                     <i style="background-image: url('https://asset.91hc.com/src/images/public/cal.png');" onclick="openUrl('<?= Url::toRoute(['/work/work-oddinterest/cal'])?>');"></i>
                 </li>
             </ul>
+        </div>
+        <?php }?>
             <!-- /#wrapper -->
         <?php $this->endBody() ?>
     </body>

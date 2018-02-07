@@ -95,8 +95,9 @@ class WorkOddinterestController extends BaseController {
         $arData = [];
         if (!empty(Yii::$app->request->post())) {
             $arPost = Yii::$app->request->post('WorkOdd');
-            $arDataAll = MathPayment::PayInterest($arPost['offlineMoney'], $arPost['offlineRate'], $arPost['oddBorrowPeriod'], 'month', $arPost['oddRepaymentStyle']);
-            $arData = $arDataAll['notes'];
+            $arDataAll = MathPayment::PayInterest($arPost['offlineMoney'], $arPost['offlineRate'], $arPost['oddBorrowPeriod'], 'month', $arPost['oddRepaymentStyle'], $arPost['oddBorrowTime']);
+            $arData['list'] = $arDataAll['notes'];
+            $arData['info'] = $arPost;
         }
         return $this->renderPartial('cal', ['arData' => $arData]);
     }
