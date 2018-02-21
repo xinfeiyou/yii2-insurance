@@ -75,7 +75,7 @@ class BaseModel extends \yii\db\ActiveRecord {
             if ($bStatus) {
                 $arMsg = $this->setReturnMsg('0000', $model->primaryKey);
             } else {
-                $arMsg = $this->setReturnMsg('1002',$model->getErrors());
+                $arMsg = $this->setReturnMsg('1002', json_encode($model->getErrors()));
             }
             return $arMsg;
         } catch (\Exception $ex) {
@@ -108,7 +108,7 @@ class BaseModel extends \yii\db\ActiveRecord {
                 if ($bStatus) {
                     $arMsg = $this->setReturnMsg('0000', $model->primaryKey);
                 } else {
-                    $arMsg = $this->setReturnMsg('1002');
+                    $arMsg = $this->setReturnMsg('1002',json_encode($model->getErrors()));
                 }
             }
             return $arMsg;

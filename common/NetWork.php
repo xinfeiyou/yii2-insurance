@@ -27,7 +27,7 @@ class NetWork {
         $ch = curl_init(); //初始化curl
         curl_setopt($ch, CURLOPT_URL, $url); //设置链接
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //设置是否返回信息
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//这个是重点
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //这个是重点
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json; charset=utf-8',
             'Content-Length: ' . strlen($json_string))
@@ -163,9 +163,13 @@ class NetWork {
      * @return boolean
      */
     public static Function GetUrl($url) {
-        if (empty($url)) {
-            $response = file_get_contents($url);
-            return $response;
+        if (!empty($url)) {
+            try {
+                $response = file_get_contents($url);
+                return $response;
+            } catch (\Exception $ex) {
+                return $ex->getMessage();
+            }
         } else {
             return FALSE;
         }
@@ -352,4 +356,5 @@ class NetWork {
         $msg['msg'] = $strMsg;
         return $msg;
     }
+
 }

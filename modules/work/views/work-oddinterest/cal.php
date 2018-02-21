@@ -62,6 +62,11 @@ AppAsset::register($this);
                                 echo ('3' == $arData['info']['oddRepaymentStyle']) ? 'selected' : '';
                             }
                             ?>>等额本息</option>
+                            <option value="4" <?php
+                            if (isset($arData['info']['oddRepaymentStyle'])) {
+                                echo ('4' == $arData['info']['oddRepaymentStyle']) ? 'selected' : '';
+                            }
+                            ?>>等额本金</option>
                         </select>
                         <div class="help-block"></div>
                     </div>

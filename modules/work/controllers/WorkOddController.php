@@ -72,22 +72,6 @@ class WorkOddController extends BaseController {
     }
 
     /**
-     * Creates a new WorkApply model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate() {
-        $model = new WorkOdd();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                        'model' => $model,
-            ]);
-        }
-    }
-
-    /**
      * Deletes an existing WorkOddinterest model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id

@@ -16,35 +16,41 @@ $this->params['breadcrumbs'][] = '生成线下还款列表';
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'oddNumber')->textInput(['maxlength' => true,'disabled'=>true]) ?>
+        <?= $form->field($model, 'oddNumber')->textInput(['maxlength' => true, 'disabled' => true]) ?>
 
-        <?= $form->field($model, 'offlineMoney',[
+        <?=
+        $form->field($model, 'offlineMoney', [
             'template' => '{label}<div class="input-group">
                 <span class="input-group-addon">$</span>
                 {input}
                 <span class="input-group-addon">.00</span>
               </div>',
-        ])->textInput(['maxlength' => true])?>
-        
-        <?= $form->field($model, 'offlineRate',[
+        ])->textInput(['maxlength' => true])
+        ?>
+
+        <?=
+        $form->field($model, 'offlineRate', [
             'template' => '{label}<div class="input-group">
                 <span class="input-group-addon">$</span>
                 {input}
                 <span class="input-group-addon">.00</span>
               </div>',
-        ])->textInput(['maxlength' => true]) ?>
+        ])->textInput(['maxlength' => true])
+        ?>
 
-        <?= $form->field($model, 'oddRepaymentStyle')->dropDownList($model->getSysConfigInfoType('oddRepaymentStyle')) ?>
+        <?= $form->field($model, 'oddRepaymentStyle')->textInput(['maxlength' => true, 'disabled' => true, 'value' => $model->getSysConfigInfoTypeValue('oddRepaymentStyle', $model->oddRepaymentStyle)]) ?>
 
-        <?= $form->field($model, 'oddBorrowPeriod',[
+        <?=
+        $form->field($model, 'oddBorrowPeriod', [
             'template' => '{label}<div class="input-group">
                 {input}
                 <span class="input-group-addon" id="basic-addon2">月</span>
               </div>',
-        ])->textInput(['maxlength' => true]) ?>
+        ])->textInput(['maxlength' => true, 'disabled' => true])
+        ?>
 
         <div class="form-group">
-            <?= Html::submitButton( '保存放款信息', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('保存放款信息', ['class' => 'btn btn-primary']) ?>
             &nbsp;&nbsp;
             <?= Html::a('生成还款明细', ['reload-online-interest', 'strOddNum' => $model->oddNumber], ['class' => 'btn btn-primary']) ?>
         </div>
@@ -53,25 +59,35 @@ $this->params['breadcrumbs'][] = '生成线下还款列表';
     </div>
     <hr>
     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>期数</th>
-          <th>线下本金</th>
-          <th>线下利息</th>
-          <th>线下总额</th>
-          <th>线下余额</th>
-        </tr>
-      </thead>
-      <tbody>
-          <?php if(!empty($arInterest)){foreach($arInterest as $obj){?>
-        <tr>
-          <th scope="row"><?=$obj->intPeriod;?></th>
-          <td><?=$obj->fOffLineCost;?></td>
-          <td><?=$obj->fOffLineInterest;?></td>
-          <td><?=$obj->fOffLineTotal;?></td>
-          <td><?=$obj->fRemainder;?></td>
-        </tr>
-          <?php }}?>
-      </tbody>
+        <thead>
+            <tr>
+                <th>期数</th>
+                <th>线上本金</th>
+                <th>线上利息</th>
+                <th>线上总额</th>
+                <th>线下本金</th>
+                <th>线下利息</th>
+                <th>线下总额</th>
+                <th>线下余额</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($arInterest)) {
+                foreach ($arInterest as $obj) {
+                    ?>
+                    <tr>
+                        <th scope="row"><?= $obj->intPeriod; ?></th>
+                        <td><?= $obj->fOnLineCost; ?></td>
+                        <td><?= $obj->fOnLineInterest; ?></td>
+                        <td><?= $obj->fOnLineTotal; ?></td>
+                        <td><?= $obj->fOffLineCost; ?></td>
+                        <td><?= $obj->fOffLineInterest; ?></td>
+                        <td><?= $obj->fOffLineTotal; ?></td>
+                        <td><?= $obj->fRemainder; ?></td>
+                    </tr>
+                <?php }
+            }
+            ?>
+        </tbody>
     </table>
 </div>

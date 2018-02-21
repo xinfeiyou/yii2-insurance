@@ -79,7 +79,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
-                'template' => '{view} &nbsp&nbsp;&nbsp;{update}',
+                'template' => '{view}&nbsp&nbsp;&nbsp;{update}&nbsp&nbsp;&nbsp;{bank}',
+                'buttons' => [
+                    'bank' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-piggy-bank"></span>', ['/work/work-user-withhold/update', 'strUserId' => $model->strUserId], ['title' => '验证绑卡']);
+                    },
+                ],
                 'headerOptions' => ['width' => '100']
             ],
         ],

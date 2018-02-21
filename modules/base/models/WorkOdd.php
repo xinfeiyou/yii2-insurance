@@ -45,7 +45,7 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
             [['oddYearRate', 'oddMoney', 'serviceFee', 'offlineMoney', 'offlineRate'], 'number'],
             [['oddRepaymentStyle'], 'string'],
             [['oddBorrowPeriod', 'isCr', 'receiptStatus', 'finishType'], 'integer'],
-            [['oddTrialTime', 'oddRehearTime', 'finishTime'], 'safe'],
+            [['oddTrialTime', 'oddRehearTime', 'finishTime','tCreateTime','tUpdateTime'], 'safe'],
             [['oddNumber', 'oddType', 'userId', 'operator', 'receiptUserId'], 'string', 'max' => 20],
             [['strWorkNum'], 'string', 'max' => 40],
             [['oddTitle'], 'string', 'max' => 100],
@@ -79,7 +79,24 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
             'receiptStatus' => '受托状态',
             'finishType' => '完结类型',
             'finishTime' => '完结时间',
+            'tCreateTime' => '创建时间',
+            'tUpdateTime' => '更新时间',
         ];
+    }
+
+    /**
+     * 添加数据
+     * @param type $oddNumber
+     * @param type $arData
+     */
+    public function add($oddNumber, $arData) {
+        $model = WorkOdd::findOne(['oddNumber' => $oddNumber]);
+        if(empty($model)){
+            $arData['oddNumber'] = $oddNumber;
+            return $this->create_data((new WorkOdd()), $arData);
+        }else{
+            return $this->edit_data($model, $arData);
+        }
     }
 
     /**

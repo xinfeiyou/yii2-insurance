@@ -4,6 +4,7 @@ namespace app\modules\work\controllers;
 
 use Yii;
 use app\modules\base\models\WorkOddinterest;
+use app\modules\base\models\WorkOddDeduct;
 use app\modules\base\models\search\WorkOddinterestSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -86,6 +87,19 @@ class WorkOddinterestController extends BaseController {
                         'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * 代扣
+     * @return type
+     */
+    public function actionDeduct($oddNumber, $intPeriod) {
+        $model = WorkOddinterest::findOne(['oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
+        $arData = WorkOddDeduct::findAll(['oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
+        return $this->render('deduct', [
+                    'model' => $model,
+                    'arData' => $arData,
+        ]);
     }
 
     /**

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'oddType',
                 'headerOptions' => ['width' => '120'],
                 'value' => function($model) {
-                    return $model->getSysConfigInfoTypeValue('oddType',$model->oddType);
+                    return $model->getSysConfigInfoTypeValue('oddType', $model->oddType);
                 },
                 'filter' => (new WorkOdd())->getSysConfigInfoType('oddType'),
             ],
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'oddRepaymentStyle',
                 'headerOptions' => ['width' => '120'],
                 'value' => function($model) {
-                    return $model->getSysConfigInfoTypeValue('oddRepaymentStyle',$model->oddRepaymentStyle);
+                    return $model->getSysConfigInfoTypeValue('oddRepaymentStyle', $model->oddRepaymentStyle);
                 },
                 'filter' => (new WorkOdd())->getSysConfigInfoType('oddRepaymentStyle'),
             ],
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'finishTime',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'header' => Html::a('新增', ['create'], ['class' => 'btn btn-success']),
+                'header' => '操作',
                 'template' => '{view} &nbsp&nbsp;&nbsp;{update}&nbsp&nbsp;{editMoney}',
                 'buttons' => [
                     'editMoney' => function ($url, $model) {

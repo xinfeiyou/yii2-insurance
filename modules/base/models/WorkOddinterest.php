@@ -30,7 +30,7 @@ use app\common\MathPayment;
  * @property string $tUpdateTime
  */
 class WorkOddinterest extends \app\modules\base\models\BaseModel {
-
+    public $fDiff;
     /**
      * @inheritdoc
      */
@@ -75,9 +75,31 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
             'tOperateTime' => '还款时间',
             'strPaymentStatus' => '还款状态',
             'fSubsidy' => '逾期罚息',
+            'fDiff' => '差额',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];
+    }
+
+    /**
+     * 添加数据
+     * @param type $oddNumber
+     * @param type $arData
+     */
+    public function add($oddNumber, $arData) {
+        $arData['oddNumber'] = $oddNumber;
+        return $this->create_data((new WorkOddinterest()), $arData);
+    }
+
+    /**
+     * 清除记录
+     * @param type $oddNumber
+     */
+    public function del($oddNumber) {
+        $model = WorkOddinterest::findOne(['oddNumber' => $oddNumber]);
+        if (!empty($model)) {
+            $model->delete();
+        }
     }
 
     /**
@@ -171,21 +193,16 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
      * @return type
      */
     public function editOddOffLineInterest($strOddNum, $offlineMoney, $offlineRate, $oddBorrowPeriod, $oddRepaymentStyle) {
-        $arObj = WorkOddinterest::findOne(['oddNumber' => $strOddNum]);
-        if (empty($arObj)) {
-            $arDataAll = MathPayment::PayInterest($offlineMoney, $offlineRate, $oddBorrowPeriod, 'month', $oddRepaymentStyle);
-            foreach ($arDataAll['notes'] as $ar) {
-                $model = new WorkOddinterest();
-                $arData['oddNumber'] = $strOddNum;
-                $arData['intPeriod'] = $ar['month'];
-                $arData['fOffLineCost'] = $ar['benjin'];
-                $arData['fOffLineInterest'] = $ar['lixi'];
-                $arData['fOffLineTotal'] = $ar['zonger'];
-                $arData['fRemainder'] = $ar['yuer'];
-                $arData['tStartTime'] = $ar['stime'];
-                $arData['tEndTime'] = $ar['etime'];
-                $this->create_data($model, $arData);
-            }
+        $arDataAll = MathPayment::PayInterest($offlineMoney, $offlineRate, $oddBorrowPeriod, 'month', $oddRepaymentStyle);
+        foreach ($arDataAll['notes'] as $ar) {
+            $model = WorkOddinterest::findOne(['oddNumber' => $strOddNum, 'intPeriod' => $ar['month']]);
+            $arData['fOffLineCost'] = $ar['benjin'];
+            $arData['fOffLineInterest'] = $ar['lixi'];
+            $arData['fOffLineTotal'] = $ar['zonger'];
+            $arData['fRemainder'] = $ar['yuer'];
+//                $arData['tStartTime'] = $ar['stime'];
+//                $arData['tEndTime'] = $ar['etime'];
+            $ar = $this->edit_data($model, $arData);
         }
         return $this->setReturnMsg('0000');
     }

@@ -11,6 +11,7 @@ use app\common\baofu\HttpClient;
 use app\modules\base\models\BaofuRequest;
 use app\modules\base\models\BaofuResult;
 use app\modules\base\models\BaofuSearch;
+use app\modules\base\models\WorkUserWithhold;
 use yii\base\Exception;
 use app\common\NetWork;
 use app\common\Str;
@@ -22,6 +23,17 @@ class BaofuController extends BaseController {
 
     public $strTitle = '宝付代扣';
 
+    public function actionEditStatus() {
+        $strUserId = Yii::$app->request->post('strUserId'); //用户ID
+        if (!empty($strUserId)) {
+            $model = WorkUserWithhold::findOne(['strUserId' => $strUserId]);
+            $arData['strStatus'] = "1";
+            $arRes = $model->edit_data($model, $arData);
+            $arReturn = NetWork::setMsg($this->strTitle, "修改状态", $arRes['ret'], []);
+            Str::echoJson($arReturn);
+        }
+    }
+
     /**
      * 绑定用户银行卡
      */
@@ -31,7 +43,7 @@ class BaofuController extends BaseController {
         $strBankCode = Yii::$app->request->post('bankCode'); //银行卡编码
         $strBankNum = Yii::$app->request->post('bankNum'); //银行卡号
         $strCardNum = Yii::$app->request->post('cardnum'); //身份证号
-        $fMoney = Yii::$app->request->post('money'); //身份证号 0.01;
+        $fMoney = empty(Yii::$app->request->post('money')) ? '0.01' : Yii::$app->request->post('money'); //身份证号 0.01;
         if (!empty($strPhone) && !empty($strName) && !empty($strBankNum) && !empty($strCardNum)) {
             $strJson = $this->setPayData($strName, $strCardNum, $strBankCode, $strBankNum, $strPhone, $fMoney);
             $arData = json_decode($strJson, true);
