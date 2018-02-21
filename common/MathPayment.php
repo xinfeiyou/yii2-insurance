@@ -105,6 +105,7 @@ class MathPayment {
             $array['notes'][$i]['yuer'] = ($yuer > 0) ? round($yuer, 2) : 0;
             $array['notes'][$i]['stime'] = $time;
             $array['notes'][$i]['etime'] = self::timeNextMonth($time);
+            $time = self::timeNextMonth($time);
         }
         $array['yingli'] = $interest;
         return $array;
@@ -131,6 +132,7 @@ class MathPayment {
             $array['notes'][$i]['yuer'] = ($yuer > 0) ? round($yuer, 2) : 0;
             $array['notes'][$i]['stime'] = $time;
             $array['notes'][$i]['etime'] = self::timeNextMonth($time);
+            $time = self::timeNextMonth($time);
         }
         $array['yingli'] = $yingli;
         return $array;
@@ -161,6 +163,7 @@ class MathPayment {
             $array['notes'][$i]['stime'] = $time;
             $array['notes'][$i]['etime'] = self::timeNextMonth($time);
             $interestTotal += $interest;
+            $time = self::timeNextMonth($time);
         }
         $array['yingli'] = round($interestTotal, 2);
         return $array;
@@ -190,6 +193,7 @@ class MathPayment {
             $array['notes'][$i]['stime'] = $time;
             $array['notes'][$i]['etime'] = self::timeNextMonth($time);
             $interestTotal += $interest;
+            $time = self::timeNextMonth($time);
         }
         $array['yingli'] = round($interestTotal, 2);
         return $array;

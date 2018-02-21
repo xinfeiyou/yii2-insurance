@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'oddTrialTime',
             [
                 'attribute' => 'oddRehearTime',
-                'headerOptions' => ['width' => '150']
+                'headerOptions' => ['width' => '180']
             ],
             [
                 'attribute' => 'userId',
