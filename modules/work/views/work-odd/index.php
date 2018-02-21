@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\base\models\WorkOdd;
+use app\modules\base\models\ViewWorkOdd;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\base\models\search\WorkOddSearch */
@@ -21,7 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             [
                 'attribute' => 'oddNumber',
-                'headerOptions' => ['width' => '100']
+                'format' => 'raw',
+                'headerOptions' => ['width' => '100'],
+                'value' => function($model) {
+                    return Html::a($model->oddNumber, "https://www.91hc.com/odd/" . $model->oddNumber, ['target' => '_blank']);
+                }
             ],
             [
                 'attribute' => 'oddType',
@@ -29,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     return $model->getSysConfigInfoTypeValue('oddType', $model->oddType);
                 },
-                'filter' => (new WorkOdd())->getSysConfigInfoType('oddType'),
+                'filter' => (new ViewWorkOdd())->getSysConfigInfoType('oddType'),
             ],
             'oddTitle',
             [
@@ -46,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     return $model->getSysConfigInfoTypeValue('oddRepaymentStyle', $model->oddRepaymentStyle);
                 },
-                'filter' => (new WorkOdd())->getSysConfigInfoType('oddRepaymentStyle'),
+                'filter' => (new ViewWorkOdd())->getSysConfigInfoType('oddRepaymentStyle'),
             ],
             [
                 'attribute' => 'oddBorrowPeriod',
@@ -61,6 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'userId',
                 'headerOptions' => ['width' => '70']
+            ],
+            [
+                'attribute' => 'nickName',
+                'headerOptions' => ['width' => '250']
             ],
             [
                 'attribute' => 'operator',

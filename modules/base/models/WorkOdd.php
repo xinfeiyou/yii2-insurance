@@ -29,7 +29,7 @@ use Yii;
  * @property string $finishTime
  */
 class WorkOdd extends \app\modules\base\models\BaseModel {
-
+    public $nickName;
     /**
      * @inheritdoc
      */
@@ -81,6 +81,7 @@ class WorkOdd extends \app\modules\base\models\BaseModel {
             'finishTime' => '完结时间',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
+            'nickName' => '用户名称',
         ];
     }
 

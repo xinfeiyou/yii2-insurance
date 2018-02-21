@@ -4,6 +4,7 @@ namespace app\modules\base\models;
 
 use Yii;
 use app\modules\base\models\WorkConfig;
+use app\modules\base\models\WorkUser;
 
 /**
  * This is the model class for table "{{%work_odd}}".
@@ -41,6 +42,17 @@ class BaseModel extends \yii\db\ActiveRecord {
         } else {
             return $arData[$key];
         }
+    }
+
+    /**
+     * 获取用户真实姓名
+     * @param type $strUserId
+     * @return type
+     */
+    public function getUserInfo($strUserId) {
+        $objUser = WorkUser::findOne(['strUserId' => $strUserId]);
+        $nickName = empty($objUser) ? "" : $objUser->nickName;
+        return $nickName;
     }
 
     /**
@@ -108,7 +120,7 @@ class BaseModel extends \yii\db\ActiveRecord {
                 if ($bStatus) {
                     $arMsg = $this->setReturnMsg('0000', $model->primaryKey);
                 } else {
-                    $arMsg = $this->setReturnMsg('1002',json_encode($model->getErrors()));
+                    $arMsg = $this->setReturnMsg('1002', json_encode($model->getErrors()));
                 }
             }
             return $arMsg;
