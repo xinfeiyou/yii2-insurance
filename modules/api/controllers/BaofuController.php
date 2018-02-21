@@ -55,6 +55,27 @@ class BaofuController extends BaseController {
     }
 
     /**
+     * 代扣金额
+     * @param string $strPhone      //手机号
+     * @param string $strName       //真实姓名
+     * @param string $strBankCode   //银行卡编码
+     * @param string $strBankNum    //银行卡号
+     * @param string $strCardNum    //身份证号
+     * @param float $fMoney         //代扣金额
+     */
+    public function actionWithholdUserMoney($strPhone, $strName, $strBankCode, $strBankNum, $strCardNum, $fMoney) {
+        if (!empty($strPhone) && !empty($strName) && !empty($strBankNum) && !empty($strCardNum) && !empty($fMoney)) {
+            //$strJson = $this->setPayData($strName, $strCardNum, $strBankCode, $strBankNum, $strPhone, $fMoney);
+            $strJson = '{"additional_info":"附加字段","biz_type":"0000","data_type":"json","member_id":"1191123","req_reserved":"保留","resp_code":"0000","resp_msg":"交易成功","succ_amt":"1","terminal_id":"36452","trade_date":"20180220113639","trans_id":"TI15190977991129","trans_no":"201802200110001690104455","trans_serial_no":"TSN15190977998804","txn_sub_type":"13","txn_type":"0431","version":"4.0.0.0"}';
+            $arData = json_decode($strJson, true);
+            $arReturn = NetWork::setMsg($this->strTitle, $arData['resp_msg'], $arData['resp_code'], []);
+        } else {
+            $arReturn = NetWork::setMsg($this->strTitle, '参数不能为空', '4001', []);
+        }
+        return $arReturn;
+    }
+
+    /**
      * 查询
      */
     public function actionSearchUserBank() {

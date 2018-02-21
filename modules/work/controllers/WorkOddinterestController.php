@@ -5,6 +5,7 @@ namespace app\modules\work\controllers;
 use Yii;
 use app\modules\base\models\WorkOddinterest;
 use app\modules\base\models\WorkOddDeduct;
+use app\modules\base\models\WorkUserWithhold;
 use app\modules\base\models\search\WorkOddinterestSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -95,6 +96,24 @@ class WorkOddinterestController extends BaseController {
      */
     public function actionDeduct($oddNumber, $intPeriod) {
         $model = WorkOddinterest::findOne(['oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
+        if (!empty(\Yii::$app->request->post('WorkOddinterest'))) {
+            $strUserId = $model->strUserId;
+            $fMoney = \Yii::$app->request->post('WorkOddinterest')['fMoney'];
+            $objBank = WorkUserWithhold::findOne(['strUserId' => $strUserId]);
+            $params['strPhone'] = $objBank->strUserPhone;
+            $params['strName'] = $objBank->strRealName;
+            $params['strBankCode'] = $objBank->strBankCode;
+            $params['strBankNum'] = $objBank->strBankNum;
+            $params['strCardNum'] = $objBank->strUserCode;
+            $params['fMoney'] = $fMoney;
+            $arData = \Yii::$app->runAction('/api/baofu/withhold-user-money', $params);
+            $strField = 'fRealMonery';
+            if ('0000' == $arData['ret']) {
+                (new WorkOddinterest())->editOddMoney($oddNumber, $intPeriod, $strField, $fMoney);
+                (new WorkOddDeduct())->add($oddNumber, $intPeriod, $strField, $fMoney);
+                return $this->redirect(['deduct', 'oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
+            }
+        }
         $arData = WorkOddDeduct::findAll(['oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
         return $this->render('deduct', [
                     'model' => $model,

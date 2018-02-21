@@ -30,7 +30,10 @@ use app\common\MathPayment;
  * @property string $tUpdateTime
  */
 class WorkOddinterest extends \app\modules\base\models\BaseModel {
+
     public $fDiff;
+    public $fMoney;
+
     /**
      * @inheritdoc
      */
@@ -76,6 +79,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
             'strPaymentStatus' => '还款状态',
             'fSubsidy' => '逾期罚息',
             'fDiff' => '差额',
+            'fMoney' => '实扣金额',
             'tCreateTime' => '创建时间',
             'tUpdateTime' => '更新时间',
         ];
@@ -205,6 +209,23 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
             $ar = $this->edit_data($model, $arData);
         }
         return $this->setReturnMsg('0000');
+    }
+
+    /**
+     * 修改还款金额
+     * @param string $strOddNum     借款编号
+     * @param int $intPeriod        还款期数
+     * @param string $strField      字段名称
+     * @param float $fMoney         金额
+     */
+    public function editOddMoney($strOddNum, $intPeriod, $strField, $fMoney) {
+        if (in_array($strField, ['fRealMonery', 'fRealinterest', 'fSubsidy']) && $fMoney > 0) {
+            $model = WorkOddinterest::findOne(['oddNumber' => $strOddNum, 'intPeriod' => $intPeriod]);
+            $arData[$strField] = $model->$strField + $fMoney;
+            return $model->edit_data($model, $arData);
+        } else {
+            return $this->setReturnMsg('1000');
+        }
     }
 
 }

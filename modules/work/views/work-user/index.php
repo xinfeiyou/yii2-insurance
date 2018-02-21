@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'strPass',
             [
                 'attribute' => 'nickName',
-                'headerOptions' => ['width' => '200']
+                'headerOptions' => ['width' => '300']
             ],
             [
                 'attribute' => 'gender',
