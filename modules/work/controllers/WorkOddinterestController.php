@@ -107,10 +107,21 @@ class WorkOddinterestController extends BaseController {
             $params['strCardNum'] = $objBank->strUserCode;
             $params['fMoney'] = $fMoney;
             $arData = \Yii::$app->runAction('/api/baofu/withhold-user-money', $params);
-            $strField = 'fRealMonery';
+            switch (\Yii::$app->request->post('strField')) {
+                case '本金':
+                    $strField = 'fRealMonery';
+                    break;
+                case '利息':
+                    $strField = 'fRealinterest';
+                    break;
+                case '罚息':
+                    $strField = 'fSubsidy';
+                    break;
+            }
             if ('0000' == $arData['ret']) {
                 (new WorkOddinterest())->editOddMoney($oddNumber, $intPeriod, $strField, $fMoney);
                 (new WorkOddDeduct())->add($oddNumber, $intPeriod, $strField, $fMoney);
+                \Yii::$app->runAction('/api/user/add-money-log', ['userId' => $strUserId, 'money' => $fMoney]);
                 return $this->redirect(['deduct', 'oddNumber' => $oddNumber, 'intPeriod' => $intPeriod]);
             }
         }

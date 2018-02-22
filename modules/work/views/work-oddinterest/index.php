@@ -21,49 +21,49 @@ $this->params['breadcrumbs'][] = $this->title;
             'oddNumber',
             [
                 'attribute' => 'intPeriod',
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fOnLineCost',
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fOnLineInterest',
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fOnLineTotal',
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fOffLineCost',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fOffLineInterest',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fOffLineTotal',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fRemainder',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fRealMonery',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'fRealinterest',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '40']
+                'headerOptions' => ['width' => '80']
             ],
             [
                 'attribute' => 'strUserId',
@@ -77,11 +77,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'tEndTime',
                 'headerOptions' => ['width' => '160']
             ],
-            [
-                'attribute' => 'tOperateTime',
-                'contentOptions' => ['style' => 'background-color:#61AFAF'],
-                'headerOptions' => ['width' => '160']
-            ],
+//            [
+//                'attribute' => 'tOperateTime',
+//                'contentOptions' => ['style' => 'background-color:#61AFAF'],
+//                'headerOptions' => ['width' => '160']
+//            ],
             [
                 'attribute' => 'strPaymentStatus',
                 'contentOptions' => ['style' => 'background-color:#61AFAF'],

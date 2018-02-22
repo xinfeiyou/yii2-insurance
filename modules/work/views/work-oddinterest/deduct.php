@@ -14,7 +14,16 @@ function bindBank(strPhone,strRealName,strBankCode,strBankNum,strUserCode,strUse
     }, "json");    
 }
 EOD;
+$jsj = <<<EOD
+    $(".dropdown-menu li a").on("click",function(){
+        var text = $(this).text();
+        $("#strField").val(text)
+        $("#strValue").text(text);
+	//$(this).parent().parent().parent().find("button span.text").text($(this).text())
+    })    
+EOD;
 $this->registerJs($js, View::POS_END);
+$this->registerJs($jsj, View::POS_READY);
 $this->title = '申请信息: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => '代扣列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = '代扣列表详情';
@@ -46,7 +55,7 @@ $this->params['breadcrumbs'][] = '代扣列表详情';
         ?>
 
         <?=
-        $form->field($model, 'fOffLineCost', [
+        $form->field($model, 'fOnLineCost', [
             'template' => '{label}<div class="input-group">
                 <span class="input-group-addon">$</span>
                 {input}
@@ -56,7 +65,7 @@ $this->params['breadcrumbs'][] = '代扣列表详情';
         ?>
 
         <?=
-        $form->field($model, 'fOffLineInterest', [
+        $form->field($model, 'fOnLineInterest', [
             'template' => '{label}<div class="input-group">
                 <span class="input-group-addon">$</span>
                 {input}
@@ -65,14 +74,14 @@ $this->params['breadcrumbs'][] = '代扣列表详情';
         ])->textInput(['maxlength' => true, 'disabled' => true])
         ?>
 
-        <?=
-        $form->field($model, 'fOffLineTotal', [
-            'template' => '{label}<div class="input-group">
-                <span class="input-group-addon">$</span>
-                {input}
-                <span class="input-group-addon">.00</span>
-              </div>',
-        ])->textInput(['maxlength' => true, 'disabled' => true])
+        <?php
+//        $form->field($model, 'fOnLineTotal', [
+//            'template' => '{label}<div class="input-group">
+//                <span class="input-group-addon">$</span>
+//                {input}
+//                <span class="input-group-addon">.00</span>
+//              </div>',
+//        ])->textInput(['maxlength' => true, 'disabled' => true])
         ?>
 
         <?=
@@ -110,13 +119,14 @@ $this->params['breadcrumbs'][] = '代扣列表详情';
             'template' => '{label}<div class="input-group">
                        <span class="input-group-addon">$</span>
                        {input}
+                       <input type="hidden" name="strField" id="strField">
                        <span class="input-group-addon">.00</span>
                        <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">本金&nbsp;&nbsp;<span class="caret"></span></button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="text" id="strValue">选择</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                          <li><a href="#">本金&nbsp;&nbsp;</a></li>
-                          <li><a href="#">利息&nbsp;&nbsp;</a></li>
-                          <li><a href="#">罚息&nbsp;&nbsp;</a></li>
+                          <li><a href="javascript:">本金</a></li>
+                          <li><a href="javascript:">利息</a></li>
+                          <li><a href="javascript:">罚息</a></li>
                         </ul>
                       </div><!-- /btn-group -->
                     </div><!-- /input-group -->',

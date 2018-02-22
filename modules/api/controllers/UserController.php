@@ -18,12 +18,28 @@ class UserController extends BaseController {
     public $strTitle = '用户操作';
 
     /**
+     * 添加用户资金
+     * @param type $userId
+     * @param type $money
+     */
+    public function actionAddMoneyLog($userId, $money) {
+        $url = \Yii::$app->params['web_line']['api_url'] . '/custody/deductNotify';
+        $arData['retCode'] = '0000';
+        $arData['userId'] = $userId;
+        $arData['money'] = $money;
+        $arData['sign'] = $this->encrypt($arData);
+        $data['bgData'] = json_encode($arData);
+        $strJson = NetWork::CurlPost($url, $data,'','0');
+        return $strJson;
+    }
+
+    /**
      * Renders the index view for the module
      * @return string
      */
     public function actionBind() {
         $arPost = \Yii::$app->request->post();
-        $url = \Yii::$app->params['api_url'] . '/common/register';
+        $url = \Yii::$app->params['on_line']['api_url'] . '/common/register';
         $arData['phone'] = $arPost['strPhone'];
         $arData['smsCode'] = $arPost['strCode'];
         $arData['password'] = md5(rand(1000, 9999));
@@ -90,7 +106,7 @@ class UserController extends BaseController {
             $url = \Yii::$app->request->post('url') . '?access_token=';
             $imageData = NetWork::CurlUrlData($json_string, $strToken, $url);
             Files::writeFile($strUserId . '.jpg', $imageData);
-            $imagUrl = 'https://'.$_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . 'upload/weixin/' . $strUserId . '.jpg';
+            $imagUrl = 'https://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . 'upload/weixin/' . $strUserId . '.jpg';
             (new WorkUser())->edit($strUserId, ['strCodeImg' => $imagUrl]);
             $arReturn = NetWork::setMsg($this->strTitle, "获取成功", "0000", ['url' => $imagUrl]);
         }
@@ -139,7 +155,7 @@ class UserController extends BaseController {
      * @return type
      */
     public function actionSendSms() {
-        $url = \Yii::$app->params['api_url'] . '/common/sms';
+        $url = \Yii::$app->params['on_line']['api_url'] . '/common/sms';
         $phone = \Yii::$app->request->post('strPhone');
         $arData['phone'] = $phone;
         $arData['msgType'] = 'register';
