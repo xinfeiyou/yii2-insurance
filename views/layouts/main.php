@@ -163,6 +163,15 @@ AppAsset::register($this);
                                 <li><a href="#">逾期</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 数据查询 <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-header">子类列表</li>
+                                <li><a href="<?= Url::toRoute(['/work/old-money-list']) ?>">资金记录</a></li>
+                                <li><a href="<?= Url::toRoute(['/work/old-money-recharge']) ?>">宝付充值</a></li>
+                                <li><a href="<?= Url::toRoute(['/work/old-money-withdraw']) ?>">宝付提现</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-fw fa-dropbox"></i> 系统设置</a>
                         </li>
