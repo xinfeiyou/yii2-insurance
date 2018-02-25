@@ -39,6 +39,7 @@ class MssqlController extends Controller {
         $pdo_statement_object = $pdo_object->prepare($sql);
         $pdo_statement_object->execute();
         $result = $pdo_statement_object->fetchAll(\PDO::FETCH_ASSOC);
+        \Yii::$app->db->createCommand()->truncateTable('old_money_list')->execute();
         foreach ($result as $v) {
             $v['Money'] = round($v['Money'], 2);
             $model = new OldMoneyList();
