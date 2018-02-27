@@ -36,7 +36,7 @@ class OldMoneyList extends \app\modules\base\models\BaseModel {
             [['Money'], 'number'],
             [['tCreateTime', 'tUpdateTime', 'CreateTime'], 'safe'],
             [['FundRecordID', 'AccountID'], 'string', 'max' => 100],
-            [['FundRecordType'], 'string', 'max' => 1],
+            [['FundRecordType'], 'string', 'max' => 10],
             [['UserName', 'RealName'], 'string', 'max' => 40],
         ];
     }

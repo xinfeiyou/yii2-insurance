@@ -167,6 +167,8 @@ AppAsset::register($this);
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 数据查询 <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header">子类列表</li>
+                                <li><a href="<?= Url::toRoute(['/work/old-project-list/index']) ?>">项目记录</a></li>
+                                <li><a href="<?= Url::toRoute(['/work/old-order-list/index']) ?>">投资记录</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-money-list']) ?>">资金记录</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-money-recharge']) ?>">宝付充值</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-money-withdraw']) ?>">宝付提现</a></li>
@@ -194,16 +196,16 @@ AppAsset::register($this);
             </div>
             <!-- /#page-content-wrapper -->
         </div>
-        <?php if(empty(Yii::$app->user->isGuest)){ ?>
-        <div id="tool_boxs">
-            <ul class="list-unstyled">
-                <li>
-                    <i style="background-image: url('https://asset.91hc.com/src/images/public/cal.png');" onclick="openUrl('<?= Url::toRoute(['/work/work-oddinterest/cal'])?>');"></i>
-                </li>
-            </ul>
-        </div>
-        <?php }?>
-            <!-- /#wrapper -->
+        <?php if (empty(Yii::$app->user->isGuest)) { ?>
+            <div id="tool_boxs">
+                <ul class="list-unstyled">
+                    <li>
+                        <i style="background-image: url('https://asset.91hc.com/src/images/public/cal.png');" onclick="openUrl('<?= Url::toRoute(['/work/work-oddinterest/cal']) ?>');"></i>
+                    </li>
+                </ul>
+            </div>
+        <?php } ?>
+        <!-- /#wrapper -->
         <?php $this->endBody() ?>
     </body>
 </html>
