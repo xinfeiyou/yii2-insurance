@@ -92,10 +92,47 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
-                'template' => '{view}&nbsp;&nbsp;&nbsp;&nbsp;{invest}',
+                'template' => '<div class="btn-group">
+                                <button type="button" class="btn btn-default">选择</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>{info}</li>
+                                    <li>{invest}</li>
+                                    <li>{invest1}</li>
+                                    <li>{invest2}</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>{invest3}</li>
+                                    <li>{invest4}</li>
+                                    <li>{invest5}</li>
+                                </ul>
+                            </div>',
                 'buttons' =>[
-                     'invest' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-th-list"></span>', ['/work/old-order-list/list', 'ProjectID' => $model->ProjectID], ['title' => '投资列表']);
+                    'info' => function ($url, $model) {
+                        return Html::a('标的信息', ['/work/old-project-list/view', 'id' => $model->id], ['title' => '标的信息','target' => '_blank']);
+                    },
+                    'invest' => function ($url, $model) {
+                        return Html::a('投资信息', ['/work/old-order-list/index', 'ProjectID' => $model->ProjectID], ['title' => '投资列表','target' => '_blank']);
+                    },
+//                    'invest' => function ($url, $model) {
+//                        return Html::a('投资信息', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'1'], ['title' => '投资列表','target' => '_blank']);
+//                    },
+                    'invest1' => function ($url, $model) {
+                        return Html::a('红包投资', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'8'], ['title' => '红包投资','target' => '_blank']);
+                    },
+                    'invest2' => function ($url, $model) {
+                        return Html::a('转让/承接', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'7'], ['title' => '转让/承接','target' => '_blank']);
+                    },
+                    'invest3' => function ($url, $model) {
+                        return Html::a('项目回款', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'3'], ['title' => '项目回款','target' => '_blank']);
+                    },
+                    'invest4' => function ($url, $model) {
+                        return Html::a('利息管理费', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'2'], ['title' => '利息管理费','target' => '_blank']);
+                    },
+                    'invest5' => function ($url, $model) {
+                        return Html::a('债权转让费', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'6'], ['title' => '债权转让费','target' => '_blank']);
                     },
                 ]
             ],

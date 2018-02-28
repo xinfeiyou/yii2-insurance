@@ -3,16 +3,16 @@
 namespace app\modules\work\controllers;
 
 use Yii;
-use app\modules\base\models\OldOrderList;
-use app\modules\base\models\search\OldOrderListSearch;
+use app\modules\base\models\OldMoneyLine;
+use app\modules\base\models\search\OldMoneyLineSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OldOrderListController implements the CRUD actions for OldOrderList model.
+ * OldMoneyLineController implements the CRUD actions for OldMoneyLine model.
  */
-class OldOrderListController extends Controller
+class OldMoneyLineController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,18 +30,18 @@ class OldOrderListController extends Controller
     }
 
     /**
-     * Lists all OldOrderList models.
+     * Lists all OldMoneyLine models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new OldOrderListSearch();
-        $ProjectID = empty(\Yii::$app->request->get('ProjectID'))?"":\Yii::$app->request->get('ProjectID');
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$ProjectID);
+        $searchModel = new OldMoneyLineSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
 }

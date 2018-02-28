@@ -170,6 +170,7 @@ AppAsset::register($this);
                                 <li><a href="<?= Url::toRoute(['/work/old-project-list/index']) ?>">项目记录</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-order-list/index']) ?>">投资记录</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-money-list']) ?>">资金记录</a></li>
+                                <li><a href="<?= Url::toRoute(['/work/old-money-line']) ?>">线下充值</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-money-recharge']) ?>">宝付充值</a></li>
                                 <li><a href="<?= Url::toRoute(['/work/old-money-withdraw']) ?>">宝付提现</a></li>
                             </ul>

@@ -74,12 +74,12 @@ class OldProjectListSearch extends OldProjectList
         ]);
 
         $query->andFilterWhere(['like', 'ProjectID', $this->ProjectID])
-            ->andFilterWhere(['like', 'ProjectType', $this->ProjectType])
+            ->andFilterWhere([ 'ProjectType' => $this->ProjectType])
             ->andFilterWhere(['like', 'Title', $this->Title])
-            ->andFilterWhere(['like', 'RepaymentType', $this->RepaymentType])
+            ->andFilterWhere(['RepaymentType' => $this->RepaymentType])
             ->andFilterWhere(['like', 'Safeguards', $this->Safeguards])
             ->andFilterWhere(['like', 'BorrowerInformation', $this->BorrowerInformation])
-            ->andFilterWhere(['like', 'ProjectState', $this->ProjectState]);
+            ->andFilterWhere(['ProjectState' => $this->ProjectState]);
 
         return $dataProvider;
     }

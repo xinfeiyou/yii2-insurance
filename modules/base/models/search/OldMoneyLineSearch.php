@@ -5,12 +5,12 @@ namespace app\modules\base\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\base\models\OldOrderList;
+use app\modules\base\models\OldMoneyLine;
 
 /**
- * OldOrderListSearch represents the model behind the search form about `app\modules\base\models\OldOrderList`.
+ * OldMoneyLineSearch represents the model behind the search form about `app\modules\base\models\OldMoneyLine`.
  */
-class OldOrderListSearch extends OldOrderList
+class OldMoneyLineSearch extends OldMoneyLine
 {
     /**
      * @inheritdoc
@@ -19,8 +19,8 @@ class OldOrderListSearch extends OldOrderList
     {
         return [
             [['id'], 'integer'],
-            [['OrderID', 'OrderType', 'ProjectID', 'AccountID', 'PreviousRepaymentDate', 'CreateTime', 'SettlementPeriod', 'tCreateTime', 'tUpdateTime','UserName','RealName'], 'safe'],
-            [['ExtraRate', 'Amount', 'ExtraMoney'], 'number'],
+            [['AddMoneyApplicationID', 'AccountID', 'ManagerID', 'State', 'DealTime', 'CreateTime', 'UserName', 'RealName', 'tCreateTime', 'tUpdateTime'], 'safe'],
+            [['Money'], 'number'],
         ];
     }
 
@@ -40,12 +40,10 @@ class OldOrderListSearch extends OldOrderList
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$ProjectID = "")
+    public function search($params)
     {
-        $query = OldOrderList::find();
-        if(!empty($ProjectID)){
-            $this->ProjectID = $ProjectID;
-        }
+        $query = OldMoneyLine::find();
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -63,20 +61,19 @@ class OldOrderListSearch extends OldOrderList
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ExtraRate' => $this->ExtraRate,
-            'Amount' => $this->Amount,
-            'PreviousRepaymentDate' => $this->PreviousRepaymentDate,
+            'Money' => $this->Money,
+            'DealTime' => $this->DealTime,
             'CreateTime' => $this->CreateTime,
-            'ExtraMoney' => $this->ExtraMoney,
             'tCreateTime' => $this->tCreateTime,
             'tUpdateTime' => $this->tUpdateTime,
         ]);
 
-        $query->andFilterWhere(['like', 'OrderID', $this->OrderID])
-            ->andFilterWhere(['OrderType' => $this->OrderType])
-            ->andFilterWhere(['like', 'ProjectID', $this->ProjectID])
+        $query->andFilterWhere(['like', 'AddMoneyApplicationID', $this->AddMoneyApplicationID])
             ->andFilterWhere(['like', 'AccountID', $this->AccountID])
-            ->andFilterWhere(['like', 'SettlementPeriod', $this->SettlementPeriod]);
+            ->andFilterWhere(['like', 'ManagerID', $this->ManagerID])
+            ->andFilterWhere(['like', 'State', $this->State])
+            ->andFilterWhere(['like', 'UserName', $this->UserName])
+            ->andFilterWhere(['like', 'RealName', $this->RealName]);
 
         return $dataProvider;
     }

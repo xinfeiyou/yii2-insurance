@@ -10,13 +10,12 @@ use app\modules\base\models\OldMoneyList;
 /**
  * OldMoneyListSearch represents the model behind the search form about `app\modules\base\models\OldMoneyList`.
  */
-class OldMoneyListSearch extends OldMoneyList
-{
+class OldMoneyListSearch extends OldMoneyList {
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id'], 'integer'],
             [['FundRecordID', 'FundRecordType', 'AccountID', 'Content', 'UserName', 'RealName', 'CreateTime', 'tCreateTime', 'tUpdateTime'], 'safe'],
@@ -27,8 +26,7 @@ class OldMoneyListSearch extends OldMoneyList
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,10 +38,14 @@ class OldMoneyListSearch extends OldMoneyList
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params, $Content = "", $FundRecordType = "") {
         $query = OldMoneyList::find();
-
+        if (!empty($Content)) {
+            $this->Content = $Content;
+        }
+        if (!empty($FundRecordType)) {
+            $this->FundRecordType = $FundRecordType;
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -68,12 +70,13 @@ class OldMoneyListSearch extends OldMoneyList
         ]);
 
         $query->andFilterWhere(['like', 'FundRecordID', $this->FundRecordID])
-            ->andFilterWhere(['like', 'FundRecordType', $this->FundRecordType])
-            ->andFilterWhere(['like', 'AccountID', $this->AccountID])
-            ->andFilterWhere(['like', 'Content', $this->Content])
-            ->andFilterWhere(['like', 'UserName', $this->UserName])
-            ->andFilterWhere(['like', 'RealName', $this->RealName]);
+                ->andFilterWhere(['FundRecordType' => $this->FundRecordType])
+                ->andFilterWhere(['like', 'AccountID', $this->AccountID])
+                ->andFilterWhere(['like', 'Content', $this->Content])
+                ->andFilterWhere(['like', 'UserName', $this->UserName])
+                ->andFilterWhere(['like', 'RealName', $this->RealName]);
 
         return $dataProvider;
     }
+
 }

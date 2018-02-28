@@ -36,14 +36,15 @@ class OldMoneyListController extends Controller
     public function actionIndex()
     {
         $searchModel = new OldMoneyListSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $Content = empty(\Yii::$app->request->get('Content'))?"":\Yii::$app->request->get('Content');
+        $FundRecordType = empty(\Yii::$app->request->get('FundRecordType'))?"":\Yii::$app->request->get('FundRecordType');
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$Content ,$FundRecordType);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-
     /**
      * Displays a single OldMoneyList model.
      * @param string $id
