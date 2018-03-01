@@ -113,12 +113,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'info' => function ($url, $model) {
                         return Html::a('标的信息', ['/work/old-project-list/view', 'id' => $model->id], ['title' => '标的信息','target' => '_blank']);
                     },
-                    'invest' => function ($url, $model) {
-                        return Html::a('投资信息', ['/work/old-order-list/index', 'ProjectID' => $model->ProjectID], ['title' => '投资列表','target' => '_blank']);
-                    },
 //                    'invest' => function ($url, $model) {
-//                        return Html::a('投资信息', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'1'], ['title' => '投资列表','target' => '_blank']);
+//                        return Html::a('投资列表', ['/work/old-money-list/index', 'ProjectID' => $model->ProjectID], ['title' => '投资列表','target' => '_blank']);
 //                    },
+                    'invest' => function ($url, $model) {
+                        return Html::a('本金投资', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'1'], ['title' => '本金投资','target' => '_blank']);
+                    },
                     'invest1' => function ($url, $model) {
                         return Html::a('红包投资', ['/work/old-money-list/index', 'Content' => $model->Title,'FundRecordType'=>'8'], ['title' => '红包投资','target' => '_blank']);
                     },
