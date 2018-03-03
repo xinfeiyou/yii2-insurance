@@ -212,4 +212,23 @@ class Str {
         exit(self::cnJsonEncode($array));
     }
 
+    /**
+     * 解析url字符串中的参数
+     * @param string $str   url地址字符串
+     * @param string $type  默认分隔符是?
+     * @return array        参数数组
+     */
+    public static function parseUrlParam($str, $type = '?') {
+        $data = array();
+        $arr = array();
+        $p = array();
+        $arr = explode($type, $str);
+        $p = explode('&', $arr[1]);
+        foreach ($p as $val) {
+            $tmp = explode('=', $val);
+            $data[$tmp[0]] = $tmp[1];
+        }
+        return $data;
+    }
+
 }
