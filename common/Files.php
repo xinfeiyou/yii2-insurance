@@ -33,11 +33,15 @@ class Files {
      * @return boolean
      */
     public static function writeFileLog($fFileName, $fContent, $fTag = 'a') {
-        $fFileName = \Yii::$app->basePath . '/runtime/logs/' . $fFileName;
+        $fFileName = \Yii::$app->basePath . '/runtime/logs/' . $fFileName . '_log' . date("Ymd") . '.txt';
         ignore_user_abort(TRUE);
-        $fp = fopen($fFileName, $fTag);
+        if (!file_exists($fFileName)) {
+            $fp = fopen($fFileName, 'w');
+        } else {
+            $fp = fopen($fFileName, 'a');
+        }
         if (flock($fp, LOCK_EX)) {
-            fwrite($fp, $fContent);
+            fwrite($fp, date("Y-m-d H:i:s") . "=>" . $fContent . "\n");
             flock($fp, LOCK_UN);
         }
         fclose($fp);

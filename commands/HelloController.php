@@ -38,6 +38,10 @@ class HelloController extends Controller {
         echo $this->getToken();
     }
 
+    public function actionTokenwx() {
+        echo $this->getTokenwx();
+    }
+
     /**
      * 获取线上服务器信息
      */
@@ -63,6 +67,21 @@ class HelloController extends Controller {
         $arData = json_decode($json, true);
         if (!empty($arData['access_token'])) {
             return json_encode((new WorkConfig())->editKeyToValue('strToken', $arData['access_token']));
+        } else {
+            return $json;
+        }
+    }
+
+    /**
+     * 更新token值
+     * @return type
+     */
+    public function getTokenwx() {
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" . \Yii::$app->params['weixin']['appId'] . "&secret=" . \Yii::$app->params['weixin']['appSecret'];
+        $json = file_get_contents($url);
+        $arData = json_decode($json, true);
+        if (!empty($arData['access_token'])) {
+            return json_encode((new WorkConfig())->editKeyToValue('strTokenwx', $arData['access_token']));
         } else {
             return $json;
         }

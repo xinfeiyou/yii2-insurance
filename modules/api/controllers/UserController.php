@@ -39,10 +39,10 @@ class UserController extends BaseController {
      */
     public function actionBind() {
         $arPost = \Yii::$app->request->post();
-        $url = \Yii::$app->params['on_line']['api_url'] . '/common/register';
+        $url = \Yii::$app->params['web_line']['api_url'] . '/common/register';
         $arData['phone'] = $arPost['strPhone'];
         $arData['smsCode'] = $arPost['strCode'];
-        $arData['password'] = md5(rand(1000, 9999));
+        $arData['password'] = md5(rand(1000, 9999)); 
 //{"status":0,"info":"该手机号已经被占用！","data":{"version": "0.1.0","time": 1517453007}}
 //{"status":1,"info":"注册成功！","userId":"2000000161","data":{"version":"0.1.0","time":1517454980}}
         $strJson = NetWork::CurlPost($url, $arData);
@@ -155,7 +155,7 @@ class UserController extends BaseController {
      * @return type
      */
     public function actionSendSms() {
-        $url = \Yii::$app->params['on_line']['api_url'] . '/common/sms';
+        $url = \Yii::$app->params['web_line']['api_url'] . '/common/sms';
         $phone = \Yii::$app->request->post('strPhone');
         $arData['phone'] = $phone;
         $arData['msgType'] = 'register';
