@@ -6,16 +6,30 @@ use Yii;
 use app\modules\api\controllers\BaseController;
 use app\common\Files;
 use app\common\EleRedPack;
+use app\common\Weixin;
+
 /**
  * Default controller for the `api` module
  */
 class WeixinController extends BaseController {
 
+    public $cookieData = ''; //登录公众平台的cookie
+    public $cookieName = 'weixin_cookie.txt';
     public $strTitle = '微信公众号';
+
     /**
      * 服务号入口
      */
     public function actionIndex() {
+        $weixin = new Weixin(\Yii::$app->params['weixin']['appUser'], \Yii::$app->params['weixin']['appPass']);
+        $json = $weixin->sendUserMsg('o4-aI0VAqHij2ClnZ-S2b0by4OMw', '测试是否能发信息');
+        print_r($json);
+        exit();
+        $arMsg = json_decode($json, true);
+        if ('ok' != $arMsg['base_resp']['err_msg']) {
+            exit('登录失败');
+        }
+        exit('OK');
         if (!empty(\Yii::$app->request->get('echostr'))) {
             $this->checkSignature(\Yii::$app->request->get('echostr')); //验证数据
         } else {
@@ -74,9 +88,9 @@ class WeixinController extends BaseController {
     public function message($RX_TYPE, $postObj, $keyword) {
         switch ($RX_TYPE) {
             case 'text':
-                if(strpos($keyword, 'ele.me/hongbao')){
+                if (strpos($keyword, 'ele.me/hongbao')) {
                     $content = (new EleRedPack())->GetEleMaxRedPack('18779970815', $keyword);
-                }else{
+                } else {
                     $content = $keyword;
                 }
                 $resultStr = $this->GetTypeBuildXML('text', $postObj, $content);
@@ -105,9 +119,11 @@ class WeixinController extends BaseController {
         }
         return $resultStr;
     }
+
     /*
      * 构建相应的XML代码
      */
+
     public function GetTypeBuildXML($type, $object, $content = "") {
         switch ($type) {
             case 'text': $xml = $this->buildTextXml($object, $content);
@@ -120,11 +136,12 @@ class WeixinController extends BaseController {
         }
         return $xml;
     }
+
     /*
      * 返回 text xml代码段
      */
 
-    public Function buildTextXml($object, $content) {
+    public function buildTextXml($object, $content) {
         $rand = time() . rand(1000, 9999);
         $headerStr = $this->buildHeaderToXml('text', $object);
         $result = '<xml>' . $headerStr . '<Content><![CDATA[' . $content . ']]></Content><MsgId>' . $rand . '</MsgId></xml>';
@@ -137,7 +154,7 @@ class WeixinController extends BaseController {
      * 列表数不要超过10条
      */
 
-    public Function buildImageATextXml($object, $titleArray) {
+    public function buildImageATextXml($object, $titleArray) {
         $count = count($titleArray);
         $itemStr = "";
         if ($count > 0) {
@@ -147,7 +164,7 @@ class WeixinController extends BaseController {
                     if ($count > 1) {
                         if ($key != 'Description')
                             $itemStr .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
-                    }else {
+                    } else {
                         $itemStr .= "<" . $key . "><![CDATA[" . $val . "]]></" . $key . ">";
                     }
                 }
@@ -166,7 +183,7 @@ class WeixinController extends BaseController {
      * 返回 音乐 xml代码
      */
 
-    public Function buildMusicXml($object, $musicArray) {
+    public function buildMusicXml($object, $musicArray) {
         if (is_array($musicArray) AND ! empty($musicArray)) {
             $musicStr = $this->buildItemArrToXml('Music', $musicArray);
             $headerStr = $this->buildHeaderToXml('music', $object);
@@ -181,7 +198,7 @@ class WeixinController extends BaseController {
      * 公共函数 生成头XML
      */
 
-    public Function buildHeaderToXml($type, $object) {
+    public function buildHeaderToXml($type, $object) {
         $xmlTpl = '<ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType>';
         $result = sprintf($xmlTpl, $object->FromUserName, $object->ToUserName, time(), $type);
         return $result;
@@ -191,7 +208,7 @@ class WeixinController extends BaseController {
      * 公共函数 列表生成
      */
 
-    public Function buildItemArrToXml($type, $ItemArray) {
+    public function buildItemArrToXml($type, $ItemArray) {
         $xmlStr = '<' . $type . '>';
         foreach ($ItemArray as $key => $value) {
             $xmlStr .= '<' . $key . '><![CDATA[' . $value . ']]></' . $key . '>';

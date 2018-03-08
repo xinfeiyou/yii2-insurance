@@ -18,7 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'id',
-            'oddNumber',
+            [
+                'attribute' => 'oddNumber',
+                'headerOptions' => ['width' => '80']
+            ],
             [
                 'attribute' => 'intPeriod',
                 'headerOptions' => ['width' => '80']
@@ -103,6 +106,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return 0;
                     }
                 },
+            ],
+            [
+                'attribute' => 'fSpreads',
+                'contentOptions' => ['style' => 'background-color:#61AFAF'],
+                'headerOptions' => ['width' => '80']
             ],
             // 'tCreateTime',
             // 'tUpdateTime',

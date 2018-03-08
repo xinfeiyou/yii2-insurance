@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tOperateTime',
             'strPaymentStatus',
             'fSubsidy',
+            'fSpreads',
             'tCreateTime',
             'tUpdateTime',
         ],

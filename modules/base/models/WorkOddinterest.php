@@ -47,7 +47,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
     public function rules() {
         return [
             [['intPeriod', 'strPaymentStatus'], 'integer'],
-            [['fOnLineCost', 'fOnLineInterest', 'fOnLineTotal', 'fOffLineCost', 'fOffLineInterest', 'fOffLineTotal', 'fRemainder', 'fRealMonery', 'fRealinterest', 'fSubsidy'], 'number'],
+            [['fOnLineCost', 'fOnLineInterest', 'fOnLineTotal', 'fOffLineCost', 'fOffLineInterest', 'fOffLineTotal', 'fRemainder', 'fRealMonery', 'fRealinterest', 'fSubsidy', 'fSpreads'], 'number'],
             [['tStartTime', 'tEndTime', 'tOperateTime', 'tCreateTime', 'tUpdateTime'], 'safe'],
             [['strWorkNum'], 'string', 'max' => 40],
             [['oddNumber', 'strUserId'], 'string', 'max' => 20],
@@ -78,6 +78,7 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
             'tOperateTime' => '还款时间',
             'strPaymentStatus' => '还款状态',
             'fSubsidy' => '逾期罚息',
+            'fSpreads' => '息差',
             'fDiff' => '差额',
             'fMoney' => '实扣金额',
             'tCreateTime' => '创建时间',
@@ -219,8 +220,9 @@ class WorkOddinterest extends \app\modules\base\models\BaseModel {
      * @param float $fMoney         金额
      */
     public function editOddMoney($strOddNum, $intPeriod, $strField, $fMoney) {
-        if (in_array($strField, ['fRealMonery', 'fRealinterest', 'fSubsidy']) && $fMoney > 0) {
+        if (in_array($strField, ['fRealMonery', 'fRealinterest', 'fSubsidy', 'fSpreads']) && $fMoney > 0) {
             $model = WorkOddinterest::findOne(['oddNumber' => $strOddNum, 'intPeriod' => $intPeriod]);
+            $arData['tOperateTime'] = date("Y-m-d H:i:s");
             $arData[$strField] = $model->$strField + $fMoney;
             return $model->edit_data($model, $arData);
         } else {

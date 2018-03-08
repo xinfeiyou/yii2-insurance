@@ -12,27 +12,29 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'oddNumber')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'oddNumber')->textInput(['maxlength' => true,'disabled' => true]) ?>
 
-    <?= $form->field($model, 'intPeriod')->textInput() ?>
+    <?= $form->field($model, 'intPeriod')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'fRemainder')->textInput() ?>
+    <?= $form->field($model, 'fRemainder')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'fRealMonery')->textInput() ?>
+    <?= $form->field($model, 'fRealMonery')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'fRealinterest')->textInput() ?>
+    <?= $form->field($model, 'fRealinterest')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'strUserId')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fSubsidy')->textInput(['disabled' => true]) ?>
+    
+    <?php // $form->field($model, 'strUserId')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tStartTime')->textInput() ?>
+    <?= $form->field($model, 'tStartTime')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'tEndTime')->textInput() ?>
+    <?= $form->field($model, 'tEndTime')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'tOperateTime')->textInput() ?>
+    <?= $form->field($model, 'tOperateTime')->textInput(['disabled' => true]) ?>
 
-    <?= $form->field($model, 'strPaymentStatus')->textInput() ?>
+    <?= $form->field($model, 'strPaymentStatus')->dropDownList($model->getSysConfigInfoType('strPaymentStatus')) ?>
 
-    <?= $form->field($model, 'fSubsidy')->textInput() ?>
+    
 
     <?php // $form->field($model, 'tCreateTime')->textInput() ?>
 

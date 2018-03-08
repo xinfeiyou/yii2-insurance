@@ -127,6 +127,7 @@ $this->params['breadcrumbs'][] = '代扣列表详情';
                           <li><a href="javascript:">本金</a></li>
                           <li><a href="javascript:">利息</a></li>
                           <li><a href="javascript:">罚息</a></li>
+                          <li><a href="javascript:">息差</a></li>
                         </ul>
                       </div><!-- /btn-group -->
                     </div><!-- /input-group -->',

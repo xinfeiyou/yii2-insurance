@@ -58,7 +58,7 @@ class EleRedPack {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $json_string); //设置请求体，提交数据包
                 break;
             case 'DELETE':
-                curl_setopt($handle, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 break;
         }
         curl_setopt($ch, CURLOPT_COOKIE, $cookie);
@@ -135,7 +135,7 @@ class EleRedPack {
         $arPost['device_id'] = '';
         $arPost['group_sn'] = $arUrl['sn'];
         $arPost['hardware_id'] = '';
-        $arPost['method'] = '';
+        $arPost['method'] = 'phone';
         $arPost['phone'] = $phone;
         $arPost['platform'] = $arUrl['platform'];
         $arPost['sign'] = $arCookie['sign'];
