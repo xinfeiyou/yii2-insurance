@@ -121,7 +121,7 @@ class MathPayment {
      */
     public static function fixedFrontInterest($money, $yearInterest, $month, $oddType, $time) {
         $interest = $money * $yearInterest / 12;
-        $yingli = round(($interest * 12), 2);
+        $yingli = round(($interest * $month), 2);
         for ($i = 1; $i <= $month; $i++) {
             $benjin = ($i == $month) ? $money : 0;
             $yuer = $money + $yingli - $benjin - ($interest * $i);
