@@ -248,7 +248,11 @@ class MathPayment {
         //return date('Y-m-d H:i:s',strtotime('+1 month',strtotime($time)));
         return date('Y-m-d H:i:s', strtotime('+30 day', strtotime($time)));
     }
-
+    /**
+     * 获取一周后的时间
+     * @param type $time
+     * @return type
+     */
     public static Function timeNextWeek($time) {
         return date('Y-m-d 23:59:59', strtotime('+7 day', strtotime($time)));
     }
